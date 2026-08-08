@@ -14,7 +14,8 @@ interface Props {
 
 const { post, hasAlternate, headings = [] } = Astro.props;
 const { title, date, description } = post.entry.data;
-const path = postPath(post);
+// 조회수 키는 count.js가 기록하는 값(= 브라우저의 실제 경로 = base 포함)과 같아야 한다.
+const countPath = withBase(postPath(post));
 const tags = postTags(post.entry);
 const alternatePath = hasAlternate
   ? postPath({ ...post, lang: post.lang === 'ko' ? 'en' : 'ko' })
@@ -40,7 +41,7 @@ const alternatePath = hasAlternate
             </span>
           )
         }
-        <ViewCount path={path} />
+        <ViewCount path={countPath} />
       </div>
     </header>
     <hr />
