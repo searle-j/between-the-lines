@@ -7,13 +7,13 @@
 
 :root {
   color-scheme: light;
-  --bg: #f5f1e8;
+  --bg: #f1ede2;
   --text: #292824;
   --muted: #77756e;
   --link: #76504f;
   --link-hover: #5a3b3a;
-  --border: #d8d3c9;
-  --surface: #efe9dd;
+  --border: #d5d0c5;
+  --surface: #ebe6da;
   --quote-border: #bdb7aa;
   --quote-text: #55534d;
 
@@ -206,23 +206,23 @@ hr {
   font-weight: 600;
 }
 
-/* ---------- Header — 여백형 (와이드 화면에서 내비=왼쪽 여백, 토글=오른쪽 여백) ---------- */
+/* ---------- Header — 여백형 (와이드 화면: 내비=왼쪽 여백, 토글=오른쪽 여백) ---------- */
 
 @media (min-width: 1200px) {
-  html[data-layout='margin'] .site-header {
+  .site-header {
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 20;
     pointer-events: none;
   }
 
-  html[data-layout='margin'] .header-inner {
+  .header-inner {
     max-width: none;
     display: block;
     padding: 2.25rem 2.25rem 0;
   }
 
-  html[data-layout='margin'] .site-title {
+  .site-title {
     pointer-events: auto;
     display: inline-block;
     max-width: 180px;
@@ -230,14 +230,14 @@ hr {
     line-height: 1.15;
   }
 
-  html[data-layout='margin'] .controls {
+  .controls {
     pointer-events: auto;
     position: absolute;
     top: 2.5rem;
     right: 2.25rem;
   }
 
-  html[data-layout='margin'] .site-header nav {
+  .site-header nav {
     pointer-events: auto;
     display: flex;
     flex-direction: column;
@@ -249,7 +249,7 @@ hr {
     border-bottom: none;
   }
 
-  html[data-layout='margin'] main.container {
+  main.container {
     padding-top: 3rem;
   }
 }

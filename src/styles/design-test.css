@@ -1,50 +1,34 @@
 /* ============================================================
-   D TUNE — 조합 D 확정 후 미세 조정 변형 (임시 파일)
-   패널(DesignTestPanel)이 data-bg / data-link / data-code /
-   data-layout 속성으로 전환한다. 값이 없으면 global.css의 D 기본값.
-   확정되면: 선택된 변형 값을 global.css에 이식하고 이 파일과
+   D TUNE — 코드 블록 팔레트 변형 (임시 파일)
+   배경(②)·링크(기존+밑줄)·배치(여백/상단 자동)는 확정되어
+   global.css에 반영됐고, 코드 팔레트만 비교가 남았다.
+
+   각 옵션은 라이트/다크 팔레트 쌍이다:
+     따뜻(warm) = global.css 기본 (light warm / dark warm)
+     로제(rose) = light: Rosé Pine Dawn / dark: Rosé Pine Main
+     그루브(gruv) = light: Gruvbox light / dark: Gruvbox dark
+     플렉스(flex) = light: Flexoki light / dark: Flexoki dark
+
+   확정되면 선택 팔레트를 global.css에 이식하고 이 파일과
    BaseLayout의 DESIGN_TEST 관련 코드를 제거한다.
    ============================================================ */
 
-/* ---- 배경 (light 전용 미세 조정) ---- */
+/* ---- 로제 ---- */
 
-/* ① 한 단계 낮춤 — 추천 */
-html[data-bg='p1']:not([data-theme='dark']) {
-  --bg: #f3efe5;
-  --surface: #ede8dc;
+html[data-code='rose']:not([data-theme='dark']) {
+  --astro-code-color-text: #575279;
+  --astro-code-color-background: #f2e9e1;
+  --astro-code-token-comment: #9893a5;
+  --astro-code-token-keyword: #286983;
+  --astro-code-token-string: #ea9d34;
+  --astro-code-token-function: #d7827e;
+  --astro-code-token-constant: #907aa9;
+  --astro-code-token-string-expression: #56949f;
+  --astro-code-token-parameter: #b4637a;
+  --astro-code-token-punctuation: #797593;
+  --astro-code-token-link: #286983;
 }
 
-/* ② 두 단계 낮춤 */
-html[data-bg='p2']:not([data-theme='dark']) {
-  --bg: #f1ede2;
-  --surface: #ebe6da;
-  --border: #d5d0c5;
-}
-
-/* ③ 덜 노랗게 (중성 종이) */
-html[data-bg='p3']:not([data-theme='dark']) {
-  --bg: #f2efe9;
-  --surface: #ece9e1;
-  --border: #d7d3cb;
-}
-
-/* ---- 링크색 (light 전용 — dark의 #C09492는 유지) ---- */
-
-/* 진하게+채도↑ — 추천 */
-html[data-link='l1']:not([data-theme='dark']) {
-  --link: #8e4642;
-  --link-hover: #6f3734;
-}
-
-/* 더 선명하게 */
-html[data-link='l2']:not([data-theme='dark']) {
-  --link: #a03e38;
-  --link-hover: #7e2f2a;
-}
-
-/* ---- 코드 블록 다크 팔레트 (light는 공통, dark만 교체) ---- */
-
-/* 로제 — 어두운 자줏빛 바탕 + 보석톤 (추천) */
 html[data-code='rose'][data-theme='dark'] {
   --astro-code-color-text: #e2deee;
   --astro-code-color-background: #262230;
@@ -59,7 +43,22 @@ html[data-code='rose'][data-theme='dark'] {
   --astro-code-token-link: #9ccfd8;
 }
 
-/* 그루브 — Gruvbox dark 토큰 (따뜻하고 진한 대비) */
+/* ---- 그루브 ---- */
+
+html[data-code='gruv']:not([data-theme='dark']) {
+  --astro-code-color-text: #3c3836;
+  --astro-code-color-background: #ebdbb2;
+  --astro-code-token-comment: #928374;
+  --astro-code-token-keyword: #9d0006;
+  --astro-code-token-string: #79740e;
+  --astro-code-token-function: #076678;
+  --astro-code-token-constant: #8f3f71;
+  --astro-code-token-string-expression: #b57614;
+  --astro-code-token-parameter: #af3a03;
+  --astro-code-token-punctuation: #504945;
+  --astro-code-token-link: #076678;
+}
+
 html[data-code='gruv'][data-theme='dark'] {
   --astro-code-color-text: #ebdbb2;
   --astro-code-color-background: #32302f;
@@ -74,7 +73,22 @@ html[data-code='gruv'][data-theme='dark'] {
   --astro-code-token-link: #83a598;
 }
 
-/* 플렉스 — Flexoki dark 토큰 (차분한 잉크톤) */
+/* ---- 플렉스 ---- */
+
+html[data-code='flex']:not([data-theme='dark']) {
+  --astro-code-color-text: #100f0f;
+  --astro-code-color-background: #f2f0e5;
+  --astro-code-token-comment: #6f6e69;
+  --astro-code-token-keyword: #af3029;
+  --astro-code-token-string: #24837b;
+  --astro-code-token-function: #205ea6;
+  --astro-code-token-constant: #5e409d;
+  --astro-code-token-string-expression: #66800b;
+  --astro-code-token-parameter: #bc5215;
+  --astro-code-token-punctuation: #575653;
+  --astro-code-token-link: #205ea6;
+}
+
 html[data-code='flex'][data-theme='dark'] {
   --astro-code-color-text: #cecdc3;
   --astro-code-color-background: #1c1b1a;
@@ -88,6 +102,3 @@ html[data-code='flex'][data-theme='dark'] {
   --astro-code-token-punctuation: #878580;
   --astro-code-token-link: #4385be;
 }
-
-/* 레이아웃(data-layout='margin')의 CSS는 global.css에 있다 —
-   확정 시 그대로 남을 가능성이 커서 본 스타일에 두었다. */

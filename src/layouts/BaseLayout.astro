@@ -39,7 +39,7 @@ const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
 ---
 
 <!doctype html>
-<html lang={lang} data-theme="light">
+<html lang={lang} data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -74,26 +74,18 @@ const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
     />
     <script is:inline>
       (() => {
+        /* 기본 테마는 dark — 방문자가 토글로 light를 고르면 localStorage로 유지 */
         let stored = null;
         try {
           stored = localStorage.getItem('theme');
         } catch {}
-        const media = window.matchMedia('(prefers-color-scheme: dark)');
-        document.documentElement.dataset.theme = stored ?? (media.matches ? 'dark' : 'light');
-        if (!stored) {
-          media.addEventListener('change', (e) => {
-            document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
-          });
-        }
-        /* design test: D 미세조정 변형 복원 — 기본값은 추천안 (FOUC 방지) */
+        document.documentElement.dataset.theme = stored === 'light' ? 'light' : 'dark';
+        /* design test: 코드 팔레트 복원 (기본값 = 로제) + 지난 테스트 키 정리 */
         try {
-          localStorage.removeItem('design-combo');
-          localStorage.removeItem('design-texture');
-          const d = document.documentElement.dataset;
-          d.bg = localStorage.getItem('d-bg') ?? 'p1';
-          d.link = localStorage.getItem('d-link') ?? 'l1';
-          d.code = localStorage.getItem('d-code') ?? 'rose';
-          d.layout = localStorage.getItem('d-layout') ?? 'margin';
+          for (const key of ['design-combo', 'design-texture', 'd-bg', 'd-link', 'd-layout']) {
+            localStorage.removeItem(key);
+          }
+          document.documentElement.dataset.code = localStorage.getItem('d-code') ?? 'rose';
         } catch {}
       })();
     </script>

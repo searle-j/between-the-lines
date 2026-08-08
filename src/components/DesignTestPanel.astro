@@ -1,54 +1,22 @@
 ---
-// 임시 D-미세조정 패널 — 배경·링크색·코드(다크)·레이아웃을 실시간 전환.
+// 임시 패널 — 남은 마지막 결정: 코드 블록 팔레트 (라이트/다크 쌍으로 전환).
 // BaseLayout의 DESIGN_TEST 플래그로 함께 제거된다.
 ---
 
 <aside class="dt" id="dt" data-open="true">
-  <button type="button" class="dt-chip" id="dt-chip" title="D 미세조정 패널 열기">Aa</button>
+  <button type="button" class="dt-chip" id="dt-chip" title="코드 팔레트 패널 열기">Aa</button>
   <div class="dt-body">
     <div class="dt-head">
-      <span>D TUNE</span>
+      <span>D TUNE · 코드 팔레트</span>
       <button type="button" id="dt-min" title="접기">–</button>
     </div>
-
-    <div class="dt-row">
-      <span class="dt-label">배경</span>
-      <div class="dt-btns" data-k="bg">
-        <button type="button" data-v="p0" title="#F5F1E8 — 원래 D">기존</button>
-        <button type="button" data-v="p1" title="#F3EFE5 — 한 단계 차분 (추천)">①</button>
-        <button type="button" data-v="p2" title="#F1EDE2 — 두 단계">②</button>
-        <button type="button" data-v="p3" title="#F2EFE9 — 덜 노랗게">③</button>
-      </div>
+    <div class="dt-btns" data-k="code">
+      <button type="button" data-v="warm" title="light/dark 모두 D의 warm 계열">따뜻</button>
+      <button type="button" data-v="rose" title="light: Rosé Pine Dawn · dark: Rosé Pine Main">로제</button>
+      <button type="button" data-v="gruv" title="light: Gruvbox light · dark: Gruvbox dark">그루브</button>
+      <button type="button" data-v="flex" title="light: Flexoki light · dark: Flexoki dark">플렉스</button>
     </div>
-
-    <div class="dt-row">
-      <span class="dt-label">링크</span>
-      <div class="dt-btns" data-k="link">
-        <button type="button" data-v="l0" title="#76504F — 원래 D">기존</button>
-        <button type="button" data-v="l1" title="#8E4642 — 진하게+채도 (추천)">진하게</button>
-        <button type="button" data-v="l2" title="#A03E38 — 더 선명">선명</button>
-      </div>
-    </div>
-
-    <div class="dt-row">
-      <span class="dt-label">코드<small>·다크</small></span>
-      <div class="dt-btns" data-k="code">
-        <button type="button" data-v="warm" title="라이트와 같은 warm 계열">따뜻</button>
-        <button type="button" data-v="rose" title="자줏빛 바탕 + 보석톤 (추천)">로제</button>
-        <button type="button" data-v="gruv" title="Gruvbox dark">그루브</button>
-        <button type="button" data-v="flex" title="Flexoki dark">플렉스</button>
-      </div>
-    </div>
-
-    <div class="dt-row">
-      <span class="dt-label">배치</span>
-      <div class="dt-btns" data-k="layout">
-        <button type="button" data-v="margin" title="와이드 화면: 내비 왼쪽 여백 · 토글 오른쪽 여백 (추천)">여백</button>
-        <button type="button" data-v="top" title="기존 상단 헤더">상단</button>
-      </div>
-    </div>
-
-    <div class="dt-name" id="dt-name"></div>
+    <div class="dt-name">라이트·다크 팔레트가 함께 바뀝니다</div>
   </div>
 </aside>
 
@@ -85,7 +53,7 @@
   }
 
   .dt-body {
-    width: 236px;
+    width: 216px;
     padding: 10px;
     border: 1px solid #c9c5bb;
     border-radius: 10px;
@@ -123,27 +91,8 @@
     padding: 0 2px;
   }
 
-  .dt-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 5px;
-  }
-
-  .dt-label {
-    flex: none;
-    width: 52px;
-    font-size: 10.5px;
-    opacity: 0.75;
-  }
-
-  .dt-label small {
-    font-size: 9px;
-  }
-
   .dt-btns {
     display: flex;
-    flex: 1;
     gap: 4px;
   }
 
@@ -153,9 +102,9 @@
     background: transparent;
     color: inherit;
     border-radius: 6px;
-    padding: 3px 0;
+    padding: 4px 0;
     cursor: pointer;
-    font-size: 11px;
+    font-size: 11.5px;
     white-space: nowrap;
   }
 
@@ -183,7 +132,6 @@
     margin-top: 7px;
     font-size: 10px;
     opacity: 0.7;
-    min-height: 1.2em;
   }
 
   @media (max-width: 640px) {
@@ -197,30 +145,18 @@
 <script>
   const root = document.documentElement;
   const panel = document.getElementById('dt')!;
-  const nameEl = document.getElementById('dt-name')!;
-  const groups = [...panel.querySelectorAll<HTMLElement>('.dt-btns')];
+  const buttons = [...panel.querySelectorAll<HTMLButtonElement>('.dt-btns button')];
 
   function sync() {
-    const state: string[] = [];
-    for (const group of groups) {
-      const key = group.dataset.k!;
-      const current = root.dataset[key] ?? '';
-      for (const b of group.querySelectorAll('button')) {
-        b.setAttribute('aria-pressed', String(b.dataset.v === current));
-        if (b.dataset.v === current) state.push(b.textContent!.trim());
-      }
-    }
-    nameEl.textContent = state.join(' · ');
+    const current = root.dataset.code ?? 'rose';
+    for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.v === current));
   }
 
-  for (const group of groups) {
-    const key = group.dataset.k!;
-    group.addEventListener('click', (e) => {
-      const button = (e.target as HTMLElement).closest('button');
-      if (!button?.dataset.v) return;
-      root.dataset[key] = button.dataset.v;
+  for (const b of buttons) {
+    b.addEventListener('click', () => {
+      root.dataset.code = b.dataset.v!;
       try {
-        localStorage.setItem(`d-${key}`, button.dataset.v);
+        localStorage.setItem('d-code', b.dataset.v!);
       } catch {}
       sync();
     });
