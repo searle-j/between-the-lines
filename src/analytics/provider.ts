@@ -17,7 +17,11 @@ const ENDPOINT = 'https://between-the-lines.goatcounter.com/counter';
 async function fetchCount(key: string): Promise<number | null> {
   try {
     const res = await fetch(`${ENDPOINT}/${encodeURIComponent(key)}.json`);
-    if (!res.ok) return null;
+    // A path with no visits yet returns HTTP 404 but still carries a valid
+    // `{"count":"0"}` body — that's a genuine zero, not a failure, so parse
+    // regardless of status. A real failure (setting off → HTML error page,
+    // or a network error) yields no JSON count and returns null, keeping the
+    // counter hidden rather than showing a wrong "0".
     const { count } = await res.json();
     const n = Number(String(count).replace(/,/g, ''));
     return Number.isFinite(n) ? n : null;
