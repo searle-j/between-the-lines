@@ -129,6 +129,10 @@ main.container {
   padding-bottom: 3rem;
 }
 
+::selection {
+  background: color-mix(in srgb, var(--link) 22%, transparent);
+}
+
 a {
   color: var(--link);
   text-decoration: none;
@@ -663,6 +667,15 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
 }
 
 /* ---------- Search (Pagefind UI 토큰 연결) ---------- */
+
+/* 검색 결과 매칭 하이라이트 — 형광 노랑 대신 액센트 워시 */
+#search mark {
+  background: color-mix(in srgb, var(--link) 16%, transparent);
+  color: inherit;
+  font-weight: 600;
+  padding: 0 0.12em;
+  border-radius: var(--radius-inline);
+}
 
 #search {
   margin-top: 1.5rem;
