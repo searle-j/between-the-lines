@@ -1,0 +1,733 @@
+/* ============================================================
+   DESIGN TEST — 9개 조합 (임시 파일)
+   data-combo 속성으로 전환: a b c d (asset test plan §31) /
+   f1..f5 (design-asset-test-plan 조합 1..5)
+   테스트 종료 후: 이 파일 + BaseLayout의 DESIGN_TEST 관련 코드 제거,
+   우승 조합의 변수만 global.css :root로 이식.
+   ============================================================ */
+
+/* ---- 원격 CSS가 없는 폰트의 @font-face ---- */
+
+/* RIDIBatang — 눈누 CDN (full woff, 첫 로드에 시간이 걸릴 수 있음) */
+@font-face {
+  font-family: 'RIDIBatang';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* 을유1945 — 무료 CDN 없음. public/fonts/에 woff2를 직접 넣으면 조합 4에 자동 적용,
+   없으면 Noto Serif KR로 대체 표시된다 (콘솔 404는 무해). */
+@font-face {
+  font-family: 'Eulyoo1945';
+  src: url('/between-the-lines/fonts/Eulyoo1945-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Eulyoo1945';
+  src: url('/between-the-lines/fonts/Eulyoo1945-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* ---- 공통 폰트 꼬리 (조합 활성 시) ---- */
+
+html[data-combo] {
+  --dt-sans-tail: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR',
+    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --dt-serif-tail: 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
+}
+
+/* ============================================================
+   A · Safe Baseline — Pretendard / 자체 종이 팔레트
+   ============================================================ */
+
+html[data-combo='a'] {
+  --bg: #faf9f6;
+  --text: #24231f;
+  --muted: #73716a;
+  --link: #455a4a;
+  --link-hover: #314238;
+  --border: #dedad1;
+  --surface: #efece5;
+  --quote-border: #bdb7aa;
+  --quote-text: #55534d;
+
+  --font-sans: 'Pretendard Variable', Pretendard, var(--dt-sans-tail);
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-masthead: 'Instrument Serif', Georgia, serif;
+  --masthead-size: 2.35rem;
+  --masthead-weight: 400;
+  --font-meta: 'IBM Plex Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.02em;
+
+  --content-width: 720px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.75;
+  --radius-code: 0;
+  --radius-inline: 0;
+  --radius-img: 0;
+
+  --astro-code-color-text: #24231f;
+  --astro-code-color-background: #efece5;
+  --astro-code-token-comment: #8d8a80;
+  --astro-code-token-keyword: #455a4a;
+  --astro-code-token-string: #7a6a3f;
+  --astro-code-token-function: #46566a;
+  --astro-code-token-constant: #76504f;
+  --astro-code-token-string-expression: #55684d;
+  --astro-code-token-parameter: #24231f;
+  --astro-code-token-punctuation: #55534d;
+  --astro-code-token-link: #455a4a;
+}
+
+html[data-combo='a'][data-theme='dark'] {
+  --bg: #1f201d;
+  --text: #e7e3da;
+  --muted: #a9a59b;
+  --link: #8faf98;
+  --link-hover: #a8c4b0;
+  --border: #3b3b35;
+  --surface: #292923;
+  --quote-border: #4a4a42;
+  --quote-text: #a9a59b;
+
+  --astro-code-color-text: #e7e3da;
+  --astro-code-color-background: #262621;
+  --astro-code-token-comment: #8d897e;
+  --astro-code-token-keyword: #8faf98;
+  --astro-code-token-string: #c4b183;
+  --astro-code-token-function: #98acc6;
+  --astro-code-token-constant: #c09492;
+  --astro-code-token-string-expression: #a3bd90;
+  --astro-code-token-parameter: #e7e3da;
+  --astro-code-token-punctuation: #a9a59b;
+  --astro-code-token-link: #8faf98;
+}
+
+/* ============================================================
+   B · Modern Paper — SUIT / warm ivory + radial grain
+   ============================================================ */
+
+html[data-combo='b'] {
+  --bg: #f7f4ec;
+  --text: #24231f;
+  --muted: #73716a;
+  --link: #46566a;
+  --link-hover: #344151;
+  --border: #d8d3c9;
+  --surface: #eeece6;
+  --quote-border: #bdb7aa;
+  --quote-text: #55534d;
+
+  --font-sans: 'SUIT Variable', SUIT, var(--dt-sans-tail);
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-masthead: 'Instrument Serif', Georgia, serif;
+  --masthead-size: 2.35rem;
+  --masthead-weight: 400;
+  --font-meta: var(--font-sans);
+  --font-mono: 'IBM Plex Mono', monospace;
+  --meta-size: 0.85rem;
+  --meta-tracking: 0.01em;
+
+  --content-width: 720px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.75;
+  --radius-code: 2px;
+  --radius-inline: 2px;
+  --radius-img: 2px;
+
+  --astro-code-color-text: #24231f;
+  --astro-code-color-background: #eeece6;
+  --astro-code-token-comment: #8d8a80;
+  --astro-code-token-keyword: #46566a;
+  --astro-code-token-string: #7a6a3f;
+  --astro-code-token-function: #455a4a;
+  --astro-code-token-constant: #76504f;
+  --astro-code-token-string-expression: #55684d;
+  --astro-code-token-parameter: #24231f;
+  --astro-code-token-punctuation: #55534d;
+  --astro-code-token-link: #46566a;
+}
+
+html[data-combo='b'][data-theme='dark'] {
+  --bg: #22211e;
+  --text: #eae6dd;
+  --muted: #aaa59b;
+  --link: #98acc6;
+  --link-hover: #b0c1d8;
+  --border: #403d37;
+  --surface: #2c2a25;
+  --quote-border: #4d4a43;
+  --quote-text: #aaa59b;
+
+  --astro-code-color-text: #eae6dd;
+  --astro-code-color-background: #292722;
+  --astro-code-token-comment: #8d897e;
+  --astro-code-token-keyword: #98acc6;
+  --astro-code-token-string: #c4b183;
+  --astro-code-token-function: #8faf98;
+  --astro-code-token-constant: #c09492;
+  --astro-code-token-string-expression: #a3bd90;
+  --astro-code-token-parameter: #eae6dd;
+  --astro-code-token-punctuation: #aaa59b;
+  --astro-code-token-link: #98acc6;
+}
+
+/* ============================================================
+   C · Research Notebook — IBM Plex / 회백 종이 + SVG noise
+   ============================================================ */
+
+html[data-combo='c'] {
+  --bg: #f4f3ee;
+  --text: #1e1e1b;
+  --muted: #686861;
+  --link: #455a4a;
+  --link-hover: #314238;
+  --border: #cec9be;
+  --surface: #eceae2;
+  --quote-border: #b5b0a3;
+  --quote-text: #52524b;
+
+  --font-sans: 'IBM Plex Sans', 'IBM Plex Sans KR', var(--dt-sans-tail);
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-masthead: 'IBM Plex Sans', var(--dt-sans-tail);
+  --masthead-size: 1.55rem;
+  --masthead-weight: 500;
+  --font-meta: 'IBM Plex Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.02em;
+
+  --content-width: 680px;
+  --body-size: 17px;
+  --body-size-mobile: 16.5px;
+  --body-lh: 1.75;
+  --radius-code: 0;
+  --radius-inline: 0;
+  --radius-img: 0;
+
+  --astro-code-color-text: #1e1e1b;
+  --astro-code-color-background: #eceae2;
+  --astro-code-token-comment: #8a897f;
+  --astro-code-token-keyword: #455a4a;
+  --astro-code-token-string: #7a6a3f;
+  --astro-code-token-function: #46566a;
+  --astro-code-token-constant: #76504f;
+  --astro-code-token-string-expression: #55684d;
+  --astro-code-token-parameter: #1e1e1b;
+  --astro-code-token-punctuation: #52524b;
+  --astro-code-token-link: #455a4a;
+}
+
+html[data-combo='c'][data-theme='dark'] {
+  --bg: #1f201d;
+  --text: #e7e3da;
+  --muted: #a9a59b;
+  --link: #8faf98;
+  --link-hover: #a8c4b0;
+  --border: #3b3b35;
+  --surface: #292923;
+  --quote-border: #4a4a42;
+  --quote-text: #a9a59b;
+
+  --astro-code-color-text: #e7e3da;
+  --astro-code-color-background: #262621;
+  --astro-code-token-comment: #8d897e;
+  --astro-code-token-keyword: #8faf98;
+  --astro-code-token-string: #c4b183;
+  --astro-code-token-function: #98acc6;
+  --astro-code-token-constant: #c09492;
+  --astro-code-token-string-expression: #a3bd90;
+  --astro-code-token-parameter: #e7e3da;
+  --astro-code-token-punctuation: #a9a59b;
+  --astro-code-token-link: #8faf98;
+}
+
+/* ============================================================
+   D · Slightly Literary — Pretendard 본문 + Noto Serif KR 제목
+   ============================================================ */
+
+html[data-combo='d'] {
+  --bg: #f5f1e8;
+  --text: #292824;
+  --muted: #77756e;
+  --link: #76504f;
+  --link-hover: #5a3b3a;
+  --border: #d8d3c9;
+  --surface: #efe9dd;
+  --quote-border: #bdb7aa;
+  --quote-text: #55534d;
+
+  --font-sans: 'Pretendard Variable', Pretendard, var(--dt-sans-tail);
+  --font-body: var(--font-sans);
+  --font-heading: 'Noto Serif KR', var(--dt-serif-tail);
+  --font-masthead: 'Instrument Serif', Georgia, serif;
+  --masthead-size: 2.35rem;
+  --masthead-weight: 400;
+  --font-meta: 'IBM Plex Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.02em;
+
+  --content-width: 720px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.8;
+  --radius-code: 0;
+  --radius-inline: 0;
+  --radius-img: 0;
+
+  --astro-code-color-text: #292824;
+  --astro-code-color-background: #efe9dd;
+  --astro-code-token-comment: #8d8a80;
+  --astro-code-token-keyword: #76504f;
+  --astro-code-token-string: #7a6a3f;
+  --astro-code-token-function: #46566a;
+  --astro-code-token-constant: #455a4a;
+  --astro-code-token-string-expression: #55684d;
+  --astro-code-token-parameter: #292824;
+  --astro-code-token-punctuation: #55534d;
+  --astro-code-token-link: #76504f;
+}
+
+html[data-combo='d'][data-theme='dark'] {
+  --bg: #201f1c;
+  --text: #e8e3d9;
+  --muted: #a8a399;
+  --link: #c09492;
+  --link-hover: #d3aba9;
+  --border: #3d3a34;
+  --surface: #2a2823;
+  --quote-border: #4c4941;
+  --quote-text: #a8a399;
+
+  --astro-code-color-text: #e8e3d9;
+  --astro-code-color-background: #272520;
+  --astro-code-token-comment: #8d897e;
+  --astro-code-token-keyword: #c09492;
+  --astro-code-token-string: #c4b183;
+  --astro-code-token-function: #98acc6;
+  --astro-code-token-constant: #8faf98;
+  --astro-code-token-string-expression: #a3bd90;
+  --astro-code-token-parameter: #e8e3d9;
+  --astro-code-token-punctuation: #a8a399;
+  --astro-code-token-link: #c09492;
+}
+
+/* ============================================================
+   1 · 잉크와 종이 — Flexoki × 마루부리 (본문 세리프)
+   ============================================================ */
+
+html[data-combo='f1'] {
+  --bg: #fffcf0;
+  --text: #100f0f;
+  --muted: #6f6e69;
+  --link: #205ea6;
+  --link-hover: #1a4f8c;
+  --border: #e6e4d9;
+  --surface: #f2f0e5;
+  --quote-border: #dad8ce;
+  --quote-text: #6f6e69;
+
+  --font-sans: 'Pretendard Variable', Pretendard, var(--dt-sans-tail);
+  --font-body: 'Literata', 'MaruBuri', var(--dt-serif-tail);
+  --font-heading: var(--font-sans);
+  --font-masthead: var(--font-sans);
+  --masthead-size: 1.4rem;
+  --masthead-weight: 700;
+  --font-meta: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.01em;
+
+  --content-width: 680px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.8;
+  --radius-code: 2px;
+  --radius-inline: 3px;
+  --radius-img: 2px;
+
+  --astro-code-color-text: #100f0f;
+  --astro-code-color-background: #f2f0e5;
+  --astro-code-token-comment: #6f6e69;
+  --astro-code-token-keyword: #af3029;
+  --astro-code-token-string: #24837b;
+  --astro-code-token-function: #205ea6;
+  --astro-code-token-constant: #5e409d;
+  --astro-code-token-string-expression: #66800b;
+  --astro-code-token-parameter: #bc5215;
+  --astro-code-token-punctuation: #575653;
+  --astro-code-token-link: #205ea6;
+}
+
+html[data-combo='f1'][data-theme='dark'] {
+  --bg: #100f0f;
+  --text: #cecdc3;
+  --muted: #878580;
+  --link: #4385be;
+  --link-hover: #66a0d1;
+  --border: #282726;
+  --surface: #1c1b1a;
+  --quote-border: #343331;
+  --quote-text: #878580;
+
+  --astro-code-color-text: #cecdc3;
+  --astro-code-color-background: #1c1b1a;
+  --astro-code-token-comment: #878580;
+  --astro-code-token-keyword: #d14d41;
+  --astro-code-token-string: #3aa99f;
+  --astro-code-token-function: #4385be;
+  --astro-code-token-constant: #8b7ec8;
+  --astro-code-token-string-expression: #879a39;
+  --astro-code-token-parameter: #da702c;
+  --astro-code-token-punctuation: #878580;
+  --astro-code-token-link: #4385be;
+}
+
+/* ============================================================
+   2 · 대조군 — Flexoki × Pretendard (본문 산세리프, 팔레트는 1과 동일)
+   ============================================================ */
+
+html[data-combo='f2'] {
+  --bg: #fffcf0;
+  --text: #100f0f;
+  --muted: #6f6e69;
+  --link: #205ea6;
+  --link-hover: #1a4f8c;
+  --border: #e6e4d9;
+  --surface: #f2f0e5;
+  --quote-border: #dad8ce;
+  --quote-text: #6f6e69;
+
+  --font-sans: 'Pretendard Variable', Pretendard, var(--dt-sans-tail);
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-masthead: var(--font-sans);
+  --masthead-size: 1.4rem;
+  --masthead-weight: 700;
+  --font-meta: 'Geist Mono', monospace;
+  --font-mono: 'Geist Mono', monospace;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.01em;
+
+  --content-width: 680px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.75;
+  --radius-code: 2px;
+  --radius-inline: 3px;
+  --radius-img: 2px;
+
+  --astro-code-color-text: #100f0f;
+  --astro-code-color-background: #f2f0e5;
+  --astro-code-token-comment: #6f6e69;
+  --astro-code-token-keyword: #af3029;
+  --astro-code-token-string: #24837b;
+  --astro-code-token-function: #205ea6;
+  --astro-code-token-constant: #5e409d;
+  --astro-code-token-string-expression: #66800b;
+  --astro-code-token-parameter: #bc5215;
+  --astro-code-token-punctuation: #575653;
+  --astro-code-token-link: #205ea6;
+}
+
+html[data-combo='f2'][data-theme='dark'] {
+  --bg: #100f0f;
+  --text: #cecdc3;
+  --muted: #878580;
+  --link: #4385be;
+  --link-hover: #66a0d1;
+  --border: #282726;
+  --surface: #1c1b1a;
+  --quote-border: #343331;
+  --quote-text: #878580;
+
+  --astro-code-color-text: #cecdc3;
+  --astro-code-color-background: #1c1b1a;
+  --astro-code-token-comment: #878580;
+  --astro-code-token-keyword: #d14d41;
+  --astro-code-token-string: #3aa99f;
+  --astro-code-token-function: #4385be;
+  --astro-code-token-constant: #8b7ec8;
+  --astro-code-token-string-expression: #879a39;
+  --astro-code-token-parameter: #da702c;
+  --astro-code-token-punctuation: #878580;
+  --astro-code-token-link: #4385be;
+}
+
+/* ============================================================
+   3 · 정오의 성 — Solarized Light × RIDIBatang
+   ============================================================ */
+
+html[data-combo='f3'] {
+  --bg: #fdf6e3;
+  --text: #586e75;
+  --muted: #93a1a1;
+  --link: #268bd2;
+  --link-hover: #1e6e9c;
+  --border: #dfd8c0;
+  --surface: #eee8d5;
+  --quote-border: #d1c9ab;
+  --quote-text: #839496;
+
+  --font-sans: 'SUIT Variable', SUIT, var(--dt-sans-tail);
+  --font-body: 'Source Serif 4', 'RIDIBatang', var(--dt-serif-tail);
+  --font-heading: var(--font-sans);
+  --font-masthead: var(--font-sans);
+  --masthead-size: 1.4rem;
+  --masthead-weight: 700;
+  --font-meta: 'IBM Plex Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.02em;
+
+  --content-width: 680px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.8;
+  --radius-code: 2px;
+  --radius-inline: 3px;
+  --radius-img: 2px;
+
+  --astro-code-color-text: #586e75;
+  --astro-code-color-background: #eee8d5;
+  --astro-code-token-comment: #93a1a1;
+  --astro-code-token-keyword: #859900;
+  --astro-code-token-string: #2aa198;
+  --astro-code-token-function: #268bd2;
+  --astro-code-token-constant: #d33682;
+  --astro-code-token-string-expression: #b58900;
+  --astro-code-token-parameter: #cb4b16;
+  --astro-code-token-punctuation: #657b83;
+  --astro-code-token-link: #268bd2;
+}
+
+html[data-combo='f3'][data-theme='dark'] {
+  --bg: #002b36;
+  --text: #93a1a1;
+  --muted: #657b83;
+  --link: #268bd2;
+  --link-hover: #4ca2dc;
+  --border: #0e4250;
+  --surface: #073642;
+  --quote-border: #14505f;
+  --quote-text: #839496;
+
+  --astro-code-color-text: #93a1a1;
+  --astro-code-color-background: #073642;
+  --astro-code-token-comment: #657b83;
+  --astro-code-token-keyword: #859900;
+  --astro-code-token-string: #2aa198;
+  --astro-code-token-function: #268bd2;
+  --astro-code-token-constant: #d33682;
+  --astro-code-token-string-expression: #b58900;
+  --astro-code-token-parameter: #cb4b16;
+  --astro-code-token-punctuation: #839496;
+  --astro-code-token-link: #268bd2;
+}
+
+/* ============================================================
+   4 · 옛 인쇄물 — Gruvbox Light Hard × 세리프
+   (을유1945 CDN 부재 → woff2를 public/fonts/에 넣기 전까지 Noto Serif KR로 표시)
+   ============================================================ */
+
+html[data-combo='f4'] {
+  --bg: #f9f5d7;
+  --text: #3c3836;
+  --muted: #7c6f64;
+  --link: #076678;
+  --link-hover: #054c5a;
+  --border: #d5c4a1;
+  --surface: #ebdbb2;
+  --quote-border: #bdae93;
+  --quote-text: #665c54;
+
+  --font-sans: 'Wanted Sans Variable', 'Wanted Sans', var(--dt-sans-tail);
+  --font-body: 'Crimson Pro', 'Eulyoo1945', var(--dt-serif-tail);
+  --font-heading: var(--font-sans);
+  --font-masthead: var(--font-sans);
+  --masthead-size: 1.4rem;
+  --masthead-weight: 700;
+  --font-meta: 'Monaspace Argon', 'JetBrains Mono', monospace;
+  --font-mono: 'Monaspace Argon', 'JetBrains Mono', monospace;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.02em;
+
+  --content-width: 680px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.8;
+  --radius-code: 0;
+  --radius-inline: 0;
+  --radius-img: 0;
+
+  --astro-code-color-text: #3c3836;
+  --astro-code-color-background: #ebdbb2;
+  --astro-code-token-comment: #928374;
+  --astro-code-token-keyword: #9d0006;
+  --astro-code-token-string: #79740e;
+  --astro-code-token-function: #076678;
+  --astro-code-token-constant: #8f3f71;
+  --astro-code-token-string-expression: #b57614;
+  --astro-code-token-parameter: #af3a03;
+  --astro-code-token-punctuation: #504945;
+  --astro-code-token-link: #076678;
+}
+
+html[data-combo='f4'][data-theme='dark'] {
+  --bg: #282828;
+  --text: #ebdbb2;
+  --muted: #a89984;
+  --link: #83a598;
+  --link-hover: #a9c1ba;
+  --border: #504945;
+  --surface: #32302f;
+  --quote-border: #665c54;
+  --quote-text: #a89984;
+
+  --astro-code-color-text: #ebdbb2;
+  --astro-code-color-background: #32302f;
+  --astro-code-token-comment: #928374;
+  --astro-code-token-keyword: #fb4934;
+  --astro-code-token-string: #b8bb26;
+  --astro-code-token-function: #83a598;
+  --astro-code-token-constant: #d3869b;
+  --astro-code-token-string-expression: #fabd2f;
+  --astro-code-token-parameter: #fe8019;
+  --astro-code-token-punctuation: #bdae93;
+  --astro-code-token-link: #83a598;
+}
+
+/* ============================================================
+   5 · 새벽 종이 — Rosé Pine Dawn × Noto Serif KR
+   (Paperlogy CDN 부재 → UI는 Pretendard로 대체)
+   ============================================================ */
+
+html[data-combo='f5'] {
+  --bg: #faf4ed;
+  --text: #575279;
+  --muted: #797593;
+  --link: #286983;
+  --link-hover: #1f5265;
+  --border: #dfdad9;
+  --surface: #f2e9e1;
+  --quote-border: #cecacd;
+  --quote-text: #797593;
+
+  --font-sans: 'Pretendard Variable', Pretendard, var(--dt-sans-tail);
+  --font-body: 'Newsreader', 'Noto Serif KR', var(--dt-serif-tail);
+  --font-heading: var(--font-sans);
+  --font-masthead: var(--font-sans);
+  --masthead-size: 1.4rem;
+  --masthead-weight: 700;
+  --font-meta: 'Intel One Mono', monospace;
+  --font-mono: 'Intel One Mono', monospace;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.01em;
+
+  --content-width: 680px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.8;
+  --radius-code: 2px;
+  --radius-inline: 3px;
+  --radius-img: 2px;
+
+  --astro-code-color-text: #575279;
+  --astro-code-color-background: #f2e9e1;
+  --astro-code-token-comment: #9893a5;
+  --astro-code-token-keyword: #286983;
+  --astro-code-token-string: #ea9d34;
+  --astro-code-token-function: #d7827e;
+  --astro-code-token-constant: #907aa9;
+  --astro-code-token-string-expression: #56949f;
+  --astro-code-token-parameter: #b4637a;
+  --astro-code-token-punctuation: #797593;
+  --astro-code-token-link: #286983;
+}
+
+html[data-combo='f5'][data-theme='dark'] {
+  --bg: #191724;
+  --text: #e0def4;
+  --muted: #908caa;
+  --link: #9ccfd8;
+  --link-hover: #b6e0e8;
+  --border: #403d52;
+  --surface: #1f1d2e;
+  --quote-border: #524f67;
+  --quote-text: #908caa;
+
+  --astro-code-color-text: #e0def4;
+  --astro-code-color-background: #1f1d2e;
+  --astro-code-token-comment: #6e6a86;
+  --astro-code-token-keyword: #31748f;
+  --astro-code-token-string: #f6c177;
+  --astro-code-token-function: #ebbcba;
+  --astro-code-token-constant: #c4a7e7;
+  --astro-code-token-string-expression: #9ccfd8;
+  --astro-code-token-parameter: #eb6f92;
+  --astro-code-token-punctuation: #908caa;
+  --astro-code-token-link: #9ccfd8;
+}
+
+/* ============================================================
+   종이 질감 오버레이
+   기본: B는 radial grain, C/D는 SVG noise 내장.
+   패널의 질감 버튼(data-texture)으로 강제 on/off 가능.
+   ============================================================ */
+
+/* radial grain */
+html[data-combo='b'] body::after {
+  content: '';
+  background-image: radial-gradient(rgba(30, 30, 27, 0.05) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+}
+
+html[data-combo='b'][data-theme='dark'] body::after {
+  background-image: radial-gradient(rgba(231, 227, 218, 0.04) 0.5px, transparent 0.5px);
+}
+
+/* SVG feTurbulence noise */
+html[data-combo='c'] body::after,
+html[data-combo='d'] body::after {
+  content: '';
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.015;
+}
+
+html[data-combo='d'] body::after {
+  opacity: 0.01;
+}
+
+/* 패널의 수동 질감 토글 — 내장 설정보다 나중에 선언되어 우선한다 */
+html[data-texture='grain'] body::after {
+  content: '';
+  background-image: radial-gradient(rgba(30, 30, 27, 0.05) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+  opacity: 1;
+}
+
+html[data-texture='grain'][data-theme='dark'] body::after {
+  background-image: radial-gradient(rgba(231, 227, 218, 0.04) 0.5px, transparent 0.5px);
+}
+
+html[data-texture='noise'] body::after {
+  content: '';
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: auto;
+  opacity: 0.02;
+}
+
+html[data-texture='off'] body::after {
+  content: none !important;
+}

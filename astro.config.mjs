@@ -21,7 +21,9 @@ export default defineConfig({
     remarkPlugins: [remarkMath, [remarkMdLinks, { base: BASE }]],
     rehypePlugins: [rehypeKatex],
     shikiConfig: {
-      themes: { light: 'github-light', dark: 'github-dark' },
+      // css-variables: 토큰 색을 CSS 변수로 출력 → 디자인 조합(팔레트)별로
+      // 코드 하이라이팅이 함께 전환된다. 변수 정의는 global.css / design-test.css.
+      theme: 'css-variables',
       wrap: false,
     },
   },

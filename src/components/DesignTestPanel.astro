@@ -1,0 +1,229 @@
+---
+// 임시 디자인 테스트 패널 — 9개 조합 실시간 전환.
+// BaseLayout의 DESIGN_TEST 플래그로 함께 제거된다.
+---
+
+<aside class="dt" id="dt" data-open="true">
+  <button type="button" class="dt-chip" id="dt-chip" title="디자인 테스트 패널 열기">Aa</button>
+  <div class="dt-body">
+    <div class="dt-head">
+      <span>DESIGN TEST</span>
+      <button type="button" id="dt-min" title="접기">–</button>
+    </div>
+    <div class="dt-grid">
+      <button type="button" data-combo="">기본</button>
+      <button type="button" data-combo="a">A</button>
+      <button type="button" data-combo="b">B</button>
+      <button type="button" data-combo="c">C</button>
+      <button type="button" data-combo="d">D</button>
+      <button type="button" data-combo="f1">1</button>
+      <button type="button" data-combo="f2">2</button>
+      <button type="button" data-combo="f3">3</button>
+      <button type="button" data-combo="f4">4</button>
+      <button type="button" data-combo="f5">5</button>
+    </div>
+    <button type="button" class="dt-wide" id="dt-texture">질감: 자동</button>
+    <div class="dt-name" id="dt-name"></div>
+  </div>
+</aside>
+
+<style>
+  .dt {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 40;
+    font-family: -apple-system, 'Segoe UI', 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .dt-chip {
+    display: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid #c9c5bb;
+    background: #fffdf7;
+    color: #3a3833;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(20, 20, 15, 0.12);
+  }
+
+  .dt[data-open='false'] .dt-chip {
+    display: block;
+  }
+
+  .dt[data-open='false'] .dt-body {
+    display: none;
+  }
+
+  .dt-body {
+    width: 208px;
+    padding: 10px;
+    border: 1px solid #c9c5bb;
+    border-radius: 10px;
+    background: rgba(255, 253, 247, 0.96);
+    color: #3a3833;
+    box-shadow: 0 4px 16px rgba(20, 20, 15, 0.14);
+    backdrop-filter: blur(4px);
+  }
+
+  html[data-theme='dark'] .dt-body,
+  html[data-theme='dark'] .dt-chip {
+    background: rgba(30, 30, 27, 0.96);
+    border-color: #4a4a42;
+    color: #d6d2c8;
+  }
+
+  .dt-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.65;
+    margin-bottom: 8px;
+  }
+
+  .dt-head button {
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0 2px;
+  }
+
+  .dt-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+
+  .dt-grid button,
+  .dt-wide {
+    border: 1px solid #c9c5bb;
+    background: transparent;
+    color: inherit;
+    border-radius: 6px;
+    padding: 4px 0;
+    cursor: pointer;
+    font-size: 11.5px;
+  }
+
+  html[data-theme='dark'] .dt-grid button,
+  html[data-theme='dark'] .dt-wide {
+    border-color: #4a4a42;
+  }
+
+  .dt-grid button:first-child {
+    grid-column: span 5;
+  }
+
+  .dt-grid button:hover,
+  .dt-wide:hover {
+    background: rgba(120, 115, 100, 0.12);
+  }
+
+  .dt-grid button[aria-pressed='true'] {
+    background: #3a3833;
+    border-color: #3a3833;
+    color: #fffdf7;
+  }
+
+  html[data-theme='dark'] .dt-grid button[aria-pressed='true'] {
+    background: #d6d2c8;
+    border-color: #d6d2c8;
+    color: #1e1e1b;
+  }
+
+  .dt-wide {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .dt-name {
+    margin-top: 7px;
+    font-size: 10.5px;
+    opacity: 0.75;
+    min-height: 1.2em;
+  }
+
+  @media (max-width: 640px) {
+    .dt {
+      right: 10px;
+      bottom: 10px;
+    }
+  }
+</style>
+
+<script>
+  const NAMES: Record<string, string> = {
+    '': '기본 (현재 디자인)',
+    a: 'A · Safe Baseline — Pretendard',
+    b: 'B · Modern Paper — SUIT + grain',
+    c: 'C · Research Notebook — IBM Plex',
+    d: 'D · Slightly Literary — 세리프 제목',
+    f1: '1 · 잉크와 종이 — Flexoki × 마루부리',
+    f2: '2 · 대조군 — Flexoki × Pretendard',
+    f3: '3 · 정오의 성 — Solarized × RIDI바탕',
+    f4: '4 · 옛 인쇄물 — Gruvbox (본문 대체폰트)',
+    f5: '5 · 새벽 종이 — Rosé Pine × Noto Serif',
+  };
+  const TEXTURES = ['auto', 'off', 'grain', 'noise'];
+  const TEXTURE_LABELS: Record<string, string> = {
+    auto: '질감: 자동 (조합별 내장)',
+    off: '질감: 끔',
+    grain: '질감: grain 강제',
+    noise: '질감: noise 강제',
+  };
+
+  const root = document.documentElement;
+  const panel = document.getElementById('dt')!;
+  const nameEl = document.getElementById('dt-name')!;
+  const textureBtn = document.getElementById('dt-texture')!;
+  const buttons = [...panel.querySelectorAll<HTMLButtonElement>('.dt-grid button')];
+
+  function sync() {
+    const combo = root.dataset.combo ?? '';
+    for (const b of buttons) b.setAttribute('aria-pressed', String((b.dataset.combo ?? '') === combo));
+    nameEl.textContent = NAMES[combo] ?? combo;
+    const tex = root.dataset.texture ?? 'auto';
+    textureBtn.textContent = TEXTURE_LABELS[tex] ?? tex;
+  }
+
+  for (const b of buttons) {
+    b.title = NAMES[b.dataset.combo ?? ''] ?? '';
+    b.addEventListener('click', () => {
+      const combo = b.dataset.combo ?? '';
+      try {
+        combo ? localStorage.setItem('design-combo', combo) : localStorage.removeItem('design-combo');
+      } catch {}
+      combo ? (root.dataset.combo = combo) : delete root.dataset.combo;
+      sync();
+    });
+  }
+
+  textureBtn.addEventListener('click', () => {
+    const current = root.dataset.texture ?? 'auto';
+    const next = TEXTURES[(TEXTURES.indexOf(current) + 1) % TEXTURES.length];
+    try {
+      next === 'auto' ? localStorage.removeItem('design-texture') : localStorage.setItem('design-texture', next);
+    } catch {}
+    next === 'auto' ? delete root.dataset.texture : (root.dataset.texture = next);
+    sync();
+  });
+
+  document.getElementById('dt-min')!.addEventListener('click', () => {
+    panel.dataset.open = 'false';
+  });
+  document.getElementById('dt-chip')!.addEventListener('click', () => {
+    panel.dataset.open = 'true';
+  });
+
+  sync();
+</script>
