@@ -22,8 +22,9 @@
 
 <style>
   .dt {
+    /* 우하단은 '맨 위로' 버튼 자리라 임시 패널은 좌하단에 둔다 */
     position: fixed;
-    right: 14px;
+    left: 14px;
     bottom: 14px;
     z-index: 40;
     font-family: -apple-system, 'Segoe UI', 'Noto Sans KR', sans-serif;
@@ -136,7 +137,7 @@
 
   @media (max-width: 640px) {
     .dt {
-      right: 10px;
+      left: 10px;
       bottom: 10px;
     }
   }

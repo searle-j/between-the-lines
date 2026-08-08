@@ -1,5 +1,7 @@
 ---
+import type { MarkdownHeading } from 'astro';
 import BaseLayout from './BaseLayout.astro';
+import Toc from '../components/Toc.astro';
 import ViewCount from '../components/ViewCount.astro';
 import { isoDate, postPath, postTags, tagPath, type Post } from '../lib/posts';
 import { withBase } from '../lib/url';
@@ -7,9 +9,10 @@ import { withBase } from '../lib/url';
 interface Props {
   post: Post;
   hasAlternate: boolean;
+  headings?: MarkdownHeading[];
 }
 
-const { post, hasAlternate } = Astro.props;
+const { post, hasAlternate, headings = [] } = Astro.props;
 const { title, date, description } = post.entry.data;
 const path = postPath(post);
 const tags = postTags(post.entry);
@@ -43,4 +46,5 @@ const alternatePath = hasAlternate
       <slot />
     </div>
   </article>
+  <Toc headings={headings} />
 </BaseLayout>

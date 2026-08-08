@@ -1,0 +1,120 @@
+---
+// 게시물 목차 — Astro render()의 headings를 받아 우측 여백에 고정 표시.
+// 현재 읽는 섹션은 IntersectionObserver로 하이라이트한다.
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  items.length > 1 && (
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-title">Contents</div>
+      <ul>
+        {items.map((h) => (
+          <li class={h.depth === 3 ? 'toc-sub' : undefined}>
+            <a href={`#${h.slug}`}>{h.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .toc {
+    display: none;
+  }
+
+  /* 여백형 레이아웃의 오른쪽 여백이 충분한 폭에서만 표시 */
+  @media (min-width: 1280px) {
+    .toc {
+      display: block;
+      position: fixed;
+      top: 7.5rem;
+      right: 2.25rem;
+      width: 190px;
+      max-height: calc(100vh - 10rem);
+      overflow-y: auto;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    .toc-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 1px solid var(--border);
+    }
+
+    .toc li {
+      margin: 0.1rem 0;
+    }
+
+    .toc a {
+      display: block;
+      padding: 0.15rem 0 0.15rem 0.75rem;
+      margin-left: -1px;
+      border-left: 1px solid transparent;
+      color: var(--muted);
+    }
+
+    .toc .toc-sub a {
+      padding-left: 1.5rem;
+    }
+
+    .toc a:hover {
+      color: var(--link-hover);
+      text-decoration: none;
+    }
+
+    .toc a.active {
+      color: var(--text);
+      border-left-color: var(--link);
+    }
+  }
+</style>
+
+<script>
+  const toc = document.querySelector('.toc');
+  if (toc) {
+    const links = [...toc.querySelectorAll<HTMLAnchorElement>('a')];
+    const byId = new Map(links.map((a) => [decodeURIComponent(a.hash.slice(1)), a]));
+    const headings = [...byId.keys()]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    let current: HTMLAnchorElement | undefined;
+    const setActive = (link?: HTMLAnchorElement) => {
+      if (link === current) return;
+      current?.classList.remove('active');
+      link?.classList.add('active');
+      current = link;
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(byId.get(entry.target.id));
+        }
+      },
+      { rootMargin: '-8% 0% -75% 0%' }
+    );
+    for (const heading of headings) observer.observe(heading);
+  }
+</script>
