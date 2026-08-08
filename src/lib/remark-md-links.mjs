@@ -33,7 +33,14 @@ export function remarkMdLinks(options = {}) {
       const hash = hashIndex === -1 ? '' : url.slice(hashIndex);
       if (!target.endsWith('.md')) return;
 
-      const abs = path.resolve(fromDir, decodeURI(target)).split(path.sep).join('/');
+      // 잘못된 퍼센트 인코딩(예: `100%.md`)이 있으면 빌드를 죽이는 대신 그대로 둔다.
+      let decoded;
+      try {
+        decoded = decodeURI(target);
+      } catch {
+        return;
+      }
+      const abs = path.resolve(fromDir, decoded).split(path.sep).join('/');
 
       let m = abs.match(/\/content\/(papers|books)\/([^/]+)\.(ko|en)\.md$/);
       if (m) {

@@ -1,15 +1,8 @@
 ---
 import TagPage from '../../components/pages/TagPage.astro';
-import { getAllTags } from '../../lib/posts';
+import { tagStaticPaths } from '../../lib/posts';
 
-export async function getStaticPaths() {
-  const [ko, en] = await Promise.all([getAllTags('ko'), getAllTags('en')]);
-  const enTags = new Set(en.map(({ tag }) => tag));
-  return ko.map(({ tag }) => ({
-    params: { tag },
-    props: { tag, hasAlternate: enTags.has(tag) },
-  }));
-}
+export const getStaticPaths = () => tagStaticPaths('ko');
 
 const { tag, hasAlternate } = Astro.props;
 ---

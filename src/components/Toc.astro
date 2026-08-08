@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { headings } = Astro.props;
-const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const items = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
 ---
 
 {
@@ -17,7 +17,7 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
       <div class="toc-title">Contents</div>
       <ul>
         {items.map((h) => (
-          <li class={h.depth === 3 ? 'toc-sub' : undefined}>
+          <li class={`toc-d${h.depth}`}>
             <a href={`#${h.slug}`}>{h.text}</a>
           </li>
         ))}
@@ -74,8 +74,13 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
       color: var(--muted);
     }
 
-    .toc .toc-sub a {
+    .toc .toc-d3 a {
       padding-left: 1.5rem;
+    }
+
+    .toc .toc-d4 a {
+      padding-left: 2.25rem;
+      font-size: 0.95em;
     }
 
     .toc a:hover {

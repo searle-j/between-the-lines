@@ -30,14 +30,17 @@ interface Props {
    * counterpart exists (e.g. an untranslated post).
    */
   alternatePath?: string | null;
+  /** 404처럼 고유 URL이 없는 페이지: canonical·hreflang 대신 noindex를 낸다. */
+  noindex?: boolean;
 }
 
-const { lang, title, description, alternatePath = null } = Astro.props;
+const { lang, title, description, alternatePath = null, noindex = false } = Astro.props;
 
 const pageTitle = title ? `${title} · ${siteName}` : siteName;
 const desc = description ?? t(lang).description;
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const alternateUrl = alternatePath ? new URL(withBase(alternatePath), Astro.site) : null;
+const canonical = noindex ? null : new URL(Astro.url.pathname, Astro.site);
+const alternateUrl =
+  canonical && alternatePath ? new URL(withBase(alternatePath), Astro.site) : null;
 const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
 ---
 
@@ -48,9 +51,10 @@ const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={desc} />
-    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {canonical && <link rel="canonical" href={canonical} />}
     {
-      alternateUrl && (
+      canonical && alternateUrl && (
         <>
           <link rel="alternate" hreflang={lang} href={canonical} />
           <link rel="alternate" hreflang={lang === 'ko' ? 'en' : 'ko'} href={alternateUrl} />
@@ -63,7 +67,7 @@ const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
     <link rel="alternate" type="application/rss+xml" title={`${siteName} (EN)`} href={withBase('/en/rss.xml')} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={desc} />
-    <meta property="og:url" content={canonical} />
+    {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:site_name" content={siteName} />
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

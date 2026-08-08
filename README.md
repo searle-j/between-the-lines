@@ -74,11 +74,16 @@ npm run build      # 콘텐츠 검사 + 빌드 + Pagefind 인덱싱 → dist/
 npm run preview    # dist/ 를 로컬에서 서빙 (검색 포함 전체 확인)
 ```
 
-`npm run check:content`는 번역 누락, 파일명 규칙 위반, type-폴더 불일치를 경고한다 (빌드 시 자동 실행).
+- `npm run check:content` — 번역 누락·파일명 규칙·type-폴더 불일치 경고 (빌드 시 자동 실행)
+- `npm run check` — Astro 템플릿 타입 검사 (CI에서 자동 실행)
+- 빌드 후에는 `scripts/verify-dist.mjs`가 전 페이지의 내부 링크·내비 일관성·lang·hreflang·sitemap·검색 번들을 전수 검사하고, 위반이 있으면 빌드를 실패시킨다.
+- dev 서버가 새로 만든 md 파일을 목록에 반영하지 못하면(장시간 구동 시 드물게 발생) `npx astro dev stop` 후 `npm run dev`로 재시작한다.
 
 ## 배포
 
-`main`에 push하면 GitHub Actions가 빌드해 GitHub Pages로 자동 배포한다 (`.github/workflows/deploy.yml`).
+`main`에 push하면 GitHub Actions가 타입 검사→빌드→전수 검사를 통과한 경우에만 GitHub Pages로 배포한다 (`.github/workflows/deploy.yml`).
+
+배포 직후 몇 분간은 CDN 캐시(max-age 600초) 때문에 일부 페이지가 이전 버전으로 보이거나 스타일이 어긋날 수 있다. 최대 10분 안에 자동 해소되며, 강력 새로고침(Ctrl+Shift+R)으로 즉시 확인할 수 있다.
 
 ## 방문 통계 (예정)
 

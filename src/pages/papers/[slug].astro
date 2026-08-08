@@ -1,14 +1,8 @@
 ---
 import PostPage from '../../components/pages/PostPage.astro';
-import { getPosts } from '../../lib/posts';
+import { postStaticPaths } from '../../lib/posts';
 
-export async function getStaticPaths() {
-  const [ko, en] = await Promise.all([getPosts('ko', 'papers'), getPosts('en', 'papers')]);
-  return ko.map((post) => ({
-    params: { slug: post.slug },
-    props: { post, hasAlternate: en.some((p) => p.slug === post.slug) },
-  }));
-}
+export const getStaticPaths = () => postStaticPaths('ko', 'papers');
 
 const { post, hasAlternate } = Astro.props;
 ---

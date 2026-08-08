@@ -13,6 +13,16 @@ const KINDS = [
   { dir: 'content/books', type: 'book' },
 ];
 
+/** content.config.ts 의 glob('**\/*.{ko,en}.md') 과 같은 재귀 범위로 .md 를 모은다. */
+function mdFiles(dir) {
+  const out = [];
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    if (e.isDirectory()) out.push(...mdFiles(path.join(dir, e.name)));
+    else if (e.name.endsWith('.md')) out.push(path.join(dir, e.name));
+  }
+  return out;
+}
+
 let warnings = 0;
 const warn = (msg) => {
   warnings++;
@@ -26,12 +36,12 @@ for (const { dir, type } of KINDS) {
   const abs = path.join(ROOT, dir);
   if (!existsSync(abs)) continue;
 
-  for (const name of readdirSync(abs)) {
-    if (!name.endsWith('.md')) continue;
+  for (const file of mdFiles(abs)) {
+    const rel = path.relative(abs, file).split(path.sep).join('/');
 
-    const m = name.match(/^(.+)\.(ko|en)\.md$/);
+    const m = rel.match(/^(.+)\.(ko|en)\.md$/);
     if (!m) {
-      warn(`${dir}/${name}: '<slug>.ko.md' / '<slug>.en.md' 형식이 아니어서 사이트에 실리지 않습니다.`);
+      warn(`${dir}/${rel}: '<slug>.ko.md' / '<slug>.en.md' 형식이 아니어서 사이트에 실리지 않습니다.`);
       continue;
     }
     const [, slug, lang] = m;
@@ -39,10 +49,10 @@ for (const { dir, type } of KINDS) {
     if (!posts.has(key)) posts.set(key, new Set());
     posts.get(key).add(lang);
 
-    const fm = readFileSync(path.join(abs, name), 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    const fm = readFileSync(file, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/);
     const typeValue = fm?.[1].match(/^type:\s*["']?([\w-]+)["']?\s*$/m)?.[1];
     if (typeValue && typeValue !== type) {
-      warn(`${dir}/${name}: frontmatter type이 '${typeValue}'인데 이 폴더는 '${type}'용입니다.`);
+      warn(`${dir}/${rel}: frontmatter type이 '${typeValue}'인데 이 폴더는 '${type}'용입니다.`);
     }
   }
 }

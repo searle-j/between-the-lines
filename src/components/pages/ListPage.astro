@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPosts, groupByYear, postPath, type Kind } from '../../lib/posts';
-import { withBase } from '../../lib/url';
+import PostList from '../PostList.astro';
+import { getPosts, groupByYear, type Kind } from '../../lib/posts';
 import type { Lang } from '../../i18n/ui';
 
 interface Props {
@@ -22,13 +22,7 @@ const years = groupByYear(await getPosts(lang, kind));
     years.map(([year, posts]) => (
       <section class="year-group">
         <h2>{year}</h2>
-        <ul class="title-list">
-          {posts.map((post) => (
-            <li>
-              <a href={withBase(postPath(post))}>{post.entry.data.title}</a>
-            </li>
-          ))}
-        </ul>
+        <PostList posts={posts} />
       </section>
     ))
   }
