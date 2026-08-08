@@ -606,17 +606,27 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   font-size: 0.78em;
 }
 
-.tag-page-meta {
-  margin: 0 0 1.25rem;
-  font-size: 0.9rem;
+.crumb {
+  margin: 2rem 0 0;
+  font-size: 0.85rem;
 }
 
-.tag-page-meta a {
+.crumb a {
   color: var(--muted);
 }
 
-.tag-page-meta a:hover {
+.crumb a:hover {
   color: var(--link-hover);
+  text-decoration: none;
+}
+
+.crumb + .page-title {
+  margin-top: 0.4rem;
+}
+
+.tag-page-meta {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
 }
 
 .post-meta {
