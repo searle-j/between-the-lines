@@ -1,17 +1,50 @@
 /* ============================================================
-   D TUNE — 코드 블록 팔레트 변형 (임시 파일)
-   배경(②)·링크(기존+밑줄)·배치(여백/상단 자동)는 확정되어
-   global.css에 반영됐고, 코드 팔레트만 비교가 남았다.
+   [보관용 — 현재 사용 안 함] 디자인 A/B 테스트 변형 모음
+   2026-08-08 확정: 로제(rose) 팔레트가 global.css 기본값으로 이식됨.
+   이 파일은 BaseLayout에서 import가 주석 처리되어 번들에 포함되지
+   않는다. 테스트를 재개하려면:
+     1) BaseLayout.astro의 DESIGN_TEST = true
+     2) design-test.css import 주석 해제
+     3) <head> 스크립트의 design-test 블록 주석 해제
+   아래 셀렉터들은 data-code 속성이 있어야만 동작하므로 그 자체로도
+   비활성(inert)이다.
 
-   각 옵션은 라이트/다크 팔레트 쌍이다:
-     따뜻(warm) = global.css 기본 (light warm / dark warm)
-     로제(rose) = light: Rosé Pine Dawn / dark: Rosé Pine Main
+   옵션 (라이트/다크 팔레트 쌍):
+     따뜻(warm) = 이식 전 기본값 (아카이브)
+     로제(rose) = light: Rosé Pine Dawn / dark: Rosé Pine Main ← 확정
      그루브(gruv) = light: Gruvbox light / dark: Gruvbox dark
      플렉스(flex) = light: Flexoki light / dark: Flexoki dark
-
-   확정되면 선택 팔레트를 global.css에 이식하고 이 파일과
-   BaseLayout의 DESIGN_TEST 관련 코드를 제거한다.
    ============================================================ */
+
+/* ---- 따뜻 (이식 전 global.css 기본값 아카이브) ---- */
+
+html[data-code='warm']:not([data-theme='dark']) {
+  --astro-code-color-text: #292824;
+  --astro-code-color-background: #efe9dd;
+  --astro-code-token-comment: #8e8577;
+  --astro-code-token-keyword: #8e4642;
+  --astro-code-token-string: #6e6338;
+  --astro-code-token-function: #46566a;
+  --astro-code-token-constant: #455a4a;
+  --astro-code-token-string-expression: #55684d;
+  --astro-code-token-parameter: #292824;
+  --astro-code-token-punctuation: #6b655c;
+  --astro-code-token-link: #8e4642;
+}
+
+html[data-code='warm'][data-theme='dark'] {
+  --astro-code-color-text: #e8e3d9;
+  --astro-code-color-background: #272520;
+  --astro-code-token-comment: #8d897e;
+  --astro-code-token-keyword: #c09492;
+  --astro-code-token-string: #c4b183;
+  --astro-code-token-function: #98acc6;
+  --astro-code-token-constant: #8faf98;
+  --astro-code-token-string-expression: #a3bd90;
+  --astro-code-token-parameter: #e8e3d9;
+  --astro-code-token-punctuation: #a8a399;
+  --astro-code-token-link: #c09492;
+}
 
 /* ---- 로제 ---- */
 

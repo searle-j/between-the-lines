@@ -13,8 +13,8 @@ const alternatePath = lang === 'ko' ? '/en/search/' : '/search/';
 const pagefindDir = withBase('/pagefind');
 ---
 
-<BaseLayout lang={lang} title="Search" alternatePath={alternatePath}>
-  <h1 class="page-title">Search</h1>
+<BaseLayout lang={lang} title="Full-text Search" alternatePath={alternatePath}>
+  <h1 class="page-title">Full-text Search</h1>
   <div id="search"></div>
   <link rel="stylesheet" href={`${pagefindDir}/pagefind-ui.css`} />
   <script is:inline src={`${pagefindDir}/pagefind-ui.js`}></script>

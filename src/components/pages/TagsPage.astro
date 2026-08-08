@@ -13,9 +13,9 @@ const tags = await getAllTags(lang);
 const alternatePath = lang === 'ko' ? '/en/tags/' : '/tags/';
 ---
 
-<BaseLayout lang={lang} title="Tags" alternatePath={alternatePath}>
-  <h1 class="page-title">Tags</h1>
-  {tags.length === 0 && <p class="muted">No tags yet.</p>}
+<BaseLayout lang={lang} title="Keywords" alternatePath={alternatePath}>
+  <h1 class="page-title">Keywords</h1>
+  {tags.length === 0 && <p class="muted">No keywords yet.</p>}
   <ul class="tag-cloud">
     {
       tags.map(({ tag, count }) => (

@@ -13,13 +13,25 @@ const { lang, alternatePath = null } = Astro.props;
 const prefix = lang === 'en' ? '/en' : '';
 const current = Astro.url.pathname.replace(/\/$/, '');
 
+// 여백형(세로) 내비에서는 그룹 라벨과 들여쓰기로 위계가 보이고,
+// 상단형(가로) 내비에서는 라벨 없이 평탄하게 흐른다.
 const nav = [
-  { label: 'Papers', path: `${prefix}/papers/` },
-  { label: 'Books', path: `${prefix}/books/` },
-  { label: 'Tags', path: `${prefix}/tags/` },
-  { label: 'Search', path: `${prefix}/search/` },
-  { label: 'About', path: `${prefix}/about/` },
+  {
+    group: 'Review',
+    items: [
+      { label: 'Papers', path: `${prefix}/papers/` },
+      { label: 'Books', path: `${prefix}/books/` },
+    ],
+  },
+  {
+    group: 'Search',
+    items: [
+      { label: 'Keywords', path: `${prefix}/tags/` },
+      { label: 'Full-text', path: `${prefix}/search/` },
+    ],
+  },
 ];
+const about = { label: 'About', path: `${prefix}/about/` };
 ---
 
 <header class="site-header">
@@ -31,15 +43,26 @@ const nav = [
     </div>
     <nav aria-label="Site">
       {
-        nav.map((item) => {
-          const href = withBase(item.path);
-          return (
-            <a href={href} aria-current={current === href.replace(/\/$/, '') ? 'page' : undefined}>
-              {item.label}
-            </a>
-          );
-        })
+        nav.map(({ group, items }) => (
+          <div class="nav-group">
+            <span class="nav-group-label" aria-hidden="true">{group}</span>
+            {items.map((item) => {
+              const href = withBase(item.path);
+              return (
+                <a href={href} aria-current={current === href.replace(/\/$/, '') ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              );
+            })}
+          </div>
+        ))
       }
+      <a
+        href={withBase(about.path)}
+        aria-current={current === withBase(about.path).replace(/\/$/, '') ? 'page' : undefined}
+      >
+        {about.label}
+      </a>
     </nav>
   </div>
 </header>

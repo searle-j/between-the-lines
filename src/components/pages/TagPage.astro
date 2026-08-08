@@ -18,7 +18,7 @@ const alternatePath = hasAlternate ? tagPath(lang === 'ko' ? 'en' : 'ko', tag) :
 
 <BaseLayout lang={lang} title={`#${tag}`} alternatePath={alternatePath}>
   <p class="crumb">
-    <a href={withBase(lang === 'en' ? '/en/tags/' : '/tags/')}>← Tags</a>
+    <a href={withBase(lang === 'en' ? '/en/tags/' : '/tags/')}>← Keywords</a>
   </p>
   <h1 class="page-title">#{tag}</h1>
   <p class="tag-page-meta muted">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>

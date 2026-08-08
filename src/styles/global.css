@@ -38,18 +38,19 @@
   --radius-inline: 0;
   --radius-img: 0;
 
-  /* code blocks (Shiki css-variables theme) — light: 따뜻한 종이 위 절제된 톤 */
-  --astro-code-color-text: #292824;
-  --astro-code-color-background: #efe9dd;
-  --astro-code-token-comment: #8e8577;
-  --astro-code-token-keyword: #8e4642;
-  --astro-code-token-string: #6e6338;
-  --astro-code-token-function: #46566a;
-  --astro-code-token-constant: #455a4a;
-  --astro-code-token-string-expression: #55684d;
-  --astro-code-token-parameter: #292824;
-  --astro-code-token-punctuation: #6b655c;
-  --astro-code-token-link: #8e4642;
+  /* code blocks (Shiki css-variables theme) — 확정: Rosé Pine Dawn
+     (다른 후보 팔레트는 design-test.css에 보존) */
+  --astro-code-color-text: #575279;
+  --astro-code-color-background: #f2e9e1;
+  --astro-code-token-comment: #9893a5;
+  --astro-code-token-keyword: #286983;
+  --astro-code-token-string: #ea9d34;
+  --astro-code-token-function: #d7827e;
+  --astro-code-token-constant: #907aa9;
+  --astro-code-token-string-expression: #56949f;
+  --astro-code-token-parameter: #b4637a;
+  --astro-code-token-punctuation: #797593;
+  --astro-code-token-link: #286983;
 }
 
 html[data-theme='dark'] {
@@ -64,18 +65,18 @@ html[data-theme='dark'] {
   --quote-border: #4c4941;
   --quote-text: #a8a399;
 
-  /* dark 기본 코드 팔레트(따뜻) — data-code 변형이 덮어쓴다 */
-  --astro-code-color-text: #e8e3d9;
-  --astro-code-color-background: #272520;
-  --astro-code-token-comment: #8d897e;
-  --astro-code-token-keyword: #c09492;
-  --astro-code-token-string: #c4b183;
-  --astro-code-token-function: #98acc6;
-  --astro-code-token-constant: #8faf98;
-  --astro-code-token-string-expression: #a3bd90;
-  --astro-code-token-parameter: #e8e3d9;
-  --astro-code-token-punctuation: #a8a399;
-  --astro-code-token-link: #c09492;
+  /* dark 코드 팔레트 — 확정: Rosé Pine Main */
+  --astro-code-color-text: #e2deee;
+  --astro-code-color-background: #262230;
+  --astro-code-token-comment: #7e7a93;
+  --astro-code-token-keyword: #6fa7be;
+  --astro-code-token-string: #f6c177;
+  --astro-code-token-function: #ebbcba;
+  --astro-code-token-constant: #c4a7e7;
+  --astro-code-token-string-expression: #9ccfd8;
+  --astro-code-token-parameter: #eb6f92;
+  --astro-code-token-punctuation: #908caa;
+  --astro-code-token-link: #9ccfd8;
 }
 
 /* ---------- Base ---------- */
@@ -202,6 +203,15 @@ hr {
   border-bottom: 1px solid var(--border);
 }
 
+/* 상단형(가로) 내비: 그룹을 평탄화하고 라벨은 숨긴다 */
+.site-header nav .nav-group {
+  display: contents;
+}
+
+.site-header nav .nav-group-label {
+  display: none;
+}
+
 .site-header nav a {
   color: var(--muted);
   font-size: 0.95rem;
@@ -253,11 +263,33 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.45rem;
+    gap: 1.1rem;
     max-width: 180px;
-    margin-top: 1.5rem;
+    margin-top: 1.6rem;
     padding-bottom: 0;
     border-bottom: none;
+  }
+
+  /* 여백형(세로) 내비: 그룹 라벨 + 들여쓰기로 위계 표시 */
+  .site-header nav .nav-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .site-header nav .nav-group-label {
+    display: block;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.75;
+  }
+
+  .site-header nav .nav-group a {
+    padding-left: 0.7rem;
   }
 
   main.container {
