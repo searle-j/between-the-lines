@@ -1,7 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ViewCount from '../components/ViewCount.astro';
-import { isoDate, postPath, type Post } from '../lib/posts';
+import { isoDate, postPath, postTags, tagPath, type Post } from '../lib/posts';
+import { withBase } from '../lib/url';
 
 interface Props {
   post: Post;
@@ -11,13 +12,14 @@ interface Props {
 const { post, hasAlternate } = Astro.props;
 const { title, date, description } = post.entry.data;
 const path = postPath(post);
+const tags = postTags(post.entry);
 const alternatePath = hasAlternate
   ? postPath({ ...post, lang: post.lang === 'ko' ? 'en' : 'ko' })
   : null;
 ---
 
 <BaseLayout lang={post.lang} title={title} description={description} alternatePath={alternatePath}>
-  <article class="post">
+  <article class="post" data-pagefind-body>
     <header class="post-header">
       <h1>{title}</h1>
       <p class="post-meta">
@@ -25,6 +27,15 @@ const alternatePath = hasAlternate
         <span aria-hidden="true">·</span>
         <span>{post.typeLabel}</span>
         <ViewCount path={path} />
+        {
+          tags.length > 0 && (
+            <span class="post-meta-tags">
+              {tags.map((tag) => (
+                <a href={withBase(tagPath(post.lang, tag))}>#{tag}</a>
+              ))}
+            </span>
+          )
+        }
       </p>
     </header>
     <hr />

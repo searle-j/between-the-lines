@@ -60,4 +60,6 @@ def evaluate_jump(model, world, horizon: int = 32) -> float:
 
 관련 리뷰: [사탄탱고](../books/satantango.ko.md) — 내부 링크가 사이트 주소로 변환되는지 확인하는 링크입니다.
 
+#llm #reasoning #benchmark
+
 [^1]: 각주 렌더링 확인용 각주. 공개 코드 주소도, 이 논문도 실재하지 않는다.

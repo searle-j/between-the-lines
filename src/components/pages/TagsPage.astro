@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllTags, tagPath } from '../../lib/posts';
+import { withBase } from '../../lib/url';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tags = await getAllTags(lang);
+const alternatePath = lang === 'ko' ? '/en/tags/' : '/tags/';
+---
+
+<BaseLayout lang={lang} title="Tags" alternatePath={alternatePath}>
+  <h1 class="page-title">Tags</h1>
+  {tags.length === 0 && <p class="muted">No tags yet.</p>}
+  <ul class="tag-cloud">
+    {
+      tags.map(({ tag, count }) => (
+        <li>
+          <a class="tag-chip" href={withBase(tagPath(lang, tag))}>
+            <span>#{tag}</span>
+            <span class="tag-count">{count}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

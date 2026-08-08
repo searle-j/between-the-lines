@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../PostList.astro';
+import { getPosts, postTags, tagPath } from '../../lib/posts';
+import { withBase } from '../../lib/url';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  tag: string;
+  hasAlternate: boolean;
+}
+
+const { lang, tag, hasAlternate } = Astro.props;
+const posts = (await getPosts(lang)).filter((post) => postTags(post.entry).includes(tag));
+const alternatePath = hasAlternate ? tagPath(lang === 'ko' ? 'en' : 'ko', tag) : null;
+---
+
+<BaseLayout lang={lang} title={`#${tag}`} alternatePath={alternatePath}>
+  <h1 class="page-title">#{tag}</h1>
+  <p class="tag-page-meta muted">
+    {posts.length} {posts.length === 1 ? 'post' : 'posts'} ·
+    <a href={withBase(lang === 'en' ? '/en/tags/' : '/tags/')}>← Tags</a>
+  </p>
+  <PostList posts={posts} />
+</BaseLayout>

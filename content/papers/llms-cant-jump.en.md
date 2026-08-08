@@ -60,4 +60,6 @@ Whether a step counts as interpolation or a jump is defined by how far the state
 
 Related review: [Satantango](../books/satantango.en.md) — this link checks that internal links get rewritten to site URLs.
 
+#llm #reasoning #benchmark
+
 [^1]: A footnote for rendering checks. Neither the code URL nor the paper exists.

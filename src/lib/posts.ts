@@ -57,6 +57,38 @@ export function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
 
+// remark-inline-tags.mjs와 같은 Obsidian 태그 규칙을 쓴다.
+const INLINE_TAG = /(?:^|[\s(（[])#([A-Za-z0-9_가-힣][A-Za-z0-9_가-힣/-]*)/g;
+
+function stripCode(markdown: string): string {
+  return markdown.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
+}
+
+/** frontmatter `tags`와 본문 인라인 `#태그`(Obsidian 스타일)를 병합한다. */
+export function postTags(entry: { data: { tags: string[] }; body?: string }): string[] {
+  const tags = new Set(entry.data.tags);
+  for (const m of stripCode(entry.body ?? '').matchAll(INLINE_TAG)) {
+    if (!/^[0-9/]+$/.test(m[1])) tags.add(m[1]);
+  }
+  return [...tags].sort();
+}
+
+export async function getAllTags(lang: Lang): Promise<Array<{ tag: string; count: number }>> {
+  const counts = new Map<string, number>();
+  for (const post of await getPosts(lang)) {
+    for (const tag of postTags(post.entry)) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => a.tag.localeCompare(b.tag, 'en'));
+}
+
+export function tagPath(lang: Lang, tag: string): string {
+  return `${lang === 'en' ? '/en' : ''}/tags/${tag}/`;
+}
+
 export function groupByYear(posts: Post[]): Array<[number, Post[]]> {
   const byYear = new Map<number, Post[]>();
   for (const post of posts) {

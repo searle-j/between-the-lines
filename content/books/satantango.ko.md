@@ -45,3 +45,5 @@ description: "크러스너호르커이 라슬로, 『사탄탱고』 — 레이�
 
 - 장 구성: 1부 I→VI, 2부 VI→I
 - 함께 읽은 글: [LLMs Can't Jump](../papers/llms-cant-jump.ko.md) — 내부 링크 변환 확인용
+
+#novel #hungary

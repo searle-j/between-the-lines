@@ -3,11 +3,12 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "astro dev",
     "build": "npm run check:content && astro build",
+    "postbuild": "pagefind --site dist",
     "preview": "astro preview",
     "check:content": "node scripts/check-content.mjs"
   },
@@ -17,8 +18,12 @@
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.0",
     "katex": "^0.18.1",
+    "rehype-external-links": "^3.0.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "sharp": "^0.35.3"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
   }
 }

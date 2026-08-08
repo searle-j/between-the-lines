@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/url';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alternatePath = lang === 'ko' ? '/en/search/' : '/search/';
+// Pagefind 인덱스는 빌드 후 `postbuild`(pagefind --site dist)가 생성한다.
+const pagefindDir = withBase('/pagefind');
+---
+
+<BaseLayout lang={lang} title="Search" alternatePath={alternatePath}>
+  <h1 class="page-title">Search</h1>
+  <div id="search"></div>
+  <link rel="stylesheet" href={`${pagefindDir}/pagefind-ui.css`} />
+  <script is:inline src={`${pagefindDir}/pagefind-ui.js`}></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      const el = document.getElementById('search');
+      if (typeof PagefindUI === 'undefined') {
+        el.textContent =
+          document.documentElement.lang === 'ko'
+            ? '검색 인덱스는 빌드 때 생성됩니다 — npm run build && npm run preview 로 확인하세요.'
+            : 'The search index is generated at build time — run npm run build && npm run preview.';
+        el.className = 'muted';
+        return;
+      }
+      new PagefindUI({ element: '#search', showSubResults: true, showImages: false });
+    });
+  </script>
+</BaseLayout>

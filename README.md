@@ -48,17 +48,30 @@ draft: true          # true면 배포에서 제외, 로컬 dev에서는 보임 (
 
 상대 경로만 쓰면 Obsidian과 사이트 양쪽에서 동작한다. `.md`로 끝나는 내부 링크는 빌드 때 자동으로 게시글 주소로 변환된다.
 
+### 태그
+
+Obsidian 스타일 그대로 본문에 `#llm` 처럼 쓰면 된다 (`#ability_test`, `#world_model` 같은 스네이크케이스 권장 — 태그가 URL이 된다).
+
+- 본문 인라인 `#태그`는 자동으로 수집되어 `/tags/` 목록과 `/tags/<태그>/` 페이지가 생기고, 본문에서도 클릭 가능한 링크로 렌더된다.
+- frontmatter `tags:` 목록도 병합된다 (양쪽 다 써도 됨).
+- 코드 블록/인라인 코드 안의 `#`, URL의 `#fragment`, 숫자로만 된 태그는 무시된다.
+
 ### 지원 문법
 
-표, 각주(`[^1]`), 코드 블록(구문 강조), 수식(`$…$`, `$$…$$`), 인용, 취소선 등 GFM + LaTeX.
+표, 각주(`[^1]`), 코드 블록(구문 강조), 수식(`$…$`, `$$…$$`), 인용, 취소선 등 GFM + LaTeX. 외부 링크는 자동으로 새 창(`target="_blank"`)으로 열린다.
+
+## 검색
+
+[Pagefind](https://pagefind.app)가 빌드 후 `dist/`를 인덱싱한다(`postbuild`). `/search/` 페이지에서 키워드 검색이 되고, 한국어/영어 인덱스는 페이지 `lang`에 따라 자동 분리된다. dev 서버에는 인덱스가 없으므로 `npm run build && npm run preview`로 확인한다.
 
 ## 로컬 미리보기
 
 ```bash
+# Node 24 (.nvmrc)
 npm install
 npm run dev        # http://localhost:4321/between-the-lines/
-npm run build      # 콘텐츠 검사 + 프로덕션 빌드 → dist/
-npm run preview    # dist/ 를 로컬에서 서빙
+npm run build      # 콘텐츠 검사 + 빌드 + Pagefind 인덱싱 → dist/
+npm run preview    # dist/ 를 로컬에서 서빙 (검색 포함 전체 확인)
 ```
 
 `npm run check:content`는 번역 누락, 파일명 규칙 위반, type-폴더 불일치를 경고한다 (빌드 시 자동 실행).
