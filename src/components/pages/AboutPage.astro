@@ -1,0 +1,27 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const entry = await getEntry('pages', `about.${lang}`);
+if (!entry) throw new Error(`content/pages/about.${lang}.md is missing`);
+const { Content } = await render(entry);
+const alternatePath = lang === 'ko' ? '/en/about/' : '/about/';
+---
+
+<BaseLayout
+  lang={lang}
+  title={entry.data.title}
+  description={entry.data.description}
+  alternatePath={alternatePath}
+>
+  <article class="prose">
+    <h1 class="page-title">{entry.data.title}</h1>
+    <Content />
+  </article>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPosts, groupByYear, postPath, type Kind } from '../../lib/posts';
+import { withBase } from '../../lib/url';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  kind: Kind;
+}
+
+const { lang, kind } = Astro.props;
+const title = kind === 'papers' ? 'Papers' : 'Books';
+const alternatePath = `${lang === 'ko' ? '/en' : ''}/${kind}/`;
+const years = groupByYear(await getPosts(lang, kind));
+---
+
+<BaseLayout lang={lang} title={title} alternatePath={alternatePath}>
+  <h1 class="page-title">{title}</h1>
+  {years.length === 0 && <p class="muted">No posts yet.</p>}
+  {
+    years.map(([year, posts]) => (
+      <section class="year-group">
+        <h2>{year}</h2>
+        <ul class="title-list">
+          {posts.map((post) => (
+            <li>
+              <a href={withBase(postPath(post))}>{post.entry.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+import LanguageToggle from './LanguageToggle.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { withBase } from '../lib/url';
+import { siteName, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  alternatePath?: string | null;
+}
+
+const { lang, alternatePath = null } = Astro.props;
+const prefix = lang === 'en' ? '/en' : '';
+const current = Astro.url.pathname.replace(/\/$/, '');
+
+const nav = [
+  { label: 'Papers', path: `${prefix}/papers/` },
+  { label: 'Books', path: `${prefix}/books/` },
+  { label: 'About', path: `${prefix}/about/` },
+];
+---
+
+<header class="site-header container">
+  <div class="masthead">
+    <a class="site-title" href={withBase(`${prefix}/`)}>{siteName}</a>
+    <div class="controls">
+      <LanguageToggle lang={lang} alternatePath={alternatePath} />
+      <ThemeToggle />
+    </div>
+  </div>
+  <nav aria-label="Site">
+    {
+      nav.map((item) => {
+        const href = withBase(item.path);
+        return (
+          <a href={href} aria-current={current === href.replace(/\/$/, '') ? 'page' : undefined}>
+            {item.label}
+          </a>
+        );
+      })
+    }
+  </nav>
+</header>

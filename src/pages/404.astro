@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+---
+
+<BaseLayout lang="ko" title="404">
+  <div class="not-found">
+    <h1>404</h1>
+    <p>페이지를 찾을 수 없습니다 · Page not found</p>
+    <p><a href={withBase('/')}>← Between the Lines</a></p>
+  </div>
+</BaseLayout>

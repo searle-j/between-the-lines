@@ -1,0 +1,40 @@
+---
+import { withBase } from '../lib/url';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Path of this page in the other language; null = counterpart missing. */
+  alternatePath?: string | null;
+}
+
+const { lang, alternatePath = null } = Astro.props;
+const missing = alternatePath === null;
+
+// When the counterpart page doesn't exist, the toggle still switches
+// language but lands on that language's home.
+const koHref = lang === 'ko' ? null : withBase(alternatePath ?? '/');
+const enHref = lang === 'en' ? null : withBase(alternatePath ?? '/en/');
+---
+
+<div class="lang-toggle" role="group" aria-label="Language">
+  {
+    koHref ? (
+      <a href={koHref} class:list={{ dim: missing }} title={missing ? '한국어 원문이 없는 페이지입니다' : undefined}>
+        KO
+      </a>
+    ) : (
+      <span class="active" aria-current="true">KO</span>
+    )
+  }
+  <span class="sep" aria-hidden="true">·</span>
+  {
+    enHref ? (
+      <a href={enHref} class:list={{ dim: missing }} title={missing ? 'No English translation yet' : undefined}>
+        EN
+      </a>
+    ) : (
+      <span class="active" aria-current="true">EN</span>
+    )
+  }
+</div>

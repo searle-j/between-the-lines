@@ -1,0 +1,19 @@
+# build
+node_modules/
+dist/
+.astro/
+npm-debug.log*
+
+# Obsidian workspace state (vault settings stay local)
+.obsidian/
+.trash/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# local env
+.env
+.env.*

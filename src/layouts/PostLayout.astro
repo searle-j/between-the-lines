@@ -1,0 +1,35 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ViewCount from '../components/ViewCount.astro';
+import { isoDate, postPath, type Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+  hasAlternate: boolean;
+}
+
+const { post, hasAlternate } = Astro.props;
+const { title, date, description } = post.entry.data;
+const path = postPath(post);
+const alternatePath = hasAlternate
+  ? postPath({ ...post, lang: post.lang === 'ko' ? 'en' : 'ko' })
+  : null;
+---
+
+<BaseLayout lang={post.lang} title={title} description={description} alternatePath={alternatePath}>
+  <article class="post">
+    <header class="post-header">
+      <h1>{title}</h1>
+      <p class="post-meta">
+        <time datetime={isoDate(date)}>{isoDate(date)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{post.typeLabel}</span>
+        <ViewCount path={path} />
+      </p>
+    </header>
+    <hr />
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

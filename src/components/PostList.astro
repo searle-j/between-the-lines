@@ -1,0 +1,21 @@
+---
+import { withBase } from '../lib/url';
+import { isoDate, postPath, type Post } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+  {
+    posts.map((post) => (
+      <li>
+        <time datetime={isoDate(post.entry.data.date)}>{isoDate(post.entry.data.date)}</time>
+        <a href={withBase(postPath(post))}>{post.entry.data.title}</a>
+      </li>
+    ))
+  }
+</ul>

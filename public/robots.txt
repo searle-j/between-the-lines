@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://searle-j.github.io/between-the-lines/sitemap-index.xml

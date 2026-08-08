@@ -1,0 +1,14 @@
+# Keep LF everywhere; protects against CRLF from Windows-side editors (WSL setup)
+* text=auto eol=lf
+
+# binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary

@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../PostList.astro';
+import { countPosts, getPosts } from '../../lib/posts';
+import { siteName, type Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const recent = (await getPosts(lang)).slice(0, 10);
+const total = await countPosts();
+---
+
+<BaseLayout lang={lang} alternatePath={lang === 'ko' ? '/en/' : '/'}>
+  <h1 class="visually-hidden">{siteName}</h1>
+  <section>
+    <h2 class="section-title">Recent</h2>
+    <PostList posts={recent} />
+  </section>
+  <div class="home-stats">
+    <span>{total} {total === 1 ? 'post' : 'posts'}</span>
+    <!-- filled in once an analytics provider is wired up -->
+    <span class="total-views" data-total-views hidden></span>
+  </div>
+</BaseLayout>

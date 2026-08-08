@@ -1,0 +1,17 @@
+---
+import { render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import type { Post } from '../../lib/posts';
+
+interface Props {
+  post: Post;
+  hasAlternate: boolean;
+}
+
+const { post, hasAlternate } = Astro.props;
+const { Content } = await render(post.entry);
+---
+
+<PostLayout post={post} hasAlternate={hasAlternate}>
+  <Content />
+</PostLayout>
