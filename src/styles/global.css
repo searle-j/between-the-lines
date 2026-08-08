@@ -436,10 +436,12 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   margin: 2.25rem 0 0.7rem;
 }
 
+/* 제목 아래 메타: 작성일 / 태그 / 조회수를 각각 한 행으로 (세로 스택) */
 .post-meta {
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
   margin: 0 0 1.5rem;
   color: var(--muted);
   font-family: var(--font-meta);
@@ -447,12 +449,17 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   letter-spacing: var(--meta-tracking);
 }
 
+.meta-line {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
 .post > hr {
   margin: 0 0 2rem;
 }
 
-/* 조회수는 메타 줄의 앞 항목들과 가운뎃점으로 구분 (표시될 때만) */
-.post-meta .view-count::before,
+/* 홈 전체 조회수는 게시물 수와 같은 줄이라 가운뎃점으로 구분 (표시될 때만) */
 .home-stats .total-views::before {
   content: '·';
   margin-right: 0.5rem;
@@ -651,10 +658,6 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
 .tag-page-meta {
   margin: 0 0 1.5rem;
   font-size: 0.9rem;
-}
-
-.post-meta {
-  flex-wrap: wrap;
 }
 
 .post-meta-tags {

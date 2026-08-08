@@ -25,11 +25,12 @@ const alternatePath = hasAlternate
   <article class="post" data-pagefind-body>
     <header class="post-header">
       <h1>{title}</h1>
-      <p class="post-meta">
-        <time datetime={isoDate(date)}>{isoDate(date)}</time>
-        <span aria-hidden="true">·</span>
-        <span>{post.typeLabel}</span>
-        <ViewCount path={path} />
+      <div class="post-meta">
+        <span class="meta-line">
+          <time datetime={isoDate(date)}>{isoDate(date)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{post.typeLabel}</span>
+        </span>
         {
           tags.length > 0 && (
             <span class="post-meta-tags">
@@ -39,7 +40,8 @@ const alternatePath = hasAlternate
             </span>
           )
         }
-      </p>
+        <ViewCount path={path} />
+      </div>
     </header>
     <hr />
     <div class="prose">
