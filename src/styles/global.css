@@ -1,75 +1,81 @@
 /* ---------- Design tokens ----------
-   조합 테스트(design-test.css)가 이 변수들을 덮어써서 테마를 전환한다.
-   data-combo 속성이 없으면 아래 기본값(현재 디자인)이 그대로 쓰인다. */
+   기본 디자인 = 조합 D "Slightly Literary"
+   (Pretendard 본문 + Noto Serif KR 제목 + Instrument Serif 마스트헤드,
+    warm paper #F5F1E8 계열, dusty burgundy 액센트, SVG noise 1%)
+   design-test.css의 D-변형(data-bg / data-link / data-code / data-layout)이
+   아래 변수를 덮어써서 미세 조정을 실시간 비교한다. */
 
 :root {
   color-scheme: light;
-  --bg: #ffffff;
-  --text: #1c1e21;
-  --muted: #6b7280;
-  --link: #1a56db;
-  --link-hover: #1a56db;
-  --border: #e5e7eb;
-  --surface: #f6f8fa;
-  --quote-border: var(--border);
-  --quote-text: var(--muted);
+  --bg: #f5f1e8;
+  --text: #292824;
+  --muted: #77756e;
+  --link: #76504f;
+  --link-hover: #5a3b3a;
+  --border: #d8d3c9;
+  --surface: #efe9dd;
+  --quote-border: #bdb7aa;
+  --quote-text: #55534d;
 
   --font-sans:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'D2Coding', monospace;
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'D2Coding', monospace;
   --font-body: var(--font-sans);
-  --font-heading: var(--font-sans);
-  --font-masthead: var(--font-sans);
-  --font-meta: var(--font-sans);
+  --font-heading: 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
+  --font-masthead: 'Instrument Serif', Georgia, serif;
+  --font-meta: var(--font-mono);
 
-  --content-width: 44rem;
-  --body-size: 1.0625rem;
-  --body-size-mobile: 1rem;
-  --body-lh: 1.75;
-  --masthead-size: 1.35rem;
-  --masthead-weight: 700;
-  --meta-size: 0.9rem;
-  --meta-tracking: 0;
-  --radius-code: 8px;
-  --radius-inline: 5px;
+  --content-width: 720px;
+  --body-size: 18px;
+  --body-size-mobile: 17px;
+  --body-lh: 1.8;
+  --masthead-size: 2.35rem;
+  --masthead-weight: 400;
+  --meta-size: 0.8rem;
+  --meta-tracking: 0.02em;
+  --radius-code: 0;
+  --radius-inline: 0;
   --radius-img: 0;
 
-  /* code block palette (Shiki css-variables theme) — 기본은 GitHub 근사값 */
-  --astro-code-color-text: #24292e;
-  --astro-code-color-background: #f6f8fa;
-  --astro-code-token-constant: #005cc5;
-  --astro-code-token-string: #032f62;
-  --astro-code-token-comment: #6a737d;
-  --astro-code-token-keyword: #d73a49;
-  --astro-code-token-parameter: #24292e;
-  --astro-code-token-function: #6f42c1;
-  --astro-code-token-string-expression: #22863a;
-  --astro-code-token-punctuation: #24292e;
-  --astro-code-token-link: #032f62;
+  /* code blocks (Shiki css-variables theme) — light: 따뜻한 종이 위 절제된 톤 */
+  --astro-code-color-text: #292824;
+  --astro-code-color-background: #efe9dd;
+  --astro-code-token-comment: #8e8577;
+  --astro-code-token-keyword: #8e4642;
+  --astro-code-token-string: #6e6338;
+  --astro-code-token-function: #46566a;
+  --astro-code-token-constant: #455a4a;
+  --astro-code-token-string-expression: #55684d;
+  --astro-code-token-parameter: #292824;
+  --astro-code-token-punctuation: #6b655c;
+  --astro-code-token-link: #8e4642;
 }
 
 html[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #16181d;
-  --text: #dde1e6;
-  --muted: #8b95a1;
-  --link: #7aa2f7;
-  --link-hover: #7aa2f7;
-  --border: #2c333d;
-  --surface: #1f242c;
+  --bg: #201f1c;
+  --text: #e8e3d9;
+  --muted: #a8a399;
+  --link: #c09492;
+  --link-hover: #d3aba9;
+  --border: #3d3a34;
+  --surface: #2a2823;
+  --quote-border: #4c4941;
+  --quote-text: #a8a399;
 
-  --astro-code-color-text: #e1e4e8;
-  --astro-code-color-background: #1f242c;
-  --astro-code-token-constant: #79b8ff;
-  --astro-code-token-string: #9ecbff;
-  --astro-code-token-comment: #8b95a1;
-  --astro-code-token-keyword: #f97583;
-  --astro-code-token-parameter: #e1e4e8;
-  --astro-code-token-function: #b392f0;
-  --astro-code-token-string-expression: #85e89d;
-  --astro-code-token-punctuation: #e1e4e8;
-  --astro-code-token-link: #9ecbff;
+  /* dark 기본 코드 팔레트(따뜻) — data-code 변형이 덮어쓴다 */
+  --astro-code-color-text: #e8e3d9;
+  --astro-code-color-background: #272520;
+  --astro-code-token-comment: #8d897e;
+  --astro-code-token-keyword: #c09492;
+  --astro-code-token-string: #c4b183;
+  --astro-code-token-function: #98acc6;
+  --astro-code-token-constant: #8faf98;
+  --astro-code-token-string-expression: #a3bd90;
+  --astro-code-token-parameter: #e8e3d9;
+  --astro-code-token-punctuation: #a8a399;
+  --astro-code-token-link: #c09492;
 }
 
 /* ---------- Base ---------- */
@@ -94,13 +100,15 @@ body {
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-/* 종이 질감 오버레이 자리 — design-test.css가 content를 채운다 */
+/* 종이 질감 — D 내장 SVG noise 1% */
 body::after {
-  content: none;
+  content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 30;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.01;
 }
 
 .container {
@@ -143,18 +151,15 @@ hr {
   border: 0;
 }
 
-/* ---------- Header ---------- */
+/* ---------- Header — 상단형 (기본 폴백, 좁은 화면 공통) ---------- */
 
-.site-header {
-  padding-top: 2rem;
-}
-
-.masthead {
+.header-inner {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  flex-wrap: wrap;
+  padding-top: 2rem;
 }
 
 .site-title {
@@ -163,6 +168,7 @@ hr {
   font-weight: var(--masthead-weight);
   letter-spacing: -0.01em;
   color: var(--text);
+  line-height: 1.2;
 }
 
 .site-title:hover {
@@ -177,9 +183,10 @@ hr {
 }
 
 .site-header nav {
+  flex-basis: 100%;
   display: flex;
   gap: 1.25rem;
-  margin-top: 0.6rem;
+  margin-top: 0.4rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
 }
@@ -197,6 +204,54 @@ hr {
 .site-header nav a[aria-current='page'] {
   color: var(--text);
   font-weight: 600;
+}
+
+/* ---------- Header — 여백형 (와이드 화면에서 내비=왼쪽 여백, 토글=오른쪽 여백) ---------- */
+
+@media (min-width: 1200px) {
+  html[data-layout='margin'] .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  html[data-layout='margin'] .header-inner {
+    max-width: none;
+    display: block;
+    padding: 2.25rem 2.25rem 0;
+  }
+
+  html[data-layout='margin'] .site-title {
+    pointer-events: auto;
+    display: inline-block;
+    max-width: 180px;
+    font-size: 1.7rem;
+    line-height: 1.15;
+  }
+
+  html[data-layout='margin'] .controls {
+    pointer-events: auto;
+    position: absolute;
+    top: 2.5rem;
+    right: 2.25rem;
+  }
+
+  html[data-layout='margin'] .site-header nav {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    max-width: 180px;
+    margin-top: 1.5rem;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  html[data-layout='margin'] main.container {
+    padding-top: 3rem;
+  }
 }
 
 /* ---------- Language toggle ---------- */
@@ -352,7 +407,7 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
 .post-header h1 {
   font-family: var(--font-heading);
   font-size: 1.75rem;
-  line-height: 1.3;
+  line-height: 1.35;
   letter-spacing: -0.015em;
   margin: 2.25rem 0 0.7rem;
 }
@@ -376,6 +431,18 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
 
 .prose {
   font-family: var(--font-body);
+}
+
+/* 본문 링크는 항상 은은한 밑줄 — 색만으로 구분하지 않는다 */
+.prose a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent);
+}
+
+.prose a:hover {
+  text-decoration-color: var(--link-hover);
 }
 
 .prose h1,
@@ -537,6 +604,10 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
 @media (max-width: 640px) {
   body {
     font-size: var(--body-size-mobile);
+  }
+
+  .site-title {
+    font-size: 1.9rem;
   }
 
   .post-header h1 {

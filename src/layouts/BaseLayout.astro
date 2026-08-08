@@ -8,12 +8,15 @@ import DesignTestPanel from '../components/DesignTestPanel.astro';
 import { withBase } from '../lib/url';
 import { siteName, t, type Lang } from '../i18n/ui';
 
-// 디자인 조합 테스트가 끝나면 false로 바꾸고, design-test.css import와
-// DesignTestPanel, 아래 웹폰트 <link>들을 제거한 뒤 우승 조합을 global.css에 이식한다.
+// D 미세조정이 끝나면 false로 바꾸고 design-test.css import와 DesignTestPanel을
+// 제거한 뒤, 선택된 변형 값을 global.css에 이식한다. 폰트 <link>는 확정 디자인의
+// 일부이므로 유지한다.
 const DESIGN_TEST = true;
 
+// 확정 디자인(D)의 폰트: 본문 Pretendard · 제목 Noto Serif KR ·
+// 마스트헤드 Instrument Serif · 코드/메타 IBM Plex Mono
 const GOOGLE_FONTS =
-  'https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Geist+Mono:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;600&family=Instrument+Serif&family=Intel+One+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Literata:opsz,wght@7..72,400;7..72,600&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Noto+Serif+KR:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap';
+  'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif&family=Noto+Serif+KR:wght@400;500;600&display=swap';
 
 interface Props {
   lang: Lang;
@@ -60,30 +63,15 @@ const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:type" content="website" />
-    {
-      DESIGN_TEST && (
-        <>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-          <link rel="stylesheet" href={GOOGLE_FONTS} />
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-          />
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT@latest/fonts/variable/woff2/SUIT-Variable.css"
-          />
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css"
-          />
-          <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" />
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/monaspace-argon/index.css" />
-        </>
-      )
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href={GOOGLE_FONTS} />
+    {/* Pretendard 공식 배포 방식: 동적 서브셋 CSS (한글 글리프를 조각 단위로 로드) */}
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
     <script is:inline>
       (() => {
         let stored = null;
@@ -97,12 +85,15 @@ const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
             document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
           });
         }
-        /* design test: 마지막으로 고른 조합/질감 복원 (FOUC 방지) */
+        /* design test: D 미세조정 변형 복원 — 기본값은 추천안 (FOUC 방지) */
         try {
-          const combo = localStorage.getItem('design-combo');
-          if (combo) document.documentElement.dataset.combo = combo;
-          const texture = localStorage.getItem('design-texture');
-          if (texture) document.documentElement.dataset.texture = texture;
+          localStorage.removeItem('design-combo');
+          localStorage.removeItem('design-texture');
+          const d = document.documentElement.dataset;
+          d.bg = localStorage.getItem('d-bg') ?? 'p1';
+          d.link = localStorage.getItem('d-link') ?? 'l1';
+          d.code = localStorage.getItem('d-code') ?? 'rose';
+          d.layout = localStorage.getItem('d-layout') ?? 'margin';
         } catch {}
       })();
     </script>

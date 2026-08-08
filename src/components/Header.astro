@@ -20,24 +20,24 @@ const nav = [
 ];
 ---
 
-<header class="site-header container">
-  <div class="masthead">
+<header class="site-header">
+  <div class="container header-inner">
     <a class="site-title" href={withBase(`${prefix}/`)}>{siteName}</a>
     <div class="controls">
       <LanguageToggle lang={lang} alternatePath={alternatePath} />
       <ThemeToggle />
     </div>
+    <nav aria-label="Site">
+      {
+        nav.map((item) => {
+          const href = withBase(item.path);
+          return (
+            <a href={href} aria-current={current === href.replace(/\/$/, '') ? 'page' : undefined}>
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
   </div>
-  <nav aria-label="Site">
-    {
-      nav.map((item) => {
-        const href = withBase(item.path);
-        return (
-          <a href={href} aria-current={current === href.replace(/\/$/, '') ? 'page' : undefined}>
-            {item.label}
-          </a>
-        );
-      })
-    }
-  </nav>
 </header>

@@ -1,28 +1,53 @@
 ---
-// 임시 디자인 테스트 패널 — 9개 조합 실시간 전환.
+// 임시 D-미세조정 패널 — 배경·링크색·코드(다크)·레이아웃을 실시간 전환.
 // BaseLayout의 DESIGN_TEST 플래그로 함께 제거된다.
 ---
 
 <aside class="dt" id="dt" data-open="true">
-  <button type="button" class="dt-chip" id="dt-chip" title="디자인 테스트 패널 열기">Aa</button>
+  <button type="button" class="dt-chip" id="dt-chip" title="D 미세조정 패널 열기">Aa</button>
   <div class="dt-body">
     <div class="dt-head">
-      <span>DESIGN TEST</span>
+      <span>D TUNE</span>
       <button type="button" id="dt-min" title="접기">–</button>
     </div>
-    <div class="dt-grid">
-      <button type="button" data-combo="">기본</button>
-      <button type="button" data-combo="a">A</button>
-      <button type="button" data-combo="b">B</button>
-      <button type="button" data-combo="c">C</button>
-      <button type="button" data-combo="d">D</button>
-      <button type="button" data-combo="f1">1</button>
-      <button type="button" data-combo="f2">2</button>
-      <button type="button" data-combo="f3">3</button>
-      <button type="button" data-combo="f4">4</button>
-      <button type="button" data-combo="f5">5</button>
+
+    <div class="dt-row">
+      <span class="dt-label">배경</span>
+      <div class="dt-btns" data-k="bg">
+        <button type="button" data-v="p0" title="#F5F1E8 — 원래 D">기존</button>
+        <button type="button" data-v="p1" title="#F3EFE5 — 한 단계 차분 (추천)">①</button>
+        <button type="button" data-v="p2" title="#F1EDE2 — 두 단계">②</button>
+        <button type="button" data-v="p3" title="#F2EFE9 — 덜 노랗게">③</button>
+      </div>
     </div>
-    <button type="button" class="dt-wide" id="dt-texture">질감: 자동</button>
+
+    <div class="dt-row">
+      <span class="dt-label">링크</span>
+      <div class="dt-btns" data-k="link">
+        <button type="button" data-v="l0" title="#76504F — 원래 D">기존</button>
+        <button type="button" data-v="l1" title="#8E4642 — 진하게+채도 (추천)">진하게</button>
+        <button type="button" data-v="l2" title="#A03E38 — 더 선명">선명</button>
+      </div>
+    </div>
+
+    <div class="dt-row">
+      <span class="dt-label">코드<small>·다크</small></span>
+      <div class="dt-btns" data-k="code">
+        <button type="button" data-v="warm" title="라이트와 같은 warm 계열">따뜻</button>
+        <button type="button" data-v="rose" title="자줏빛 바탕 + 보석톤 (추천)">로제</button>
+        <button type="button" data-v="gruv" title="Gruvbox dark">그루브</button>
+        <button type="button" data-v="flex" title="Flexoki dark">플렉스</button>
+      </div>
+    </div>
+
+    <div class="dt-row">
+      <span class="dt-label">배치</span>
+      <div class="dt-btns" data-k="layout">
+        <button type="button" data-v="margin" title="와이드 화면: 내비 왼쪽 여백 · 토글 오른쪽 여백 (추천)">여백</button>
+        <button type="button" data-v="top" title="기존 상단 헤더">상단</button>
+      </div>
+    </div>
+
     <div class="dt-name" id="dt-name"></div>
   </div>
 </aside>
@@ -60,7 +85,7 @@
   }
 
   .dt-body {
-    width: 208px;
+    width: 236px;
     padding: 10px;
     border: 1px solid #c9c5bb;
     border-radius: 10px;
@@ -98,58 +123,66 @@
     padding: 0 2px;
   }
 
-  .dt-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+  .dt-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 5px;
+  }
+
+  .dt-label {
+    flex: none;
+    width: 52px;
+    font-size: 10.5px;
+    opacity: 0.75;
+  }
+
+  .dt-label small {
+    font-size: 9px;
+  }
+
+  .dt-btns {
+    display: flex;
+    flex: 1;
     gap: 4px;
   }
 
-  .dt-grid button,
-  .dt-wide {
+  .dt-btns button {
+    flex: 1;
     border: 1px solid #c9c5bb;
     background: transparent;
     color: inherit;
     border-radius: 6px;
-    padding: 4px 0;
+    padding: 3px 0;
     cursor: pointer;
-    font-size: 11.5px;
+    font-size: 11px;
+    white-space: nowrap;
   }
 
-  html[data-theme='dark'] .dt-grid button,
-  html[data-theme='dark'] .dt-wide {
+  html[data-theme='dark'] .dt-btns button {
     border-color: #4a4a42;
   }
 
-  .dt-grid button:first-child {
-    grid-column: span 5;
-  }
-
-  .dt-grid button:hover,
-  .dt-wide:hover {
+  .dt-btns button:hover {
     background: rgba(120, 115, 100, 0.12);
   }
 
-  .dt-grid button[aria-pressed='true'] {
+  .dt-btns button[aria-pressed='true'] {
     background: #3a3833;
     border-color: #3a3833;
     color: #fffdf7;
   }
 
-  html[data-theme='dark'] .dt-grid button[aria-pressed='true'] {
+  html[data-theme='dark'] .dt-btns button[aria-pressed='true'] {
     background: #d6d2c8;
     border-color: #d6d2c8;
     color: #1e1e1b;
   }
 
-  .dt-wide {
-    width: 100%;
-    margin-top: 6px;
-  }
-
   .dt-name {
     margin-top: 7px;
-    font-size: 10.5px;
-    opacity: 0.75;
+    font-size: 10px;
+    opacity: 0.7;
     min-height: 1.2em;
   }
 
@@ -162,61 +195,36 @@
 </style>
 
 <script>
-  const NAMES: Record<string, string> = {
-    '': '기본 (현재 디자인)',
-    a: 'A · Safe Baseline — Pretendard',
-    b: 'B · Modern Paper — SUIT + grain',
-    c: 'C · Research Notebook — IBM Plex',
-    d: 'D · Slightly Literary — 세리프 제목',
-    f1: '1 · 잉크와 종이 — Flexoki × 마루부리',
-    f2: '2 · 대조군 — Flexoki × Pretendard',
-    f3: '3 · 정오의 성 — Solarized × RIDI바탕',
-    f4: '4 · 옛 인쇄물 — Gruvbox (본문 대체폰트)',
-    f5: '5 · 새벽 종이 — Rosé Pine × Noto Serif',
-  };
-  const TEXTURES = ['auto', 'off', 'grain', 'noise'];
-  const TEXTURE_LABELS: Record<string, string> = {
-    auto: '질감: 자동 (조합별 내장)',
-    off: '질감: 끔',
-    grain: '질감: grain 강제',
-    noise: '질감: noise 강제',
-  };
-
   const root = document.documentElement;
   const panel = document.getElementById('dt')!;
   const nameEl = document.getElementById('dt-name')!;
-  const textureBtn = document.getElementById('dt-texture')!;
-  const buttons = [...panel.querySelectorAll<HTMLButtonElement>('.dt-grid button')];
+  const groups = [...panel.querySelectorAll<HTMLElement>('.dt-btns')];
 
   function sync() {
-    const combo = root.dataset.combo ?? '';
-    for (const b of buttons) b.setAttribute('aria-pressed', String((b.dataset.combo ?? '') === combo));
-    nameEl.textContent = NAMES[combo] ?? combo;
-    const tex = root.dataset.texture ?? 'auto';
-    textureBtn.textContent = TEXTURE_LABELS[tex] ?? tex;
+    const state: string[] = [];
+    for (const group of groups) {
+      const key = group.dataset.k!;
+      const current = root.dataset[key] ?? '';
+      for (const b of group.querySelectorAll('button')) {
+        b.setAttribute('aria-pressed', String(b.dataset.v === current));
+        if (b.dataset.v === current) state.push(b.textContent!.trim());
+      }
+    }
+    nameEl.textContent = state.join(' · ');
   }
 
-  for (const b of buttons) {
-    b.title = NAMES[b.dataset.combo ?? ''] ?? '';
-    b.addEventListener('click', () => {
-      const combo = b.dataset.combo ?? '';
+  for (const group of groups) {
+    const key = group.dataset.k!;
+    group.addEventListener('click', (e) => {
+      const button = (e.target as HTMLElement).closest('button');
+      if (!button?.dataset.v) return;
+      root.dataset[key] = button.dataset.v;
       try {
-        combo ? localStorage.setItem('design-combo', combo) : localStorage.removeItem('design-combo');
+        localStorage.setItem(`d-${key}`, button.dataset.v);
       } catch {}
-      combo ? (root.dataset.combo = combo) : delete root.dataset.combo;
       sync();
     });
   }
-
-  textureBtn.addEventListener('click', () => {
-    const current = root.dataset.texture ?? 'auto';
-    const next = TEXTURES[(TEXTURES.indexOf(current) + 1) % TEXTURES.length];
-    try {
-      next === 'auto' ? localStorage.removeItem('design-texture') : localStorage.setItem('design-texture', next);
-    } catch {}
-    next === 'auto' ? delete root.dataset.texture : (root.dataset.texture = next);
-    sync();
-  });
 
   document.getElementById('dt-min')!.addEventListener('click', () => {
     panel.dataset.open = 'false';

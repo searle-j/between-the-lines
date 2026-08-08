@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
@@ -18,11 +19,14 @@ export default defineConfig({
   },
   integrations: [sitemap()],
   markdown: {
-    remarkPlugins: [remarkMath, [remarkMdLinks, { base: BASE }]],
-    rehypePlugins: [rehypeKatex],
+    // Astro 7 표준: remark/rehype 파이프라인은 unified() 프로세서로 전달한다.
+    processor: unified({
+      remarkPlugins: [remarkMath, [remarkMdLinks, { base: BASE }]],
+      rehypePlugins: [rehypeKatex],
+    }),
     shikiConfig: {
-      // css-variables: 토큰 색을 CSS 변수로 출력 → 디자인 조합(팔레트)별로
-      // 코드 하이라이팅이 함께 전환된다. 변수 정의는 global.css / design-test.css.
+      // css-variables 테마: 토큰 색을 CSS 변수로 출력해 라이트/다크에서
+      // 서로 다른 코드 팔레트를 쓴다. 변수 정의는 global.css / design-test.css.
       theme: 'css-variables',
       wrap: false,
     },
