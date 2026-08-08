@@ -85,9 +85,15 @@ npm run preview    # dist/ 를 로컬에서 서빙 (검색 포함 전체 확인)
 
 배포 직후 몇 분간은 CDN 캐시(max-age 600초) 때문에 일부 페이지가 이전 버전으로 보이거나 스타일이 어긋날 수 있다. 최대 10분 안에 자동 해소되며, 강력 새로고침(Ctrl+Shift+R)으로 즉시 확인할 수 있다.
 
-## 방문 통계 (예정)
+## 방문 통계
 
-조회수 UI는 `src/analytics/provider.ts` 어댑터 뒤에 숨어 있다. GoatCounter 가입 후 이 어댑터에 구현을 연결하면 글별/전체 조회수가 표시된다. provider를 나중에 교체해도 페이지 쪽 코드는 바뀌지 않는다.
+[GoatCounter](https://www.goatcounter.com) hosted(`between-the-lines.goatcounter.com`)로 집계한다. 배포본에만 `count.js` 추적 스크립트가 들어가고(로컬 방문 제외), 조회수는 방문자 브라우저가 GoatCounter의 공개 카운터 JSON을 읽어 채운다.
+
+- 글별 조회수: 게시물 메타 줄의 `<ViewCount>` (`/counter/<path>.json`)
+- 전체 조회수: 홈의 `total views` (`/counter/TOTAL.json`)
+- provider는 `src/analytics/provider.ts` 어댑터 뒤에 있어 GA4 등으로 교체해도 페이지 코드는 그대로다. 카운트를 못 가져오면(설정 off·데이터 없음·네트워크 오류) 숫자를 조용히 숨긴다.
+
+**필수 설정:** GoatCounter Settings에서 **"Allow adding visitor counts on your website"** 를 켜야 사이트에 숫자가 표시된다 (기본 꺼짐). 집계 자체는 스크립트가 배포된 시점부터 시작된다.
 
 ## Obsidian 설정
 

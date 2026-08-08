@@ -451,6 +451,13 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   margin: 0 0 2rem;
 }
 
+/* 조회수는 메타 줄의 앞 항목들과 가운뎃점으로 구분 (표시될 때만) */
+.post-meta .view-count::before,
+.home-stats .total-views::before {
+  content: '·';
+  margin-right: 0.5rem;
+}
+
 /* ---------- Prose (markdown body) ---------- */
 
 .prose {

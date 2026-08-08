@@ -1,27 +1,37 @@
 /**
- * Public view-counter abstraction: pages render <ViewCount/>, ViewCount talks
- * to this interface, and the concrete provider (GoatCounter first, GA4 or
- * others later) stays swappable behind it. Historical baselines from a
- * retired provider can be folded in here as an offset without touching pages.
+ * Public view-counter adapter. Components fetch counts client-side through
+ * this module, so the concrete provider (GoatCounter now, GA4/others later)
+ * stays swappable without touching any page.
  *
- * Until a real provider is wired up, the null provider keeps every counter
- * hidden — the site renders no view counts at all.
+ * Every function returns null when a count is unavailable — the counter
+ * setting is off, there is no data yet, or the request fails (network/CORS).
+ * Callers keep the counter hidden on null, so the site degrades silently.
+ *
+ * GoatCounter visitor-counter API:
+ *   GET https://<code>.goatcounter.com/counter/<encoded path>.json
+ *   -> { "count": "1,234", ... }   (formatted string; site total uses "TOTAL")
+ * Requires "Allow adding visitor counts on your website" enabled in settings.
  */
-export interface AnalyticsProvider {
-  /** Views for one page path (e.g. `/papers/llms-cant-jump/`), or null when unavailable. */
-  getPageViews(path: string): Promise<number | null>;
-  /** Total views across the site, or null when unavailable. */
-  getTotalViews(): Promise<number | null>;
+const ENDPOINT = 'https://between-the-lines.goatcounter.com/counter';
+
+async function fetchCount(key: string): Promise<number | null> {
+  try {
+    const res = await fetch(`${ENDPOINT}/${encodeURIComponent(key)}.json`);
+    if (!res.ok) return null;
+    const { count } = await res.json();
+    const n = Number(String(count).replace(/,/g, ''));
+    return Number.isFinite(n) ? n : null;
+  } catch {
+    return null;
+  }
 }
 
-export const nullProvider: AnalyticsProvider = {
-  async getPageViews() {
-    return null;
-  },
-  async getTotalViews() {
-    return null;
-  },
-};
+/** Views for one site path, e.g. `/between-the-lines/papers/llms-cant-jump/`. */
+export function getPageViews(path: string): Promise<number | null> {
+  return fetchCount(path);
+}
 
-/** The provider the site currently uses. Swap here when GoatCounter lands. */
-export const provider: AnalyticsProvider = nullProvider;
+/** Site-wide total views. */
+export function getTotalViews(): Promise<number | null> {
+  return fetchCount('TOTAL');
+}

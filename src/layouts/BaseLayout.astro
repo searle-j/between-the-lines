@@ -103,5 +103,16 @@ const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
     <Footer lang={lang} />
     <BackToTop />
     {DESIGN_TEST && <DesignTestPanel />}
+    {
+      /* GoatCounter 방문 집계 — 배포본에서만 (로컬 dev/preview 방문은 제외) */
+      import.meta.env.PROD && (
+        <script
+          is:inline
+          data-goatcounter="https://between-the-lines.goatcounter.com/count"
+          async
+          src="https://gc.zgo.at/count.js"
+        />
+      )
+    }
   </body>
 </html>

@@ -1,8 +1,8 @@
 ---
 /**
- * Per-page view counter. Stays hidden until an analytics provider is wired
- * up behind src/analytics/provider.ts (Phase: GoatCounter). `path` is the
- * site-relative page path used as the counting key.
+ * Per-page view counter. Hidden until the analytics provider returns a count
+ * (GoatCounter, once its visitor-counter setting is on and data exists).
+ * `path` is the site path used as the counting key.
  */
 interface Props {
   path: string;
@@ -12,3 +12,15 @@ const { path } = Astro.props;
 ---
 
 <span class="view-count" data-count-path={path} hidden></span>
+
+<script>
+  import { getPageViews } from '../analytics/provider';
+
+  for (const el of document.querySelectorAll<HTMLElement>('.view-count[data-count-path]')) {
+    getPageViews(el.dataset.countPath!).then((n) => {
+      if (n === null) return;
+      el.textContent = `${n.toLocaleString('en-US')} views`;
+      el.hidden = false;
+    });
+  }
+</script>

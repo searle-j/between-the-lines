@@ -21,7 +21,19 @@ const total = await countPosts();
   </section>
   <div class="home-stats">
     <span>{total} {total === 1 ? 'post' : 'posts'}</span>
-    <!-- filled in once an analytics provider is wired up -->
     <span class="total-views" data-total-views hidden></span>
   </div>
 </BaseLayout>
+
+<script>
+  import { getTotalViews } from '../../analytics/provider';
+
+  const el = document.querySelector<HTMLElement>('.total-views[data-total-views]');
+  if (el) {
+    getTotalViews().then((n) => {
+      if (n === null) return;
+      el.textContent = `${n.toLocaleString('en-US')} total views`;
+      el.hidden = false;
+    });
+  }
+</script>
