@@ -107,4 +107,4 @@ repo 루트를 vault로 열어 쓴다. 권장 설정:
 ## License
 
 - Code (`src/`, configs): [MIT](LICENSE)
-- Content in `content/` and `assets/`: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), unless otherwise noted. Figures quoted from reviewed papers remain © their original authors. See [LICENSE-content.md](LICENSE-content.md).
+- Content in `content/` and `assets/`: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), unless otherwise noted. Any material quoted from the original works remains © its original authors. See [LICENSE-content.md](LICENSE-content.md).

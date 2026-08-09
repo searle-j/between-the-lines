@@ -7,11 +7,11 @@ export const siteName = 'Between the Lines';
 export const ui = {
   ko: {
     description: '논문과 책을 읽고 남기는 기록',
-    figuresNotice: '리뷰에 인용된 논문 그림의 저작권은 원저자에게 있습니다.',
+    attributionNotice: '리뷰에 인용된 원저작물의 모든 형태의 자료에 대한 저작권은 원저작자에게 있습니다.',
   },
   en: {
     description: 'Notes on papers and books',
-    figuresNotice: 'Figures quoted from reviewed papers remain © their original authors.',
+    attributionNotice: 'Any material quoted from the original works remains © its original authors.',
   },
 } as const;
 
