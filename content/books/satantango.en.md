@@ -2,8 +2,6 @@
 title: "Satantango"
 date: 2026-07-29
 type: book
-tags:
-  - fiction
 description: "László Krasznahorkai, Satantango — mockup post for layout checks."
 ---
 
@@ -46,4 +44,4 @@ This is a novel you read twice. Once you know the ending, every sentence of chap
 - Structure: part one I→VI, part two VI→I
 - Read together with: [LLMs Can't Jump](../papers/llms-cant-jump.en.md) — checks internal link rewriting
 
-#novel #hungary
+#novel #fiction #hungary

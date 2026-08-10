@@ -2,9 +2,6 @@
 title: "LLMs Can't Jump"
 date: 2026-08-08
 type: paper
-tags:
-  - reasoning
-  - world-model
 description: "Review of a (fictional) paper measuring extrapolation limits of LLMs with state-space jump tasks — mockup post for layout checks."
 ---
 
@@ -60,6 +57,6 @@ Whether a step counts as interpolation or a jump is defined by how far the state
 
 Related review: [Satantango](../books/satantango.en.md) — this link checks that internal links get rewritten to site URLs.
 
-#llm #reasoning #benchmark
+#llm #reasoning #benchmark #world_model
 
 [^1]: A footnote for rendering checks. Neither the code URL nor the paper exists.

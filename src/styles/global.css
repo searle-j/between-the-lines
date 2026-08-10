@@ -1,9 +1,7 @@
 /* ---------- Design tokens ----------
    기본 디자인 = 조합 D "Slightly Literary"
    (Pretendard 본문 + Noto Serif KR 제목 + Instrument Serif 마스트헤드,
-    warm paper #F5F1E8 계열, dusty burgundy 액센트, SVG noise 1%)
-   design-test.css의 D-변형(data-bg / data-link / data-code / data-layout)이
-   아래 변수를 덮어써서 미세 조정을 실시간 비교한다. */
+    warm paper #F5F1E8 계열, dusty burgundy 액센트, SVG noise 1%) */
 
 :root {
   color-scheme: light;
@@ -38,8 +36,7 @@
   --radius-inline: 0;
   --radius-img: 0;
 
-  /* code blocks (Shiki css-variables theme) — 확정: Rosé Pine Dawn
-     (다른 후보 팔레트는 design-test.css에 보존) */
+  /* code blocks (Shiki css-variables theme) — 확정: Rosé Pine Dawn */
   --astro-code-color-text: #575279;
   --astro-code-color-background: #f2e9e1;
   --astro-code-token-comment: #9893a5;
@@ -380,6 +377,11 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   align-items: baseline;
   gap: 1.25rem;
   padding: 0.4rem 0;
+}
+
+/* 태그 페이지의 다중 태그 필터(TagRefine)가 제외한 항목 */
+.post-list li[data-filtered] {
+  display: none;
 }
 
 .post-list time {

@@ -32,8 +32,6 @@ Obsidian ──▶ Markdown + assets ──▶ git push ──▶ GitHub Actions
 title: "제목"
 date: 2026-08-08
 type: paper          # paper | book (폴더와 일치)
-tags:
-  - reasoning
 description: "목록·RSS·검색엔진에 쓰일 한 줄 요약 (선택)"
 draft: true          # true면 배포에서 제외, 로컬 dev에서는 보임 (선택)
 ---
@@ -50,11 +48,11 @@ draft: true          # true면 배포에서 제외, 로컬 dev에서는 보임 (
 
 ### 태그
 
-Obsidian 스타일 그대로 본문에 `#llm` 처럼 쓰면 된다 (`#ability_test`, `#world_model` 같은 스네이크케이스 권장 — 태그가 URL이 된다).
+Obsidian 스타일 그대로 본문에 `#llm` 처럼 쓰면 된다 (`#ability_test`, `#world_model` 같은 스네이크케이스 권장 — 태그가 URL이 된다). 본문 인라인 `#태그`가 태그의 **유일한 소스**다 — frontmatter에 `tags:` 필드는 없다.
 
-- 본문 인라인 `#태그`는 자동으로 수집되어 `/tags/` 목록과 `/tags/<태그>/` 페이지가 생기고, 본문에서도 클릭 가능한 링크로 렌더된다.
-- frontmatter `tags:` 목록도 병합된다 (양쪽 다 써도 됨).
+- 인라인 `#태그`는 자동으로 수집되어 `/tags/` 목록과 `/tags/<태그>/` 페이지가 생기고, 본문에서도 클릭 가능한 링크로 렌더된다.
 - 코드 블록/인라인 코드 안의 `#`, URL의 `#fragment`, 숫자로만 된 태그는 무시된다.
+- 태그 페이지에서는 넓은 화면(≥1280px) 오른쪽의 **Also tagged** 목록으로 태그를 추가 선택해 AND 조건으로 좁힐 수 있다. 선택 상태는 `?and=tag1,tag2`로 URL에 남아 공유·새로고침에도 유지된다.
 
 ### 지원 문법
 

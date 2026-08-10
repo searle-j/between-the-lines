@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../PostList.astro';
+import TagRefine from '../TagRefine.astro';
 import { getPosts, postTags, tagPath } from '../../lib/posts';
 import { withBase } from '../../lib/url';
 import type { Lang } from '../../i18n/ui';
@@ -12,8 +13,22 @@ interface Props {
 }
 
 const { lang, tag, hasAlternate } = Astro.props;
-const posts = (await getPosts(lang)).filter((post) => postTags(post.entry).includes(tag));
+const tagged = (await getPosts(lang))
+  .map((post) => ({ post, tags: postTags(post.entry) }))
+  .filter(({ tags }) => tags.includes(tag));
+const posts = tagged.map(({ post }) => post);
 const alternatePath = hasAlternate ? tagPath(lang === 'ko' ? 'en' : 'ko', tag) : null;
+
+// 이 태그와 같은 게시물에 함께 붙은 태그들 — 다중 태그(AND) 필터 후보.
+const coCounts = new Map<string, number>();
+for (const { tags } of tagged) {
+  for (const t of tags) {
+    if (t !== tag) coCounts.set(t, (coCounts.get(t) ?? 0) + 1);
+  }
+}
+const coTags = [...coCounts.entries()]
+  .map(([t, count]) => ({ tag: t, count }))
+  .sort((a, b) => a.tag.localeCompare(b.tag, 'en'));
 ---
 
 <BaseLayout lang={lang} title={`#${tag}`} alternatePath={alternatePath}>
@@ -21,6 +36,10 @@ const alternatePath = hasAlternate ? tagPath(lang === 'ko' ? 'en' : 'ko', tag) :
     <a href={withBase(lang === 'en' ? '/en/tags/' : '/tags/')}>← Keywords</a>
   </p>
   <h1 class="page-title">#{tag}</h1>
-  <p class="tag-page-meta muted">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
-  <PostList posts={posts} />
+  <p class="tag-page-meta muted" data-post-count>
+    {posts.length}
+    {posts.length === 1 ? 'post' : 'posts'}
+  </p>
+  <PostList posts={posts} withTags />
+  <TagRefine tags={coTags} />
 </BaseLayout>

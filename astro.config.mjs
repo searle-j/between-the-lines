@@ -36,7 +36,7 @@ export default defineConfig({
     }),
     shikiConfig: {
       // css-variables 테마: 토큰 색을 CSS 변수로 출력해 라이트/다크에서
-      // 서로 다른 코드 팔레트를 쓴다. 변수 정의는 global.css / design-test.css.
+      // 서로 다른 코드 팔레트를 쓴다. 변수 정의는 global.css.
       theme: 'css-variables',
       wrap: false,
     },

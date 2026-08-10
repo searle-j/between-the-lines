@@ -1,18 +1,20 @@
 ---
 import { withBase } from '../lib/url';
-import { isoDate, postPath, type Post } from '../lib/posts';
+import { isoDate, postPath, postTags, type Post } from '../lib/posts';
 
 interface Props {
   posts: Post[];
+  /** 태그 페이지의 다중 태그 필터용 — 각 항목에 data-tags를 싣는다. */
+  withTags?: boolean;
 }
 
-const { posts } = Astro.props;
+const { posts, withTags = false } = Astro.props;
 ---
 
 <ul class="post-list">
   {
     posts.map((post) => (
-      <li>
+      <li data-tags={withTags ? postTags(post.entry).join(' ') : undefined}>
         <time datetime={isoDate(post.entry.data.date)}>{isoDate(post.entry.data.date)}</time>
         <a href={withBase(postPath(post))}>{post.entry.data.title}</a>
       </li>

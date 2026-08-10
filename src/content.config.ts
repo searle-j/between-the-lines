@@ -4,11 +4,11 @@ import { glob } from 'astro/loaders';
 // Posts live in content/{papers,books}/<slug>.{ko,en}.md — one file per
 // language. Files that don't match the pattern are ignored by the site, so
 // stray local notes never get published by accident.
+// Tags are inline-only (`#tag` in the body) — there is no frontmatter field.
 const postSchema = z.object({
   title: z.string(),
   date: z.coerce.date(),
   type: z.enum(['paper', 'book']),
-  tags: z.array(z.string()).default([]),
   description: z.string().optional(),
   draft: z.boolean().default(false),
 });

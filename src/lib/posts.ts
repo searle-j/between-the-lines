@@ -77,12 +77,12 @@ export function groupByYear(posts: Post[]): Array<[number, Post[]]> {
 }
 
 /**
- * frontmatter `tags` ∪ 본문 인라인 `#태그`.
- * 인라인 태그는 렌더러(remark-inline-tags)와 같은 워커·GFM 규칙으로 수집하므로
+ * 본문 인라인 `#태그`가 태그의 유일한 소스다 (frontmatter tags 없음).
+ * 렌더러(remark-inline-tags)와 같은 워커·GFM 규칙으로 수집하므로
  * 본문에 링크로 표시되는 태그와 집계되는 태그가 어긋날 수 없다.
  */
 export function postTags(entry: Post['entry']): string[] {
-  return [...new Set([...entry.data.tags, ...collectInlineTags(entry.body ?? '')])].sort();
+  return collectInlineTags(entry.body ?? '').sort();
 }
 
 export async function getAllTags(lang: Lang): Promise<Array<{ tag: string; count: number }>> {

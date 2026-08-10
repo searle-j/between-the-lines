@@ -54,6 +54,9 @@ for (const { dir, type } of KINDS) {
     if (typeValue && typeValue !== type) {
       warn(`${dir}/${rel}: frontmatter type이 '${typeValue}'인데 이 폴더는 '${type}'용입니다.`);
     }
+    if (/^tags:/m.test(fm?.[1] ?? '')) {
+      warn(`${dir}/${rel}: frontmatter 'tags:'는 지원하지 않습니다 — 본문 인라인 #태그로 옮기세요 (무시됨).`);
+    }
   }
 }
 

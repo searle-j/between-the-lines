@@ -2,9 +2,6 @@
 title: "LLMs Can't Jump"
 date: 2026-08-08
 type: paper
-tags:
-  - reasoning
-  - world-model
 description: "상태 공간 도약 과제로 LLM의 외삽 한계를 측정한 (가상의) 논문 리뷰 — 레이아웃 확인용 목업 게시물."
 ---
 
@@ -60,6 +57,6 @@ def evaluate_jump(model, world, horizon: int = 32) -> float:
 
 관련 리뷰: [사탄탱고](../books/satantango.ko.md) — 내부 링크가 사이트 주소로 변환되는지 확인하는 링크입니다.
 
-#llm #reasoning #benchmark
+#llm #reasoning #benchmark #world_model
 
 [^1]: 각주 렌더링 확인용 각주. 공개 코드 주소도, 이 논문도 실재하지 않는다.
