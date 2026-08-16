@@ -101,6 +101,7 @@ repo 루트를 vault로 열어 쓴다. 권장 설정:
 - **New link format: Relative path to file**
 - **Default location for new attachments**: `assets` 폴더
 - **Files and links → Excluded files**: `src`, `public`, `scripts`, `node_modules`, `dist`, `.astro`, `.github`
+- **Templates → Template folder location**: `templates` — 새 글은 `templates/post.md`를 Insert template로 불러와 시작한다 (`content/` 밖이라 사이트에는 실리지 않음).
 
 ## License
 
