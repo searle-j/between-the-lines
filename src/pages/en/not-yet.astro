@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/url';
+---
+
+<BaseLayout lang="en" title="Not ready yet" alternatePath="/not-yet/">
+  <div class="not-found">
+    <h1>Oops!</h1>
+    <p>Not ready yet — this review hasn't been written.</p>
+    <p><a href={withBase('/en/')}>← Between the Lines</a></p>
+  </div>
+</BaseLayout>

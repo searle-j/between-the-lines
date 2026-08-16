@@ -481,6 +481,13 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent);
 }
 
+/* 아직 발행되지 않은 글로 가는 내부 링크 — remark-md-links가 /not-yet/으로 보냄 */
+.prose a.stub-link {
+  color: var(--muted);
+  text-decoration-style: dotted;
+  text-decoration-color: var(--muted);
+}
+
 .prose a:hover {
   text-decoration-color: var(--link-hover);
 }
