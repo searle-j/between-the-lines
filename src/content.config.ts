@@ -9,7 +9,7 @@ import { glob } from 'astro/loaders';
 const postSchema = z.object({
   title: z.string(),
   date: z.coerce.date(),
-  type: z.enum(['paper', 'book']),
+  type: z.enum(['paper', 'book', 'literature']),
   description: z.string().optional(),
   publish: z.boolean().default(false),
 });
@@ -30,6 +30,10 @@ export const collections = {
   }),
   books: defineCollection({
     loader: glob({ pattern: '**/*.{ko,en}.md', base: './content/books', generateId }),
+    schema: postSchema,
+  }),
+  literature: defineCollection({
+    loader: glob({ pattern: '**/*.{ko,en}.md', base: './content/literature', generateId }),
     schema: postSchema,
   }),
   pages: defineCollection({

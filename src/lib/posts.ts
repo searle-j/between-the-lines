@@ -3,14 +3,17 @@ import type { Lang } from '../i18n/ui';
 import { collectInlineTags } from './remark-inline-tags.mjs';
 
 export type { Lang };
-export type Kind = 'papers' | 'books';
+export type Kind = 'papers' | 'books' | 'literature';
+
+const KINDS: Kind[] = ['papers', 'books', 'literature'];
+const TYPE_LABELS = { papers: 'Paper', books: 'Book', literature: 'Literature' } as const;
 
 export interface Post {
   slug: string;
   lang: Lang;
   kind: Kind;
-  typeLabel: 'Paper' | 'Book';
-  entry: CollectionEntry<'papers'> | CollectionEntry<'books'>;
+  typeLabel: (typeof TYPE_LABELS)[Kind];
+  entry: CollectionEntry<'papers'> | CollectionEntry<'books'> | CollectionEntry<'literature'>;
 }
 
 /** `llms-cant-jump.ko` -> { slug: 'llms-cant-jump', lang: 'ko' } */
@@ -26,13 +29,13 @@ function published(entry: { data: { publish: boolean } }): boolean {
 }
 
 export async function getPosts(lang: Lang, kind?: Kind): Promise<Post[]> {
-  const kinds: Kind[] = kind ? [kind] : ['papers', 'books'];
+  const kinds: Kind[] = kind ? [kind] : KINDS;
   const posts: Post[] = [];
   for (const k of kinds) {
     for (const entry of await getCollection(k, published)) {
       const parsed = parseId(entry.id);
       if (parsed?.lang === lang) {
-        posts.push({ ...parsed, kind: k, typeLabel: k === 'papers' ? 'Paper' : 'Book', entry });
+        posts.push({ ...parsed, kind: k, typeLabel: TYPE_LABELS[k], entry });
       }
     }
   }
@@ -42,7 +45,7 @@ export async function getPosts(lang: Lang, kind?: Kind): Promise<Post[]> {
 /** Number of distinct posts (a ko/en pair counts once). */
 export async function countPosts(): Promise<number> {
   const slugs = new Set<string>();
-  for (const k of ['papers', 'books'] as const) {
+  for (const k of KINDS) {
     for (const entry of await getCollection(k, published)) {
       const parsed = parseId(entry.id);
       if (parsed) slugs.add(`${k}/${parsed.slug}`);
@@ -102,7 +105,7 @@ export function tagPath(lang: Lang, tag: string): string {
   return `${lang === 'en' ? '/en' : ''}/tags/${tag}/`;
 }
 
-/** 게시물 상세 라우트 4개가 공유하는 getStaticPaths 본문. */
+/** 게시물 상세 라우트 6개(kind 3종 × 언어 2종)가 공유하는 getStaticPaths 본문. */
 export async function postStaticPaths(lang: Lang, kind: Kind) {
   const other: Lang = lang === 'ko' ? 'en' : 'ko';
   const [own, counterpart] = await Promise.all([getPosts(lang, kind), getPosts(other, kind)]);

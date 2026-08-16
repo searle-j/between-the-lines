@@ -42,7 +42,7 @@ export function remarkMdLinks(options = {}) {
       }
       const abs = path.resolve(fromDir, decoded).split(path.sep).join('/');
 
-      let m = abs.match(/\/content\/(papers|books)\/([^/]+)\.(ko|en)\.md$/);
+      let m = abs.match(/\/content\/(papers|books|literature)\/([^/]+)\.(ko|en)\.md$/);
       if (m) {
         const [, kind, slug, lang] = m;
         node.url = `${base}${lang === 'en' ? '/en' : ''}/${kind}/${slug}/${hash}`;

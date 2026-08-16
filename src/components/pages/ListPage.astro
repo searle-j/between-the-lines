@@ -10,7 +10,8 @@ interface Props {
 }
 
 const { lang, kind } = Astro.props;
-const title = kind === 'papers' ? 'Papers' : 'Books';
+const TITLES: Record<Kind, string> = { papers: 'Papers', books: 'Books', literature: 'Literature' };
+const title = TITLES[kind];
 const alternatePath = `${lang === 'ko' ? '/en' : ''}/${kind}/`;
 const years = groupByYear(await getPosts(lang, kind));
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Invisible Cities"
 date: 2025-04-19
-type: book
+type: literature
 publish: true
 description: "Italo Calvino, Invisible Cities — mockup post for layout checks."
 ---

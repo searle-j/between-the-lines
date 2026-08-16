@@ -18,7 +18,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.resolve(process.argv[2] ?? path.join(ROOT, 'dist'));
 const BASE = '/between-the-lines';
 const ORIGIN = 'https://searle-j.github.io';
-const NAV_LABELS = 'Review|Papers|Books|Search|Keywords|Full-text|About';
+const NAV_LABELS = 'Review|Papers|Books|Literature|Search|Keywords|Full-text|About';
 
 const errors = [];
 const fail = (file, msg) => errors.push(`${path.relative(ROOT, file)}: ${msg}`);
@@ -66,7 +66,7 @@ for (const file of pages) {
     fail(file, '사이트 내비게이션 없음');
   } else {
     const labels = [...nav.matchAll(new RegExp(`>(${NAV_LABELS})<`, 'g'))].map((m) => m[1]).join(' ');
-    if (labels !== 'Review Papers Books Search Keywords Full-text About') {
+    if (labels !== NAV_LABELS.replaceAll('|', ' ')) {
       fail(file, `내비게이션 구조 불일치: [${labels}]`);
     }
   }

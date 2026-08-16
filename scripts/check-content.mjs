@@ -11,6 +11,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const KINDS = [
   { dir: 'content/papers', type: 'paper' },
   { dir: 'content/books', type: 'book' },
+  { dir: 'content/literature', type: 'literature' },
 ];
 
 /** content.config.ts 의 glob('**\/*.{ko,en}.md') 과 같은 재귀 범위로 .md 를 모은다. */
