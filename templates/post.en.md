@@ -1,37 +1,49 @@
 ---
 title: ""
-date: {{date:YYYY-MM-DD}}
+date: "{{date:YYYY-MM-DD}}"
 type: paper
 publish: false
 description: ""
 ---
-
 ## Metadata
 
 - authors: ...
+- institution: ...
 - venue / publisher: ...
 - publication year: ...
 - link / code & data: ...
+
+---
 
 ## TL;DR
 
 - ...
 
+---
+
 ## Summary
 
 - ...
+
+---
 
 ## Comments
 
 - ...
 
+---
+
 ## Takeaways
 
 - ...
 
+---
+
 ## Next reading
 
 - ...
+
+---
 
 <!-- Pre-publish checklist
   - File name: content/papers|books/<slug>.en.md — lowercase, hyphens
