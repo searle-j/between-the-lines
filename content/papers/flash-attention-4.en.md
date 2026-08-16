@@ -2,6 +2,7 @@
 title: "FlashAttention 4"
 date: 2026-08-04
 type: paper
+publish: true
 description: "Fourth generation of IO-aware attention kernels — mockup post for layout checks."
 ---
 

@@ -2,6 +2,7 @@
 title: "Sparse Autoencoders as Microscopes"
 date: 2025-06-21
 type: paper
+publish: true
 description: "Interpretability work peering into representations with SAEs — mockup post for layout checks."
 ---
 

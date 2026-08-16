@@ -2,6 +2,7 @@
 title: "The Name of the Rose"
 date: 2026-03-15
 type: book
+publish: true
 description: "Umberto Eco, The Name of the Rose — mockup post for layout checks."
 ---
 

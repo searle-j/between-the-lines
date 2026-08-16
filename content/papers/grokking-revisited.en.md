@@ -2,6 +2,7 @@
 title: "Grokking, Revisited"
 date: 2025-11-02
 type: paper
+publish: true
 description: "A follow-up shaking the reproduction conditions of grokking — mockup post for layout checks."
 ---
 

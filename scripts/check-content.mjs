@@ -57,6 +57,9 @@ for (const { dir, type } of KINDS) {
     if (/^tags:/m.test(fm?.[1] ?? '')) {
       warn(`${dir}/${rel}: frontmatter 'tags:'는 지원하지 않습니다 — 본문 인라인 #태그로 옮기세요 (무시됨).`);
     }
+    if (/^draft:/m.test(fm?.[1] ?? '')) {
+      warn(`${dir}/${rel}: 'draft:'는 지원하지 않습니다 — 발행은 'publish: true'로 옵트인합니다 (무시됨).`);
+    }
   }
 }
 

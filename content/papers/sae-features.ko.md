@@ -2,6 +2,7 @@
 title: "Sparse Autoencoders as Microscopes"
 date: 2025-06-21
 type: paper
+publish: true
 description: "SAE로 내부 표상을 들여다보는 해석가능성 연구 — 레이아웃 확인용 목업 게시물."
 ---
 

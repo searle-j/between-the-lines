@@ -2,6 +2,7 @@
 title: "장미의 이름"
 date: 2026-03-15
 type: book
+publish: true
 description: "움베르토 에코, 『장미의 이름』 — 레이아웃 확인용 목업 게시물."
 ---
 

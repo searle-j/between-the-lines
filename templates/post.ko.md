@@ -2,30 +2,33 @@
 title: ""
 date: {{date:YYYY-MM-DD}}
 type: paper
+publish: false
 description: ""
-draft: true
 ---
+## 서지
 
-## Metadata
+- 저자: ...
+- 발표 / 출판: ...
+- 연도: ...
+- 링크 / 코드·데이터: ...
 
-- authors: ...
-- venue / publisher: ...
-- publication year: ...
-- link / code & data: ...
-
-## Summary
-
-- ...
-
-## Comments
+## 세 줄 요약
 
 - ...
 
-## Takeaways
+## 요약
 
 - ...
 
-## Next reading
+## 코멘트
+
+- ...
+
+## 배운 점
+
+- ...
+
+## 다음 읽을 것
 
 - ...
 
@@ -34,5 +37,5 @@ draft: true
   - type: paper | book (폴더와 일치), title·description 채우기
   - 마지막 줄에 인라인 #태그 (스네이크케이스, 예: #world_model #llm)
   - .en.md 번역 쌍 작성
-  - draft: true 제거하면 발행
+  - publish: true로 바꾸면 발행 (기본 false — dev에서만 보임)
 -->

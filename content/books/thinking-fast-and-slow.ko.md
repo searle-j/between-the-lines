@@ -2,6 +2,7 @@
 title: "생각에 관한 생각"
 date: 2025-09-08
 type: book
+publish: true
 description: "대니얼 카너먼, 『생각에 관한 생각』 — 레이아웃 확인용 목업 게시물."
 ---
 

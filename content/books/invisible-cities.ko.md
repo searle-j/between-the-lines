@@ -2,6 +2,7 @@
 title: "보이지 않는 도시들"
 date: 2025-04-19
 type: book
+publish: true
 description: "이탈로 칼비노, 『보이지 않는 도시들』 — 레이아웃 확인용 목업 게시물."
 ---
 

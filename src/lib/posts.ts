@@ -19,9 +19,10 @@ function parseId(id: string): { slug: string; lang: Lang } | null {
   return m ? { slug: m[1], lang: m[2] as Lang } : null;
 }
 
-// Drafts stay visible in `astro dev` but are excluded from production builds.
-function published(entry: { data: { draft: boolean } }): boolean {
-  return import.meta.env.DEV || !entry.data.draft;
+// Publishing is opt-in: production builds only include `publish: true` posts.
+// Everything stays visible in `astro dev` regardless.
+function published(entry: { data: { publish: boolean } }): boolean {
+  return import.meta.env.DEV || entry.data.publish;
 }
 
 export async function getPosts(lang: Lang, kind?: Kind): Promise<Post[]> {

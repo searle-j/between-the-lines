@@ -2,6 +2,7 @@
 title: "Hierarchical Notes on Attention"
 date: 2024-12-30
 type: paper
+publish: true
 description: "A mockup post verifying that the Contents sidebar renders nested h2–h4 hierarchy."
 ---
 

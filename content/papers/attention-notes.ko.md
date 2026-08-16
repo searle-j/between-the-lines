@@ -2,6 +2,7 @@
 title: "Attention에 관한 계층적 노트"
 date: 2024-12-30
 type: paper
+publish: true
 description: "h2–h4 중첩 구조로 목차(Contents) 위계 렌더링을 검증하는 목업 게시물."
 ---
 

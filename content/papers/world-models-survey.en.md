@@ -2,6 +2,7 @@
 title: "A Survey on World Models"
 date: 2026-05-17
 type: paper
+publish: true
 description: "A survey mapping the world-model research landscape — mockup post for layout checks."
 ---
 

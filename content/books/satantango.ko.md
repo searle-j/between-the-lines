@@ -2,6 +2,7 @@
 title: "사탄탱고"
 date: 2026-07-29
 type: book
+publish: true
 description: "크러스너호르커이 라슬로, 『사탄탱고』 — 레이아웃 확인용 목업 게시물."
 ---
 

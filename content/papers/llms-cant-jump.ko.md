@@ -2,6 +2,7 @@
 title: "LLMs Can't Jump"
 date: 2026-08-08
 type: paper
+publish: true
 description: "상태 공간 도약 과제로 LLM의 외삽 한계를 측정한 (가상의) 논문 리뷰 — 레이아웃 확인용 목업 게시물."
 ---
 

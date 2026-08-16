@@ -2,6 +2,7 @@
 title: "A Survey on World Models"
 date: 2026-05-17
 type: paper
+publish: true
 description: "world model 연구 지형도를 정리한 서베이 — 레이아웃 확인용 목업 게시물."
 ---
 

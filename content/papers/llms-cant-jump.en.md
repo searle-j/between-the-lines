@@ -2,6 +2,7 @@
 title: "LLMs Can't Jump"
 date: 2026-08-08
 type: paper
+publish: true
 description: "Review of a (fictional) paper measuring extrapolation limits of LLMs with state-space jump tasks — mockup post for layout checks."
 ---
 

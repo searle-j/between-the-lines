@@ -2,6 +2,7 @@
 title: "Satantango"
 date: 2026-07-29
 type: book
+publish: true
 description: "László Krasznahorkai, Satantango — mockup post for layout checks."
 ---
 

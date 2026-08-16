@@ -2,6 +2,7 @@
 title: "Thinking, Fast and Slow"
 date: 2025-09-08
 type: book
+publish: true
 description: "Daniel Kahneman, Thinking, Fast and Slow — mockup post for layout checks."
 ---
 

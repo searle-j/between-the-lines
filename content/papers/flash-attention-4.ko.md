@@ -2,6 +2,7 @@
 title: "FlashAttention 4"
 date: 2026-08-04
 type: paper
+publish: true
 description: "IO-인지 attention 커널 4세대 — 레이아웃 확인용 목업 게시물."
 ---
 

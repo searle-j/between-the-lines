@@ -5,12 +5,13 @@ import { glob } from 'astro/loaders';
 // language. Files that don't match the pattern are ignored by the site, so
 // stray local notes never get published by accident.
 // Tags are inline-only (`#tag` in the body) — there is no frontmatter field.
+// Publishing is opt-in: only `publish: true` posts reach production builds.
 const postSchema = z.object({
   title: z.string(),
   date: z.coerce.date(),
   type: z.enum(['paper', 'book']),
   description: z.string().optional(),
-  draft: z.boolean().default(false),
+  publish: z.boolean().default(false),
 });
 
 const pageSchema = z.object({

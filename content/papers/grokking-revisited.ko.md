@@ -2,6 +2,7 @@
 title: "Grokking, Revisited"
 date: 2025-11-02
 type: paper
+publish: true
 description: "grokking 현상의 재현 조건을 흔드는 후속 연구 — 레이아웃 확인용 목업 게시물."
 ---
 
