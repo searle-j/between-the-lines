@@ -88,3 +88,5 @@ description: ""
 - [On the Measure of Intelligence](on-the-measure-of-intelligence.ko.md)
 
 ---
+
+#world_model #llm #science

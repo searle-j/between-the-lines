@@ -46,6 +46,8 @@ description: ""
 
 ---
 
+#template
+
 <!-- Pre-publish checklist
   - File name: content/papers|books/<slug>.en.md — lowercase, hyphens
   - type: paper | book (must match the folder), fill in title & description

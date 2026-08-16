@@ -99,3 +99,11 @@ description: ""
 ## Next reading
 
 - [On the Measure of Intelligence](on-the-measure-of-intelligence.en.md)
+
+---
+
+#world_model #llm #science
+
+---
+
+#world_model #llm #science

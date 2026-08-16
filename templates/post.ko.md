@@ -46,6 +46,8 @@ description: ""
 
 ---
 
+#template
+
 <!-- 발행 전 체크리스트
   - 파일 이름: content/papers|books/<slug>.ko.md — 영문 소문자·하이픈
   - type: paper | book (폴더와 일치), title·description 채우기
