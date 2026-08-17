@@ -18,7 +18,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.resolve(process.argv[2] ?? path.join(ROOT, 'dist'));
 const BASE = '/between-the-lines';
 const ORIGIN = 'https://searle-j.github.io';
-const NAV_LABELS = 'Review|Papers|Books|Literature|Search|Keywords|Full-text|About';
+const NAV_LABELS = 'Review|Papers|Non-fiction|Fiction|Search|Keywords|Full-text|About';
 
 const errors = [];
 const fail = (file, msg) => errors.push(`${path.relative(ROOT, file)}: ${msg}`);

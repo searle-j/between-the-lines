@@ -10,8 +10,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const KINDS = [
   { dir: 'content/papers', type: 'paper' },
-  { dir: 'content/books', type: 'book' },
-  { dir: 'content/literature', type: 'literature' },
+  { dir: 'content/non-fiction', type: 'non-fiction' },
+  { dir: 'content/fiction', type: 'fiction' },
 ];
 
 /** content.config.ts 의 glob('**\/*.{ko,en}.md') 과 같은 재귀 범위로 .md 를 모은다. */
@@ -72,7 +72,7 @@ for (const { dir, type } of KINDS) {
     for (const [, target] of body.matchAll(/\]\(([^)\s#?]+\.md)[^)]*\)/g)) {
       if (/^[a-z][a-z0-9+.-]*:/i.test(target) || target.startsWith('/')) continue;
       const abs = path.resolve(path.dirname(file), decodeURI(target));
-      if (!/content[/\\](papers|books|literature)[/\\][^/\\]+\.(ko|en)\.md$/.test(abs)) continue;
+      if (!/content[/\\](papers|non-fiction|fiction)[/\\][^/\\]+\.(ko|en)\.md$/.test(abs)) continue;
       const targetFm = existsSync(abs)
         ? readFileSync(abs, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1]
         : null;

@@ -2,7 +2,7 @@
 import PostPage from '../../components/pages/PostPage.astro';
 import { postStaticPaths } from '../../lib/posts';
 
-export const getStaticPaths = () => postStaticPaths('ko', 'books');
+export const getStaticPaths = () => postStaticPaths('ko', 'fiction');
 
 const { post, hasAlternate } = Astro.props;
 ---

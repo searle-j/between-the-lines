@@ -3,17 +3,17 @@ import type { Lang } from '../i18n/ui';
 import { collectInlineTags } from './remark-inline-tags.mjs';
 
 export type { Lang };
-export type Kind = 'papers' | 'books' | 'literature';
+export type Kind = 'papers' | 'non-fiction' | 'fiction';
 
-const KINDS: Kind[] = ['papers', 'books', 'literature'];
-const TYPE_LABELS = { papers: 'Paper', books: 'Book', literature: 'Literature' } as const;
+const KINDS: Kind[] = ['papers', 'non-fiction', 'fiction'];
+const TYPE_LABELS = { papers: 'Paper', 'non-fiction': 'Non-fiction', fiction: 'Fiction' } as const;
 
 export interface Post {
   slug: string;
   lang: Lang;
   kind: Kind;
   typeLabel: (typeof TYPE_LABELS)[Kind];
-  entry: CollectionEntry<'papers'> | CollectionEntry<'books'> | CollectionEntry<'literature'>;
+  entry: CollectionEntry<'papers'> | CollectionEntry<'non-fiction'> | CollectionEntry<'fiction'>;
 }
 
 /** `llms-cant-jump.ko` -> { slug: 'llms-cant-jump', lang: 'ko' } */

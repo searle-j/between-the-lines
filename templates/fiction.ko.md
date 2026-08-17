@@ -1,7 +1,7 @@
 ---
 title: ""
 date: "{{date:YYYY-MM-DD}}"
-type: literature
+type: fiction
 publish: false
 description: ""
 ---

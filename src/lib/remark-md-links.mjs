@@ -6,8 +6,8 @@ import path from 'node:path';
  * routes, so the same link works both in Obsidian (opens the file) and on
  * the published site (opens the page):
  *
- *   [사탄탱고](../literature/satantango.ko.md)   -> /between-the-lines/literature/satantango/
- *   [Satantango](../literature/satantango.en.md) -> /between-the-lines/en/literature/satantango/
+ *   [사탄탱고](../fiction/satantango.ko.md)   -> /between-the-lines/fiction/satantango/
+ *   [Satantango](../fiction/satantango.en.md) -> /between-the-lines/en/fiction/satantango/
  *
  * A link to a post that does not exist yet — or exists but is not
  * `publish: true` — goes to the "not ready yet" page instead, so future
@@ -54,7 +54,7 @@ export function remarkMdLinks(options = {}) {
       const absOs = path.resolve(fromDir, decoded);
       const abs = absOs.split(path.sep).join('/');
 
-      let m = abs.match(/\/content\/(papers|books|literature)\/([^/]+)\.(ko|en)\.md$/);
+      let m = abs.match(/\/content\/(papers|non-fiction|fiction)\/([^/]+)\.(ko|en)\.md$/);
       if (m) {
         const [, kind, slug, lang] = m;
         const prefix = `${base}${lang === 'en' ? '/en' : ''}`;
