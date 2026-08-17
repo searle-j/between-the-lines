@@ -5,7 +5,7 @@ type: fiction
 publish: true
 description: ""
 ---
-## Metadata
+## Bibliographic Information
 
 - Title: Satantango
 - Author: László Krasznahorkai (won the Nobel Prize in Literature 👍)

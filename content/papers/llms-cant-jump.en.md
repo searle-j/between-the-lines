@@ -5,7 +5,7 @@ type: paper
 publish: true
 description: ""
 ---
-## Metadata
+## Bibliographic Information
 
 - title: Position: LLMs can’t jump
 - authors: Tom Zahavy

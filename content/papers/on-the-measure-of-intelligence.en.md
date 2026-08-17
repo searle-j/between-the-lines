@@ -5,7 +5,7 @@ type: paper
 publish: false
 description: ""
 ---
-## Metadata
+## Bibliographic Information
 
 - title: ...
 - authors: ...

@@ -5,7 +5,7 @@ type: fiction
 publish: false
 description: ""
 ---
-## Metadata
+## Bibliographic Information
 
 - title: ...
 - authors: ...
