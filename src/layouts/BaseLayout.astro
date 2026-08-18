@@ -88,6 +88,31 @@ const defaultUrl = lang === 'ko' ? canonical : alternateUrl;
     </main>
     <Footer lang={lang} />
     <BackToTop />
+    <script>
+      // 저자 주석 팝오버 위치 보정 — 기본은 마커 위 중앙 정렬(CSS)이지만,
+      // 화면 가장자리에서는 뷰포트 밖으로 나가므로 표시 시점에 측정해서
+      // 수평으로 밀어 넣고(--shift), 위 공간이 없으면 아래로 편다(data-flip).
+      for (const note of document.querySelectorAll<HTMLElement>('.author-note')) {
+        const box = note.querySelector<HTMLElement>('.author-note-box');
+        if (!box) continue;
+        const clamp = () => {
+          box.style.setProperty('--shift', '0px');
+          box.removeAttribute('data-flip');
+          const pad = 12;
+          let rect = box.getBoundingClientRect();
+          if (rect.top < pad) {
+            box.setAttribute('data-flip', '');
+            rect = box.getBoundingClientRect();
+          }
+          let shift = 0;
+          if (rect.left < pad) shift = pad - rect.left;
+          else if (rect.right > window.innerWidth - pad) shift = window.innerWidth - pad - rect.right;
+          box.style.setProperty('--shift', `${shift}px`);
+        };
+        note.addEventListener('mouseenter', clamp);
+        note.addEventListener('focusin', clamp);
+      }
+    </script>
     {
       /* GoatCounter 방문 집계 — 배포본에서만 (로컬 dev/preview 방문은 제외) */
       import.meta.env.PROD && (

@@ -499,9 +499,10 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   position: absolute;
   bottom: calc(100% + 0.45em);
   left: 50%;
-  transform: translateX(-50%);
+  /* --shift: 화면 밖으로 나가지 않게 표시 시점에 스크립트가 보정하는 offset */
+  transform: translateX(calc(-50% + var(--shift, 0px)));
   width: max-content;
-  max-width: min(320px, 80vw);
+  max-width: min(320px, calc(100vw - 2rem));
   padding: 0.6em 0.85em;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -521,6 +522,12 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
 .author-note:focus-within .author-note-box {
   visibility: visible;
   opacity: 1;
+}
+
+/* 마커가 화면 상단에 가까워 위로 뜰 공간이 없으면 아래로 편다 */
+.author-note-box[data-flip] {
+  bottom: auto;
+  top: calc(100% + 0.45em);
 }
 
 /* 본문 링크는 항상 은은한 밑줄 — 색만으로 구분하지 않는다 */
