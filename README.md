@@ -59,6 +59,10 @@ Obsidian 스타일 그대로 본문에 `#llm` 처럼 쓰면 된다 (`#ability_te
 
 표, 각주(`[^1]`), 코드 블록(구문 강조), 수식(`$…$`, `$$…$$`), 인용, 취소선 등 GFM + LaTeX. 외부 링크는 자동으로 새 창(`target="_blank"`)으로 열린다.
 
+### 저자 주석
+
+본문에 이탤릭으로 `*(작성자 주. …)*` 또는 `*(Author's note. …)*`를 쓰면, 사이트에서 앞말에 붙는 위첨자 번호로 바뀌고 호버(모바일은 탭)하면 내용이 말풍선 박스로 보인다. Obsidian에서는 종이책처럼 기울임 괄호 주석으로 보이며, `templates/author-note.ko.md`/`author-note.en.md`를 Insert template로 삽입하면 편하다. 내용이 비어 있으면(작성 중) 이탤릭 그대로 노출되고, 주석 안에 다른 Markdown을 겹치면 변환되지 않는다 — 평문만 쓴다.
+
 ## 검색
 
 [Pagefind](https://pagefind.app)가 빌드 후 `dist/`를 인덱싱한다(`postbuild`). `/search/` 페이지에서 키워드 검색이 되고, 한국어/영어 인덱스는 페이지 `lang`에 따라 자동 분리된다. dev 서버에는 인덱스가 없으므로 `npm run build && npm run preview`로 확인한다.
@@ -102,7 +106,7 @@ repo 루트를 vault로 열어 쓴다. 권장 설정:
 - **New link format: Relative path to file**
 - **Default location for new attachments**: `assets` 폴더
 - **Files and links → Excluded files**: `src`, `public`, `scripts`, `node_modules`, `dist`, `.astro`, `.github`
-- **Templates → Template folder location**: `templates` — 논문·비문학은 `templates/post.ko.md`/`post.en.md`, 문학·에세이는 `fiction.ko.md`/`fiction.en.md`를 Insert template로 불러와 시작한다 (`content/` 밖이라 사이트에는 실리지 않음).
+- **Templates → Template folder location**: `templates` — 논문은 `templates/post.ko.md`/`post.en.md`, 비문학은 `non-fiction.ko.md`/`non-fiction.en.md`, 문학·에세이는 `fiction.ko.md`/`fiction.en.md`를 Insert template로 불러와 시작한다 (`content/` 밖이라 사이트에는 실리지 않음).
 
 ## License
 

@@ -7,6 +7,7 @@ import rehypeKatex from 'rehype-katex';
 import rehypeExternalLinks from 'rehype-external-links';
 import { remarkMdLinks } from './src/lib/remark-md-links.mjs';
 import { remarkInlineTags } from './src/lib/remark-inline-tags.mjs';
+import { remarkAuthorNotes } from './src/lib/remark-author-notes.mjs';
 
 const SITE = 'https://searle-j.github.io';
 const BASE = '/between-the-lines';
@@ -26,6 +27,7 @@ export default defineConfig({
       remarkPlugins: [
         remarkMath,
         [remarkMdLinks, { base: BASE }],
+        remarkAuthorNotes,
         [remarkInlineTags, { base: BASE }],
       ],
       rehypePlugins: [

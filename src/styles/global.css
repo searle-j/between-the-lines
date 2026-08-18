@@ -473,6 +473,56 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   font-family: var(--font-body);
 }
 
+/* 저자 주석 — 본문의 (작성자 주. …)를 remark-author-notes가
+   위첨자 번호 버튼 + 호버/포커스 팝오버로 변환 */
+.author-note {
+  position: relative;
+}
+
+.author-note-mark {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--link);
+  font-family: var(--font-meta);
+  font-size: inherit;
+  line-height: inherit;
+  cursor: help;
+}
+
+.author-note-label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.author-note-box {
+  position: absolute;
+  bottom: calc(100% + 0.45em);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(320px, 80vw);
+  padding: 0.6em 0.85em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.1);
+  color: var(--quote-text);
+  font-size: inherit; /* 팝오버 글자 크기는 본문과 동일 */
+  line-height: 1.65;
+  text-align: left;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  z-index: 10;
+}
+
+/* 호버(데스크톱) 또는 탭·키보드 포커스(모바일)로 표시 */
+.author-note:hover .author-note-box,
+.author-note:focus-within .author-note-box {
+  visibility: visible;
+  opacity: 1;
+}
+
 /* 본문 링크는 항상 은은한 밑줄 — 색만으로 구분하지 않는다 */
 .prose a {
   text-decoration: underline;
