@@ -379,7 +379,7 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   padding: 0.4rem 0;
 }
 
-/* 태그 페이지의 다중 태그 필터(TagRefine)가 제외한 항목 */
+/* 키워드 페이지(TagsPage)의 토글 필터가 제외한 항목 */
 .post-list li[data-filtered] {
   display: none;
 }
@@ -668,16 +668,7 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   font-size: 0.9rem;
 }
 
-/* ---------- Tags ---------- */
-
-.tag-cloud {
-  list-style: none;
-  margin: 1.75rem 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
+/* ---------- Tags (단일 키워드 페이지) ---------- */
 
 .tag-chip {
   display: inline-flex;
@@ -688,19 +679,103 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   border: 1px solid var(--border);
   border-radius: var(--radius-inline);
   color: var(--text);
+  font: inherit;
   font-size: 0.92rem;
+  cursor: pointer;
 }
 
-.tag-chip:hover {
+.tag-chip:hover:not(:disabled) {
   text-decoration: none;
   border-color: var(--link);
   color: var(--link-hover);
+}
+
+.tag-chip[aria-pressed='true'] {
+  border-color: var(--link);
+  color: var(--link-hover);
+  background: color-mix(in srgb, var(--link) 12%, var(--surface));
+}
+
+.tag-chip:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 .tag-count {
   color: var(--muted);
   font-family: var(--font-meta);
   font-size: 0.78em;
+}
+
+/* 키워드 토글 패널 — 좁은 화면: 접이식(버튼으로 펼침), 결과 위에 랩 배치 */
+.tag-picker-toggle {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45em;
+  margin: 1.5rem 0 0;
+  padding: 0.28em 0.7em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-inline);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.tag-picker-toggle[aria-expanded='true'] {
+  border-color: var(--link);
+  color: var(--link-hover);
+}
+
+.tag-picker {
+  display: none;
+  margin-top: 1rem;
+}
+
+.tag-picker.open {
+  display: block;
+}
+
+.tag-picker ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.picker-title {
+  display: none;
+}
+
+/* 넓은 화면: 오른쪽 여백 고정 레일 (Toc와 같은 배치 규칙, 스크롤 가능) */
+@media (min-width: 1280px) {
+  .tag-picker-toggle {
+    display: none;
+  }
+
+  .tag-picker {
+    display: block;
+    position: fixed;
+    top: 7.5rem;
+    right: 2.25rem;
+    width: 200px;
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+    margin-top: 0;
+  }
+
+  .picker-title {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
 }
 
 .crumb {

@@ -66,7 +66,7 @@ export function remarkInlineTags(options = {}) {
     const lang = /\.en\.md$/.test(file?.path ?? '') ? 'en' : 'ko';
     processTree(tree, () => {}, (tag) => ({
       type: 'link',
-      url: `${base}${lang === 'en' ? '/en' : ''}/tags/${tag}/`,
+      url: `${base}${lang === 'en' ? '/en' : ''}/tags/?k=${encodeURIComponent(tag)}`,
       data: { hProperties: { className: ['inline-tag'] } },
       children: [{ type: 'text', value: `#${tag}` }],
     }));

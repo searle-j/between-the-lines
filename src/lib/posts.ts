@@ -101,8 +101,9 @@ export async function getAllTags(lang: Lang): Promise<Array<{ tag: string; count
     .sort((a, b) => a.tag.localeCompare(b.tag, 'en'));
 }
 
+/** 키워드 페이지 딥링크 — 태그별 경로 대신 단일 /tags/ 페이지의 ?k= 선택 상태. */
 export function tagPath(lang: Lang, tag: string): string {
-  return `${lang === 'en' ? '/en' : ''}/tags/${tag}/`;
+  return `${lang === 'en' ? '/en' : ''}/tags/?k=${encodeURIComponent(tag)}`;
 }
 
 /** 게시물 상세 라우트 6개(kind 3종 × 언어 2종)가 공유하는 getStaticPaths 본문. */
@@ -113,16 +114,5 @@ export async function postStaticPaths(lang: Lang, kind: Kind) {
   return own.map((post) => ({
     params: { slug: post.slug },
     props: { post, hasAlternate: counterpartSlugs.has(post.slug) },
-  }));
-}
-
-/** 태그 상세 라우트 2개가 공유하는 getStaticPaths 본문. */
-export async function tagStaticPaths(lang: Lang) {
-  const other: Lang = lang === 'ko' ? 'en' : 'ko';
-  const [own, counterpart] = await Promise.all([getAllTags(lang), getAllTags(other)]);
-  const counterpartTags = new Set(counterpart.map(({ tag }) => tag));
-  return own.map(({ tag }) => ({
-    params: { tag },
-    props: { tag, hasAlternate: counterpartTags.has(tag) },
   }));
 }

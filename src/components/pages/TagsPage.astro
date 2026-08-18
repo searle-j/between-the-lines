@@ -1,7 +1,10 @@
 ---
+// 단일 키워드 페이지 — 태그별 경로 없이, 우측(넓은 화면) 키워드 토글로
+// 게시물을 AND 조건으로 좁힌다. 선택 상태는 ?k=tag1,tag2 로 URL에 남아
+// 공유·새로고침에도 유지된다. 본문 인라인 #태그 링크가 이 딥링크를 쓴다.
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAllTags, tagPath } from '../../lib/posts';
-import { withBase } from '../../lib/url';
+import PostList from '../PostList.astro';
+import { getAllTags, getPosts } from '../../lib/posts';
 import type { Lang } from '../../i18n/ui';
 
 interface Props {
@@ -9,23 +12,127 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const tags = await getAllTags(lang);
+const tags = await getAllTags(lang); // ABC 순 정렬됨
+const posts = await getPosts(lang);
 const alternatePath = lang === 'ko' ? '/en/tags/' : '/tags/';
 ---
 
 <BaseLayout lang={lang} title="Keywords" alternatePath={alternatePath}>
   <h1 class="page-title">Keywords</h1>
   {tags.length === 0 && <p class="muted">No keywords yet.</p>}
-  <ul class="tag-cloud">
-    {
-      tags.map(({ tag, count }) => (
-        <li>
-          <a class="tag-chip" href={withBase(tagPath(lang, tag))}>
-            <span>#{tag}</span>
-            <span class="tag-count">{count}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  {
+    tags.length > 0 && (
+      <>
+        <button type="button" class="tag-picker-toggle" data-picker-toggle aria-expanded="false">
+          Keywords
+        </button>
+        <aside class="tag-picker" aria-label="Keyword filters">
+          <div class="picker-title">Keywords</div>
+          <ul>
+            {tags.map(({ tag, count }) => (
+              <li>
+                <button type="button" class="tag-chip" data-tag={tag} aria-pressed="false">
+                  <span>#{tag}</span>
+                  <span class="tag-count">{count}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </aside>
+        <p class="muted" data-tag-guide>
+          Turn keywords on and off to see the posts that match all of them.
+        </p>
+        <p class="tag-page-meta muted" data-tag-meta hidden />
+        <div data-tag-results hidden>
+          <PostList posts={posts} withTags />
+        </div>
+      </>
+    )
+  }
 </BaseLayout>
+
+<script>
+  const picker = document.querySelector<HTMLElement>('.tag-picker');
+  if (picker) {
+    const buttons = [...picker.querySelectorAll<HTMLButtonElement>('button[data-tag]')];
+    const items = [...document.querySelectorAll<HTMLElement>('[data-tag-results] li[data-tags]')].map(
+      (li) => ({ li, tags: new Set((li.dataset.tags ?? '').split(' ').filter(Boolean)) })
+    );
+    const results = document.querySelector<HTMLElement>('[data-tag-results]');
+    const guide = document.querySelector<HTMLElement>('[data-tag-guide]');
+    const meta = document.querySelector<HTMLElement>('[data-tag-meta]');
+    const panelToggle = document.querySelector<HTMLButtonElement>('[data-picker-toggle]');
+    const totals = new Map(
+      buttons.map((b) => [b.dataset.tag!, b.querySelector('.tag-count')!.textContent])
+    );
+
+    const known = new Set(buttons.map((b) => b.dataset.tag));
+    const selected = new Set<string>();
+    for (const tag of (new URLSearchParams(location.search).get('k') ?? '').split(',')) {
+      if (known.has(tag)) selected.add(tag);
+    }
+
+    const apply = () => {
+      const none = selected.size === 0;
+      let visible = 0;
+      const coCounts = new Map<string, number>();
+      for (const { li, tags } of items) {
+        const show = !none && [...selected].every((tag) => tags.has(tag));
+        li.toggleAttribute('data-filtered', !show);
+        if (!show) continue;
+        visible++;
+        for (const tag of tags) coCounts.set(tag, (coCounts.get(tag) ?? 0) + 1);
+      }
+
+      for (const button of buttons) {
+        const tag = button.dataset.tag!;
+        const on = selected.has(tag);
+        button.setAttribute('aria-pressed', String(on));
+        const countEl = button.querySelector('.tag-count')!;
+        if (none) {
+          countEl.textContent = totals.get(tag) ?? '';
+          button.disabled = false;
+        } else {
+          const count = coCounts.get(tag) ?? 0;
+          countEl.textContent = String(count);
+          // 켜면 결과가 0이 될 조합은 처음부터 누를 수 없게 잠근다.
+          button.disabled = !on && count === 0;
+        }
+      }
+
+      if (results) results.hidden = none;
+      if (guide) guide.hidden = !none;
+      if (meta) {
+        meta.hidden = none;
+        if (!none) {
+          const list = [...selected].map((tag) => `#${tag}`).join(' ');
+          meta.textContent = `${visible} ${visible === 1 ? 'post' : 'posts'} · ${list}`;
+        }
+      }
+      if (panelToggle) {
+        panelToggle.textContent = `Keywords${selected.size ? ` (${selected.size})` : ''}`;
+      }
+
+      const url = new URL(location.href);
+      if (selected.size) url.searchParams.set('k', [...selected].join(','));
+      else url.searchParams.delete('k');
+      history.replaceState(null, '', url);
+    };
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        const tag = button.dataset.tag!;
+        if (selected.has(tag)) selected.delete(tag);
+        else selected.add(tag);
+        apply();
+      });
+    }
+
+    panelToggle?.addEventListener('click', () => {
+      const open = picker.classList.toggle('open');
+      panelToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    apply();
+  }
+</script>
