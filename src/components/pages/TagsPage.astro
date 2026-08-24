@@ -5,7 +5,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../PostList.astro';
 import { getAllTags, getPosts } from '../../lib/posts';
-import type { Lang } from '../../i18n/ui';
+import { t, type Lang } from '../../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -39,9 +39,7 @@ const alternatePath = lang === 'ko' ? '/en/tags/' : '/tags/';
             ))}
           </ul>
         </aside>
-        <p class="muted" data-tag-guide>
-          Turn keywords on and off to see the posts that match all of them.
-        </p>
+        <p class="muted" data-tag-guide>{t(lang).tagsGuide}</p>
         <p class="tag-page-meta muted" data-tag-meta hidden />
         <div data-tag-results hidden>
           <PostList posts={posts} withTags />

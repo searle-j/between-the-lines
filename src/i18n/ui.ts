@@ -8,10 +8,12 @@ export const ui = {
   ko: {
     description: '논문과 책을 읽고 남기는 기록',
     attributionNotice: '리뷰에 인용된 원저작물의 모든 형태의 자료에 대한 저작권은 원저작자에게 있습니다.',
+    tagsGuide: '오른쪽 키워드를 눌러서 게시물을 찾으세요.',
   },
   en: {
     description: 'Notes on papers and books',
     attributionNotice: 'Any material quoted from the original works remains © its original authors.',
+    tagsGuide: 'Turn keywords on and off to see the posts that match all of them.',
   },
 } as const;
 
