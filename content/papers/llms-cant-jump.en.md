@@ -98,7 +98,7 @@ description: ""
 
 ## Next reading
 
-- [On the Measure of Intelligence](on-the-measure-of-intelligence.en.md)
+- [On the Measure of Intelligence](arc-agi-1--on-the-measure-of-intelligence.en.md)
 
 ---
 

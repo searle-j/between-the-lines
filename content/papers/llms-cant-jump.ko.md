@@ -85,7 +85,7 @@ description: ""
 
 ## 다음 읽을 것
 
-- [On the Measure of Intelligence](on-the-measure-of-intelligence.ko.md)
+- [On the Measure of Intelligence](arc-agi-1--on-the-measure-of-intelligence.ko.md)
 
 ---
 
