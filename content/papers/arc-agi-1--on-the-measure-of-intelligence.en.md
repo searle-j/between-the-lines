@@ -21,7 +21,7 @@ description: ""
 
 ## TL;DR
 
-![](../../assets/arc-agi-1--on-the-measure-of-intelligence/Pasted%20image%2020260913122505.png)
+![Figure 1](../../assets/arc-agi-1--on-the-measure-of-intelligence/figure-1.png)
 
 - Intelligence is the ability to efficiently acquire new skills for a given problem by generalizing from prior knowledge and experience, rather than the skill of solving a particular problem itself.
   - $\text{Intelligence} \neq \text{Skill}$

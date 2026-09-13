@@ -21,7 +21,7 @@ description: ""
 
 ## 세 줄 요약
 
-![](<Pasted%20image%2020260913122505.png>)
+![그림 1](../../assets/arc-agi-1--on-the-measure-of-intelligence/figure-1.png)
 
 - 지능은 특정한 문제를 해결하는 기술이 아니라 사전지식과 경험을 일반화함을 통해 주어진 문제를 해결하기 위한 새로운 기술을 효율적으로 습득하는 능력이다.
   - $\text{Intelligence} \neq \text{Skill}$
