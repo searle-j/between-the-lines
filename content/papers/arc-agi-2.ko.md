@@ -1,8 +1,8 @@
 ---
-title: "ARC-AGI-2"
-date: "2026-09-13"
+title: ARC-AGI-2
+date: 2026-09-13
 type: paper
-publish: false
+publish: true
 description: ""
 ---
 ## 서지 정보
