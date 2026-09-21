@@ -32,6 +32,8 @@ description: ""
 
 ## Summary
 
+- WARNING: This is a long paper — over 60 pages.
+
 ### 1. Background
 
 #### The Need for a Rigorous Measure of Intelligence
