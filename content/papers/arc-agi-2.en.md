@@ -20,7 +20,7 @@ description: ""
 
 ## TL;DR
 
-![](../../Pasted%20image%2020260919192557.png)
+![Figure 1](../../assets/arc-agi-2/figure-1.png)
 
 - ARC-AGI-1 was designed to measure fluid intelligence in AI and has served as a useful benchmark.
 - However, performance is approaching the benchmark's ceiling, calling for an update that also addresses its other limitations.
