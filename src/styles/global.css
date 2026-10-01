@@ -549,27 +549,43 @@ html[data-theme='dark'] .theme-toggle .icon-moon {
   text-decoration-color: var(--link-hover);
 }
 
+/* 본문 제목 크기는 rem(루트 16px)이 아니라 em(본문 18px) 기준이다.
+   본문에 비례해야 위계가 의도한 비율로 유지되고, 모바일에서 본문이
+   17px로 줄 때 제목도 함께 줄어든다.
+   굵기 600은 Noto Serif KR이 실제로 보유한 굵기다 — 기본값 700은
+   불러오지 않으므로 브라우저가 합성한 가짜 굵게로 렌더된다. */
 .prose h1,
 .prose h2,
 .prose h3 {
   font-family: var(--font-heading);
+  font-weight: 600;
   scroll-margin-top: 1.5rem;
 }
 
 .prose h1 {
-  font-size: 1.5rem;
-  margin: 2.25rem 0 0.75rem;
+  font-size: 1.5em;
+  margin: 2.5rem 0 0.7rem;
 }
 
 .prose h2 {
-  font-size: 1.28rem;
+  font-size: 1.333em;
   letter-spacing: -0.01em;
-  margin: 2.25rem 0 0.75rem;
+  margin: 2.5rem 0 0.7rem;
 }
 
 .prose h3 {
-  font-size: 1.1rem;
-  margin: 1.75rem 0 0.5rem;
+  font-size: 1.139em;
+  margin: 1.9rem 0 0.45rem;
+}
+
+/* h4만 본문 글꼴을 유지하고 굵기로 구분한다 — 명조를 적용하면
+   바로 위 단계인 h3와 뭉개져 보인다. */
+.prose h4 {
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin: 1.5rem 0 0.4rem;
+  scroll-margin-top: 1.5rem;
 }
 
 .prose p {
