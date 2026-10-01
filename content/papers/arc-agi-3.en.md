@@ -143,7 +143,7 @@ description: ""
 
 ## Next reading
 
-- [AVO](avo.en.md) ([paper](https://arxiv.org/abs/2603.24517))
+- [AVO](avo.en.md)
 
 ---
 

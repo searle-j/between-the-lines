@@ -128,7 +128,7 @@ description: ""
 
 ## 다음 읽을 것
 
-- [AVO](avo.ko.md) ([논문](https://arxiv.org/abs/2603.24517))
+- [AVO](avo.ko.md)
 
 ---
 
