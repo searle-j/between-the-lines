@@ -9,7 +9,7 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
 
 - 제목: FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness
 - 저자: Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, and Christopher Ré
-- 기관: Stanford, University of Buffalo SUNY
+- 기관: Stanford, University at Buffalo, SUNY
 - 발표 / 출판: NeurIPS
 - 출판 연도: 2022
 - 링크 / 코드·데이터:
@@ -20,7 +20,7 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
 
 ## 세 줄 요약
 
-![](../../assets/flashattention-1/figure-1.png)
+![그림 1](../../assets/flashattention-1/figure-1.png)
 
 - 트랜스포머 연산의 최대 병목인 어텐션을 간소화하기 위해 근사적 기법으로 연산량 자체를 줄이려는 시도들이 많았다.
 - 그러나 진짜 병목은 연산량이 아니라 하드웨어 위에서 오가는 데이터들의 크기였다.
@@ -48,36 +48,33 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
 
 #### 어텐션 구현의 기본적 형태
 
-- **Algorithm 0**: 제일 기본적인 구현 방식이자 큰 행렬 데이터터가 HBM을 왕복해야 해서 메모리 RW에 병목이 생기는 형태.
-  > 준비 단계: $Q,K,V \in \mathbb{R}^{N \times d}$ 행렬들이 HBM 위에 있음  
-  > 1: $Q,K$를 HBM으로부터 읽어온다. $S=QK^\top$ 계산 후 $S$를 HBM에 적음.  
-  > 2: $S$를 HBM으로부터 읽어온다. $P = softmax(S)$ 계산 후 $P$를 HBM에 적음.  
-  > 3: $P,V$를 HBM으로부터 읽어온다. $O = PV$ 계산 후 $O$를 HBM에 적음.  
-  > 4: return $O$.
+- **Algorithm 0**: 제일 기본적인 구현 방식이자 큰 행렬 데이터가 HBM을 왕복해야 해서 메모리 RW에 병목이 생기는 형태.
+  > 준비 단계: $Q,K,V \in \mathbb{R}^{N \times d}$ 행렬들이 HBM 위에 있음
+  >
+  > 1. $Q,K$를 HBM으로부터 읽어온다. $S=QK^\top$ 계산 후 $S$를 HBM에 적음.
+  > 2. $S$를 HBM으로부터 읽어온다. $P = softmax(S)$ 계산 후 $P$를 HBM에 적음.
+  > 3. $P,V$를 HBM으로부터 읽어온다. $O = PV$ 계산 후 $O$를 HBM에 적음.
+  > 4. return $O$.
 - 논문에 나오는 내용은 아니지만, 더 자세하게는 2022년 당시 pytorch + CUDA의 구현은 이런 식이었다. 아래 알고리즘은 안 읽고 넘어가도 무방.
-  > 1: $S$ 계산
-  >
-  > * GEMM 커널이 HBM에서 $Q$의 일부 행 $Q_I$와 $K$의 일부 행 $K_J$를 읽어와 $S \in \mathbb{R}^{N \times N}$의 부분행렬 $S_{I,J}=Q_IK_J^\top$를 계산하고 HBM에 쓴다.
-  > * 위 연산을 서로 다른 행과 열에 대해 멀티스레드로 수행하여 HBM에 전체 $S$를 완성한다.
-  >
-  > 2: $P=\mathrm{softmax}(S)$ 계산
-  > * softmax 커널이 HBM에 저장된 $S$를 행 단위로 읽어 softmax를 계산한다.
-  > * $N \le 1024$인 경우:
-  >   * 당시 PyTorch의 경로에서는 대략 한 warp *(작성자 주. warp는 하드웨어 수준에서 32개의 threads를 묶어 다른 대상에 대해 같은 명령을 수행하도록 하는 단위. e.g., 한 행의 모든 원소에 1 더하기)* 가 한 행을 담당한다. 물론 여러 개의 warp를 병렬 실행.
-  >   * 각 thread에 행의 원소들을 겹치지 않게 할당한다.
-  >   * 각 thread가 주어진 원소들의 local max를 계산한다.
-  >   * warp 전체에서 max reduction을 수행하여 행 전체의 최댓값 $m_i$를 구한다.
-  >   * 각 thread가 $e^{S_{ij}-m_i}$를 계산하고, 다시 sum reduction을 수행하여 분모를 구한다.
-  >   * 각 값을 분모로 나누어 $P_{ij}$를 계산하고, 완성된 $P$를 HBM에 쓴다.
-  > * $N > 1024$인 경우:
-  >   * 한 행을 하나의 thread block *(작성자 주. thread block은 소프트웨어 수준에서 여러 threads를 하나의 협업 단위로 묶은 것. 같은 block의 threads들은 shared memory를 공유하고 서로 동기화할 수 있다.)* 이 담당하고, block 안의 여러 warp가 협력.
-  >   * 각 thread가 행의 일부 원소를 맡아 local max를 계산한 뒤, block 전체에서 reduction하여 $m_i$를 구한다.
-  >   * 다시 행의 원소들을 읽어 (데이터가 커서 register에 들고 있을 수 없으므로 다시 HBM에서 읽어와야 한다) $e^{S_{ij}-m_i}$의 local sum을 계산하고, block 전체에서 reduction하여 분모를 구한다.
-  >   * 다시 행의 원소들을 읽어 (데이터가 커서 register에 들고 있을 수 없으므로 다시 HBM에서 읽어와야 한다) softmax 값을 계산한 뒤 $P$를 HBM에 쓴다.
-  >
-  > 3: $O=PV$ 계산
-  > * GEMM 커널이 HBM에 있는 $P$와 $V$를 부분행렬 단위로 읽어 $O$를 계산하고 HBM에 쓴다.
-  >
+  > 1. $S$ 계산
+  >    * GEMM 커널이 HBM에서 $Q$의 일부 행 $Q_I$와 $K$의 일부 행 $K_J$를 읽어와 $S \in \mathbb{R}^{N \times N}$의 부분행렬 $S_{I,J}=Q_IK_J^\top$를 계산하고 HBM에 쓴다.
+  >    * 위 연산을 서로 다른 행과 열에 대해 멀티스레드로 수행하여 HBM에 전체 $S$를 완성한다.
+  > 2. $P=\mathrm{softmax}(S)$ 계산
+  >    * softmax 커널이 HBM에 저장된 $S$를 행 단위로 읽어 softmax를 계산한다.
+  >    * $N \le 1024$인 경우:
+  >      * 당시 PyTorch의 경로에서는 대략 한 warp *(작성자 주. warp는 하드웨어 수준에서 32개의 threads를 묶어 다른 대상에 대해 같은 명령을 수행하도록 하는 단위. e.g., 한 행의 모든 원소에 1 더하기)* 가 한 행을 담당한다. 물론 여러 개의 warp를 병렬 실행.
+  >      * 각 thread에 행의 원소들을 겹치지 않게 할당한다.
+  >      * 각 thread가 주어진 원소들의 local max를 계산한다.
+  >      * warp 전체에서 max reduction을 수행하여 행 전체의 최댓값 $m_i$를 구한다.
+  >      * 각 thread가 $e^{S_{ij}-m_i}$를 계산하고, 다시 sum reduction을 수행하여 분모를 구한다.
+  >      * 각 값을 분모로 나누어 $P_{ij}$를 계산하고, 완성된 $P$를 HBM에 쓴다.
+  >    * $N > 1024$인 경우:
+  >      * 한 행을 하나의 thread block *(작성자 주. thread block은 소프트웨어 수준에서 여러 threads를 하나의 협업 단위로 묶은 것. 같은 block의 threads들은 shared memory를 공유하고 서로 동기화할 수 있다.)* 이 담당하고, block 안의 여러 warp가 협력.
+  >      * 각 thread가 행의 일부 원소를 맡아 local max를 계산한 뒤, block 전체에서 reduction하여 $m_i$를 구한다.
+  >      * 다시 행의 원소들을 읽어 (데이터가 커서 register에 들고 있을 수 없으므로 다시 HBM에서 읽어와야 한다) $e^{S_{ij}-m_i}$의 local sum을 계산하고, block 전체에서 reduction하여 분모를 구한다.
+  >      * 다시 행의 원소들을 읽어 (데이터가 커서 register에 들고 있을 수 없으므로 다시 HBM에서 읽어와야 한다) softmax 값을 계산한 뒤 $P$를 HBM에 쓴다.
+  > 3. $O=PV$ 계산
+  >    * GEMM 커널이 HBM에 있는 $P$와 $V$를 부분행렬 단위로 읽어 $O$를 계산하고 HBM에 쓴다.
   > 4. return $O$.
 
 ### FlashAttention
@@ -87,10 +84,10 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
   - 데이터의 HBM 왕복 감소; 이로 인한 wall-clock time 감소.
 - 트릭부터 공개하자면 $S, P$를 HBM에 적지 않는 것이다. $S, P$는 $O$ 계산에 사용한 다음에 저장하지 않고 버린다.
   - 즉, HBM에서 $Q, K, V$를 읽어오는 단계까지는 기본 구현과 같으나 그 이후 $S$ 계산부터 달라지는 것.
-- 이것이 어떻게 가능한가? 가장 큰 문제는 softmax이다. 왜냐하면 softmax 계산에는 최대값과 평균 같은 전역 계산이 포함된다. 모든 값들을 알기 전에는 최대값이 무엇인지, 또 평균이 무엇인지 계산할 수 없다. 즉, $S$ 전체를 구하기 전까지는 $P$를 구할 수 없는 것으로 보인다. 메모리 관점에서 표현하자면, $S$ 전체를 일단 HBM에 올려놓는 수고를 해야 비로소 $P$를 계산할 수 있을 것만 같다.
+- 이것이 어떻게 가능한가? 가장 큰 문제는 softmax이다. 왜냐하면 softmax 계산에는 최댓값과 평균 같은 전역 계산이 포함된다. 모든 값들을 알기 전에는 최댓값이 무엇인지, 또 평균이 무엇인지 계산할 수 없다. 즉, $S$ 전체를 구하기 전까지는 $P$를 구할 수 없는 것으로 보인다. 메모리 관점에서 표현하자면, $S$ 전체를 일단 HBM에 올려놓는 수고를 해야 비로소 $P$를 계산할 수 있을 것만 같다.
 - FlashAttention은 이 문제를 해결하기 위해 online 업데이트를 채택한다. 세부 사항을 생략하자면 대략 이런 식이다. 한 커널이 $S$의 부분행렬 $S_{I,J}=Q_{I}K_{J}^\top (Q_I \in \mathbb{R}^{B_r \times d}, K_J \in \mathbb{R}^{B_c \times d})$를 계산할 때마다 아래 세 가지 값을 업데이트해서 HBM에다가 적는다.
   - 여기서 $B_r$은 한 번에 읽어오는 $Q$ 블록의 행 개수이고 $B_c$는 한 번에 읽어오는 $K$ 블록의 행 개수다. 즉, 한 번에 계산하는 부분행렬 $S_{I,J}$의 크기가 $B_r \times B_c$다.
-  1. row-wise 최대값 벡터 $m$을 업데이트
+  1. row-wise 최댓값 벡터 $m$을 업데이트
   2. 업데이트된 $m$ 기준으로 softmax의 분모 $l$ 업데이트
   3. 업데이트된 $l$ 기준으로 $O$ 업데이트
 - 결론적으로 $S$의 모든 부분행렬에 대한 계산이 끝나면 자연스럽게 최종 결과물 $O$가 완성되어 있다.
@@ -103,7 +100,7 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
 
 - 자원 효율화
   - 연산량은 증가: 기존 구현 66.6 GFLOPs -> FlashAttention 75.2 GFLOPs
-  - HBM RW은 감소: 기존 구현 35.3Gb -> FlashAttention 4.4Gb
+  - HBM RW는 감소: 기존 구현 35.3 GB -> FlashAttention 4.4 GB
 - 학습 시간 단축
   - BERT-large: MLPerf 1.1 Nvidia 20분 -> FlashAttention 17.4분
   - GPT-2 medium: Huggingface 21일 -> FlashAttention 6.9일
@@ -112,7 +109,7 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
 ### 한계 및 향후 방향
 
 - 저자들이 CUDA로 짠 구현이 너무 복잡하고 이식성이 떨어진다. Multi GPUs 환경에서는 IO가 더 복잡해서 동작하기 어려울 수도 있음... 나중에는 pytorch 같은 고수준 인터페이스로 제어 가능하게 해야 할 듯.
-- 어텐션 연산 뿐 아니라 트랜스포머의 다른 다양한 연산들도 최적화 해 보자!
+- 어텐션 연산뿐 아니라 트랜스포머의 다른 다양한 연산들도 최적화해 보자!
 
 ---
 

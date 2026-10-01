@@ -58,11 +58,11 @@ description: ""
   - Sessions lasted 90 minutes and took place in a conference room.
   - Participants received $115–150 and were told in advance that good performance could earn them a bonus.
 - Results
-  - 515 tasks.
-  - 13,405 pairs attempted; some tasks contained multiple pairs.
+  - 515 test sessions.
+  - 13,405 test-pair attempts.
   - 1,848 unique pairs.
   - 62% accuracy.
-  - An average of 2.3 minutes per pair, or 2.2 minutes for correct responses.
+  - A median of 2.3 minutes per pair, or 2.2 minutes for correct responses.
 
 ### The Benchmark
 

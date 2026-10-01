@@ -47,7 +47,7 @@ description: ""
 - There are countless definitions of intelligence and no agreed-upon one, but the most familiar is this: *"Intelligence measures an agent's ability to achieve goals in a wide range of environments."* (Legg & Hutter, 2007) Let us break this down.
   - "Achieve goals" -> having skills.
   - "A wide range of environments" -> being able to generalize.
-- Turing made a similar point about the future of AI: *"If we someday want to build machines that speak, understand, and translate human languages, use imagination to solve mathematical problems, perform professional work, or lead organizations, we must take one of two paths. Either we reduce these activities to sciences so precise that we can tell machines exactly how to carry them out, or we develop machines that can work things out for themselves without being told exactly what to do at every step."*
+- R. M. Friedberg made a similar point about the future of AI: *"If we someday want to build machines that speak, understand, and translate human languages, use imagination to solve mathematical problems, perform professional work, or lead organizations, we must take one of two paths. Either we reduce these activities to sciences so precise that we can tell machines exactly how to carry them out, or we develop machines that can work things out for themselves without being told exactly what to do at every step."*
 - Ultimately, intelligence is not simply a matter of having many skills. The ability to acquire new ones is central.
 
 #### AI Evaluation So Far
@@ -258,7 +258,7 @@ $$
 
 ---
 
-#evaluation #psychometrics #measurement_science #AI
+#evaluation #psychometrics #measurement_science #AI #benchmark
 
 <!-- Pre-publication checklist
   - File name: content/papers|non-fiction/<slug>.en.md — lowercase letters and hyphens

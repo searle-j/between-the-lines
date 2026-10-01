@@ -59,28 +59,47 @@ function walk(node, nextNumber) {
 
     const number = nextNumber();
     const id = `author-note-${number}`;
-    node.children[i] = {
+    // 본문 노드를 그대로 끼워 넣으려고 여는 태그와 닫는 태그를 나눠 둔다.
+    // 덕분에 주석 안의 수식·강조가 원래 노드째로 렌더된다.
+    const open = {
       type: 'html',
       value:
         '<span class="author-note">' +
         '<sup class="author-note-ref">' +
         `<button type="button" class="author-note-mark" aria-label="${escapeHtml(note.prefix.ariaLabel)} ${number}" aria-describedby="${id}">${number}</button>` +
         '</sup>' +
-        `<span class="author-note-box" id="${id}" role="note"><span class="author-note-label">${escapeHtml(note.prefix.label)}</span> ${escapeHtml(note.body)}</span>` +
-        '</span>',
+        `<span class="author-note-box" id="${id}" role="note"><span class="author-note-label">${escapeHtml(note.prefix.label)}</span> `,
     };
+    const close = { type: 'html', value: '</span></span>' };
+    const parts = [open, ...note.body, close];
+    node.children.splice(i, 1, ...parts);
+    i += parts.length - 1;
   }
 }
 
-/** `*(작성자 주. …)*` 형태의 emphasis 노드에서 주석 내용을 추출한다. */
+/**
+ * `*(작성자 주. …)*` 형태의 emphasis 노드에서 주석 본문 노드들을 떼어낸다.
+ * 여는 표식은 첫 text 노드에, 닫는 괄호는 마지막 text 노드에 있어야 하며
+ * 그 사이의 수식·강조 같은 노드는 손대지 않고 그대로 넘긴다.
+ */
 function parseNote(emphasis) {
-  if (emphasis.children.length !== 1 || emphasis.children[0].type !== 'text') return null;
-  const value = emphasis.children[0].value.trim();
-  for (const prefix of PREFIXES) {
-    if (!value.startsWith(prefix.open) || !value.endsWith(')')) continue;
-    const body = value.slice(prefix.open.length, -1).trim();
-    if (!body) return null; // 빈 스니펫은 이탤릭 그대로 노출 — 미완성이 눈에 띄게
-    return { prefix, body };
-  }
-  return null;
+  const kids = emphasis.children ?? [];
+  if (kids.length === 0) return null;
+  const first = kids[0];
+  const last = kids[kids.length - 1];
+  if (first.type !== 'text' || last.type !== 'text') return null;
+
+  const prefix = PREFIXES.find((p) => first.value.trimStart().startsWith(p.open));
+  if (!prefix || !last.value.trimEnd().endsWith(')')) return null;
+
+  const body = kids.map((n) => ({ ...n }));
+  const li = body.length - 1;
+  body[0].value = body[0].value.trimStart().slice(prefix.open.length).replace(/^\s+/, '');
+  body[li].value = body[li].value.trimEnd().replace(/\)$/, '').replace(/\s+$/, '');
+
+  // 빈 스니펫은 이탤릭 그대로 노출 — 미완성이 눈에 띄게 둔다.
+  const empty = body.every((n) => n.type === 'text' && n.value.trim() === '');
+  if (empty) return null;
+
+  return { prefix, body: body.filter((n) => !(n.type === 'text' && n.value === '')) };
 }

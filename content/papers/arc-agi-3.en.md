@@ -51,7 +51,7 @@ description: ""
 - Improving LRM performance across the board would therefore require tackling many domains individually. It is difficult to regard LRMs as general intelligence with a general capacity to learn.
   - Human reasoning, by contrast, can operate without domain knowledge or precise feedback.
 - If these systems have so little general intelligence, how do they solve ARC tasks? The authors attribute this ability to training on large amounts of generated ARC-like problems. In other words, the systems solve ARC through memorization rather than pure reasoning.
-  - As one piece of evidence, Gemini 3 mapped green to 3 and red to 6 in an ARC task. This mapping appeared only in the solution, not in the problem.
+  - As one piece of evidence, Gemini 3 mapped green to 3 and magenta to 6 in an ARC task. This mapping appeared only in the solution, not in the problem.
 - Conclusion: private benchmark tasks must be strictly out-of-distribution (OOD) relative to the public tasks.
 
 ### ARC-AGI-3
@@ -88,7 +88,7 @@ description: ""
     - Novelty: use environments not found in existing video games, to prevent prior exposure through pretraining.
     - Humans should be able to solve a task in roughly 20 minutes.
     - Understanding the task should be easy; solving it should be difficult.
-    - Provide easy, tutorial-like levels to introduce the task. Each environment has up to six difficulty levels.
+    - Provide easy, tutorial-like levels to introduce the task. Each environment has at least six difficulty levels.
     - Each task should involve multiple rules.
 - Tasks must pass two quality assurance (QA) processes.
   - Environment QA
@@ -103,19 +103,19 @@ description: ""
 
 - Performance is scored as follows.
   - Using fewer steps relative to humans earns a higher score.
-  - More difficult tasks receive greater weight.
-  - The final score is a weighted average across all environments.
-  - A small adjustment prevents an unusually high score in one environment from distorting the average.
+  - Within an environment, scores from harder levels receive greater weight.
+  - The final score is the arithmetic mean of the per-environment scores.
+  - Level scores that exceed the human baseline are capped at 100%.
 
 ### Human Performance Data
 
-- Humans can solve every environment in ARC-AGI-3. This means that, for each environment, at least one person completed every difficulty level.
+- Humans can solve every environment in ARC-AGI-3. This means that, for each environment, at least two people independently completed every difficulty level.
 - Study setup
-  - Participants worked on nine environments over 90 minutes and received $115–140.
+  - Participants worked on about nine environments per session on average over 90 minutes and received $115–140.
   - After 20 minutes on a task, they were prompted to wrap up. After 30 minutes, the task ended automatically and they moved to the next one.
   - Each environment could be attempted only once, and participants could not return to earlier levels, to prevent the use of prior experience.
-- Overall: 486 participants, 414 environments, and 2,893 attempts at solving an environment.
-- The human baseline for each task—the value used in the scoring method above—was set using a representative value.
+- Overall: 486 participants, 414 candidate environments tested, and 2,893 attempts at solving an environment.
+- The human baseline for each task—the value used in the scoring method above—was set to the second-best first attempt.
 
 ### Conclusion
 
