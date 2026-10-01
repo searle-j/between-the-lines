@@ -81,7 +81,7 @@ description: ""
 
 ---
 
-## Comments
+## Reflections
 
 - When I was an undergraduate, I once thought that neuroscientists were somewhat like astronomers. They seemed similar in that both explore unknown spaces and discover new facts, and in that both are willing to make bold speculations when necessary in areas where sufficient evidence does not yet exist. Reading this book also felt a little like drifting through space. It moves dizzyingly back and forth between established facts and bold hypotheses, but in the end, that was exactly what made it more fun.
 - The idea that the purpose of the brain is not to perceive the world exactly as it is, but to interpret it in ways advantageous for survival, seems at least somewhat right. In other words, the world we experience is not fixed. If so, there may also be no single correct way to build a world model, nor a single correct final form for a world model. Ultimately, thinking about world models leads back to the unanswerable question of "What are we modeling the world for?"—in other words, how should we define the objective function?

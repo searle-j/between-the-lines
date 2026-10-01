@@ -83,7 +83,7 @@ description: ""
 
 ---
 
-## Comments
+## Reflections
 
 - The researchers say that psychometrics inspired the ARC-AGI series. For more background, see [ARC-AGI-1: On the Measure of Intelligence](arc-agi-1--on-the-measure-of-intelligence.en.md).
 - One difference is that psychometricians do not focus solely on creating test items. They put more effort into developing sound methods for constructing items and identifying the mathematical structure those items form. I wonder whether further progress in the ARC-AGI series might depend on examining the structure shared by its tasks, beyond simply designing better ones.

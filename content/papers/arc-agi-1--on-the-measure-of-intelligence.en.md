@@ -237,7 +237,7 @@ $$
 
 ---
 
-## Comments
+## Reflections
 
 - Psychometrics seems useful for AI evaluation. However, as the paper points out, artificial intelligence differs from human intelligence, so applying psychometrics to AI without modification is difficult. And unlike human intelligence, AI will continue to develop and change rapidly, so I suspect the difficulty of measuring it will persist.
 - Naturally, measuring intelligence seems to be shifting, at least in part, from a question of natural science to one of engineering. Just consider how the author describes the purpose of measuring AI: "to drive the development of artificial intelligence..." A psychometrician, by contrast, does not measure intelligence "to make humans more intelligent..."

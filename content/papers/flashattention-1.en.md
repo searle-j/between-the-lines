@@ -89,6 +89,7 @@ description: FlashAttention reduces GPU memory I/O through tiling and recomputat
   - Loading blocks of $Q,K,V$ from HBM is still necessary. What changes is how $S$ and the subsequent results are handled.
 - How is this possible? Softmax is the main obstacle because it requires reductions across each row: a maximum and a normalization sum. At first, it seems that all row elements must be available before these quantities can be computed. In other words, it appears necessary to finish $S$ and store it in HBM before computing $P$.
 - FlashAttention addresses this with online updates. In simplified terms, whenever the kernel computes a block $S_{I,J}=Q_IK_J^\top$, where $Q_I \in \mathbb{R}^{B_r \times d}$ and $K_J \in \mathbb{R}^{B_c \times d}$, it updates three quantities and writes the updated blocks back to HBM.
+  - Here $B_r$ is the number of rows in the $Q$ block and $B_c$ is the number of rows in the $K$ block, so each block $S_{I,J}$ computed at once is $B_r \times B_c$.
   1. Update the vector of row maxima $m$.
   2. Update the softmax normalization sums $l$, rescaling them to account for the new $m$.
   3. Update the output $O$ using the revised normalization.
@@ -115,7 +116,7 @@ description: FlashAttention reduces GPU memory I/O through tiling and recomputat
 
 ---
 
-## Comments
+## Reflections
 
 - There is something deeply satisfying about engineering that solves a real, important problem.
 

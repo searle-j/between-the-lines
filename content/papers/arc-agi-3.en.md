@@ -123,7 +123,7 @@ description: ""
 
 ---
 
-## Comments
+## Reflections
 
 - Honestly, I feel the series has started to lose sight of its original purpose and focus on "coming up with harder problems."
   - ARC-AGI-1 explicitly aimed to "measure fluid intelligence," whereas ARC-AGI-3 aims to "measure the gap between human and artificial intelligence." Yet there is little argument for why fluid intelligence alone should fully explain that gap. Intelligence is a complex, multilayered concept; I find it difficult to reduce it to "human–AI gap = fluid intelligence."
