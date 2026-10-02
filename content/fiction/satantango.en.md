@@ -22,3 +22,7 @@ Hope gives birth to despair, and despair gives birth to hope again. This cycle b
 The only character who escapes this world is Estike. Estike is a young girl who suffers psychological abuse from her family and eventually kills herself. She takes her own life believing that she will go to heaven, guided there by angels. And then the girl’s corpse rises high into the air and flies up into the sky. Once again, this is not a place where surreal events happen. So is Estike’s ascension a miracle? Or at least a message of hope? One thing worth noting is that Estike is not resurrected. So, to borrow the words of one of the characters, it is something that could, with a low probability, actually happen. Nor is Estike’s ascension described beautifully. It is portrayed almost as if the wind had snatched up a scrap of cloth and carried it away. Whether to read this event as a sign of hope is up to the reader.
 
 _Satantango_ is full of wonderful sentences. Beautiful but unpleasant, subtle but primitive, brilliant but gloomy—I found myself thinking that perhaps these sentences themselves touch on the novel’s theme. How are we supposed to read sentences that constantly clash with one another, weaving together a vast, multilayered despair? Is Satan’s tango mesmerizing, or ominous?
+
+---
+
+#novel #hungary

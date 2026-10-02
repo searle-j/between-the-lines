@@ -9,7 +9,7 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
 
 - 제목: FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness
 - 저자: Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, and Christopher Ré
-- 기관: Stanford, University at Buffalo, SUNY
+- 기관: Stanford; University at Buffalo, SUNY
 - 발표 / 출판: NeurIPS
 - 출판 연도: 2022
 - 링크 / 코드·데이터:
@@ -131,4 +131,4 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
 
 ---
 
-#AI #hardware #machine_learning_system #attention
+#AI #hardware #machine_learning_system #attention #GPU #efficiency

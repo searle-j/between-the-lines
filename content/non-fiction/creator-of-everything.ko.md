@@ -104,4 +104,4 @@ description: ""
 
 ---
 
-#world_model #brain
+#world_model #brain #neuroscience #consciousness #AI

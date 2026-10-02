@@ -258,12 +258,12 @@ $$
 
 ---
 
-#evaluation #psychometrics #measurement_science #AI #benchmark
+#evaluation #psychometrics #measurement_science #AI #benchmark #ARC #intelligence #generalization
 
 <!-- Pre-publication checklist
   - File name: content/papers|non-fiction/<slug>.en.md — lowercase letters and hyphens
   - type: paper | non-fiction (matching the folder); fill in title and description
-  - Inline #tags at the end (snake_case, e.g., #world_model #llm)
+  - Inline #tags at the end (snake_case, e.g., #world_model #LLM)
   - Create the corresponding .ko.md / .en.md pair
   - Set publish: true to publish (false by default — visible only in dev)
 -->

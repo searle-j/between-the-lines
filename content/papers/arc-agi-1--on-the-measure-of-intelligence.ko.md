@@ -258,12 +258,12 @@ $$
 
 ---
 
-#evaluation #psychometrics #measurement_science #AI #benchmark
+#evaluation #psychometrics #measurement_science #AI #benchmark #ARC #intelligence #generalization
 
 <!-- 발행 전 체크리스트
   - 파일 이름: content/papers|non-fiction/<slug>.ko.md — 영문 소문자·하이픈
   - type: paper | non-fiction (폴더와 일치), title·description 채우기
-  - 마지막 줄에 인라인 #태그 (스네이크케이스, 예: #world_model #llm)
+  - 마지막 줄에 인라인 #태그 (스네이크케이스, 예: #world_model #LLM)
   - .en.md 번역 쌍 작성
   - publish: true로 바꾸면 발행 (기본 false — dev에서만 보임)
 -->

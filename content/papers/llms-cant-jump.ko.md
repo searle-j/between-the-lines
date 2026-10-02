@@ -89,4 +89,4 @@ description: ""
 
 ---
 
-#world_model #llm #science
+#world_model #LLM #science #reasoning #AI

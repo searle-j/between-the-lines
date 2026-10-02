@@ -51,7 +51,7 @@ description: ""
 <!-- Pre-publish checklist
   - File name: content/papers/<slug>.en.md — lowercase, hyphens
   - type: paper (must match the folder), fill in title & description
-  - Inline #tags on the last line (snake_case, e.g. #world_model #llm)
+  - Inline #tags on the last line (snake_case, e.g. #world_model #LLM)
   - Write the .ko.md counterpart
   - Flip publish: true to publish (defaults to false — dev-only)
 -->
