@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeExternalLinks from 'rehype-external-links';
+import { remarkDisplayMath } from './src/lib/remark-display-math.mjs';
 import { remarkMdLinks } from './src/lib/remark-md-links.mjs';
 import { remarkInlineTags } from './src/lib/remark-inline-tags.mjs';
 import { remarkAuthorNotes } from './src/lib/remark-author-notes.mjs';
@@ -26,6 +27,7 @@ export default defineConfig({
     processor: unified({
       remarkPlugins: [
         remarkMath,
+        remarkDisplayMath,
         [remarkMdLinks, { base: BASE }],
         remarkAuthorNotes,
         [remarkInlineTags, { base: BASE }],
