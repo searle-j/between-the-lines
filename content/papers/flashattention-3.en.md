@@ -2,7 +2,7 @@
 title: FlashAttention-3
 date: 2026-10-06
 type: paper
-publish: false
+publish: true
 description: FlashAttention-3 uses asynchronous scheduling and FP8 quantization to make attention faster on Hopper GPUs while limiting numerical error.
 ---
 ## Bibliographic Information
@@ -48,7 +48,7 @@ description: FlashAttention-3 uses asynchronous scheduling and FP8 quantization 
 
 #### Producer-Consumer Asynchrony
 
-![Pingpong scheduling across two consumer warpgroups](../../assets/Pasted%20image%2020261006125721.png)
+![Pingpong scheduling across two consumer warpgroups](../../assets/flashattention-3/figure-1.png)
 
 > Pingpong scheduling across two warpgroups. The same color denotes the same iteration over a block of $K,V$. Each warpgroup keeps its own $Q$ tile and updates the corresponding output rows as it processes successive $K,V$ blocks.
 
@@ -64,7 +64,7 @@ description: FlashAttention-3 uses asynchronous scheduling and FP8 quantization 
 
 #### Overlapping GEMM and Softmax Within One Warpgroup
 
-![Two-stage WGMMA-softmax pipeline within one warpgroup](../../assets/Pasted%20image%2020261006125733.png)
+![Two-stage WGMMA-softmax pipeline within one warpgroup](../../assets/flashattention-3/figure-2.png)
 
 > Asynchronous scheduling within one warpgroup. The same color denotes the same iteration over a $K,V$ block; the $Q$ tile stays fixed.
 
@@ -74,15 +74,15 @@ description: FlashAttention-3 uses asynchronous scheduling and FP8 quantization 
 
 #### Low-Precision GEMM with FP8
 
-![Different WGMMA register layouts for FP32 accumulators and FP8 operands](../../assets/Pasted%20image%2020261006145758.png)
+![Different WGMMA register layouts for FP32 accumulators and FP8 operands](../../assets/flashattention-3/figure-3.png)
 
 - FP8 promises faster computation, but introduces two problems.
-  1. WGMMA's FP8 path has different layout requirements from FP16/BF16, including a mismatch between FP32 accumulator and FP8 operand layouts.
+  1. WGMMA expects different data layouts for FP16/BF16 and FP8.
   2. Quantization reduces numerical accuracy.
-- The layout problem requires data rearrangement as well as type conversion. The implementation shuffles register values and transposes $V$ tiles in shared memory to satisfy FP8 WGMMA's requirements.
+- The layout issue can be handled by preprocessing the data to match the dimensions and data types.
 - Accuracy requires algorithmic changes. FlashAttention-3 applies two techniques. *(Author's note. Neither technique originated with FlashAttention-3, so the paper gives only a brief explanation. For more detail, it is worth reading the earlier work.)*
   - **Block quantization:** give each block its own scale, so an outlier in one block does not force an unnecessarily large scale on the others. *(Author's note. A scale maps values into the range representable by FP8. The corresponding inverse scaling is applied when reconstructing their magnitude. There are several ways to choose this scale.)*
-  - **Incoherent processing:** large models often have outliers concentrated in particular dimensions, making quantization difficult. Before quantization, multiply both $Q$ and $K$ by the same random orthogonal matrix $M$ to spread those outliers across dimensions. Since $MM^\top = I$, we have $(QM)(KM)^\top = QK^\top$: the transformation preserves the dot products before quantization.
+  - **Incoherent processing:** large models often have outliers concentrated in particular dimensions, which can cause problems with scaling. To eliminate these outliers, multiply $Q,K$ by a random orthogonal matrix $M$, applying a rotation or reflection. In notation: $(QM)(KM)^\top$, with $MM^\top = I$.
 
 ### Experiments
 
@@ -110,4 +110,4 @@ description: FlashAttention-3 uses asynchronous scheduling and FP8 quantization 
 
 ---
 
-#AI
+#AI #GPU #attention #hardware #machine_learning_system #efficiency #quantization
