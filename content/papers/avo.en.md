@@ -62,13 +62,15 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 #### Formulation
 
 - Basic variables
+  - $\mathfrak{X}$: the space of CUDA kernels.
   - $x_i$: the $i$th CUDA kernel.
   - $f_j$: the $j$th evaluation function, such as throughput in TFLOPs/s.
   - $\mathbf{f}(x_i) = (f_1(x_i), ..., f_n(x_i))$: the vector of evaluation results for $x_i$.
   - $\mathcal{P}_t = \{(x_1,\mathbf{f}(x_1)), ..., (x_t,\mathbf{f}(x_t))\}$: all kernel–evaluation pairs up to time $t$.
+  - $\mathfrak{P}$: the space of finite sets of kernel–evaluation pairs ($\mathcal{P}_t \in \mathfrak{P}$).
 - Basic operations in evolutionary search
-  - $\mathrm{Sample}(\mathcal{P})$: select a subset of kernel–evaluation pairs.
-  - $\mathrm{Generate}(\mathcal{P})$: generate a new kernel using the given set of kernel–evaluation pairs.
+  - $\mathrm{Sample}: \mathfrak{P} \to \mathfrak{P}$: select a subset of kernel–evaluation pairs.
+  - $\mathrm{Generate}: \mathfrak{P} \to \mathfrak{X}$: generate a new kernel using the given set of kernel–evaluation pairs.
   - $\mathrm{Vary}(\mathcal{P}) = \mathrm{Generate}(\mathrm{Sample}(\mathcal{P}))$: a basic variation operator.
 - What AVO aims to do beyond these operations
   - $\mathrm{Vary}(\mathcal{P}) = \mathrm{Agent}(\mathcal{P},\mathcal{K},\mathbf{f})$.
@@ -123,8 +125,8 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 
 - Problem: online softmax *(Author's note. For an explanation of online softmax, try the [FlashAttention-1 post](flashattention-1.en.md)!)* includes a step that updates the row-wise maximum. The existing implementation branches on whether the maximum needs updating and skips the operation when it does not. But evaluating the branch means checking every row for updates each time. This is a form of synchronization. As discussed earlier, more synchronization erodes the benefits of asynchronous execution.
 - Solution: remove the branch and always perform the operation. When no update is needed, multiply by 1. In pseudocode:
-  - BEFORE: `if need_update: O = O*scaler`
-  - AFTER: `scaler = factor if need_update else 1; O = O*scaler`
+  - BEFORE: `if need_update: output_O = output_O*scaler`
+  - AFTER: `scaler = factor if need_update else 1; output_O = output_O*scaler`
 
 #### Finding 2. Correction/MMA Pipeline Overlap
 

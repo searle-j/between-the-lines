@@ -55,13 +55,15 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 
 #### Formulation
 - 기본 변수들
+	- $\mathfrak{X}$ : CUDA 커널들의 공간
 	- $x_i$ : $i$번째 CUDA 커널
 	- $f_j$ : $j$번째 평가 함수 e.g., TFLOPS가 얼마인가?
 	- $\mathbf{f}(x_i) = (f_1(x_i), ..., f_n(x_i))$ : $x_i$의 평가 결과 벡터
 	- $\mathcal{P}_t = \{(x_1,\mathbf{f}(x_1)), ..., (x_t,\mathbf{f}(x_t))\}$ : 시점 $t$ 까지의 모든 커널-평가 쌍들
+	- $\mathfrak{P}$ : 커널-평가 쌍의 유한 집합들이 이루는 공간 ($\mathcal{P}_t \in \mathfrak{P}$)
 - 진화적 탐색의 기본 연산들
-	- $\mathrm{Sample}(\mathcal{P})$ : 커널-평가 쌍 중에 일부를 선택하기
-	- $\mathrm{Generate}(\mathcal{P})$ : 주어진 커널-평가 쌍 집합을 참고해서 새로운 커널을 생성하기
+	- $\mathrm{Sample}: \mathfrak{P} \to \mathfrak{P}$ : 커널-평가 쌍 중에 일부를 선택하기
+	- $\mathrm{Generate}: \mathfrak{P} \to \mathfrak{X}$ : 주어진 커널-평가 쌍 집합을 참고해서 새로운 커널을 생성하기
 	- $\mathrm{Vary}(\mathcal{P}) = \mathrm{Generate}(\mathrm{Sample}(\mathcal{P}))$ : 기본적인 변이연산
 - AVO가 기본 연산을 넘어 하고 싶은 것
 	- $\mathrm{Vary}(\mathcal{P}) = \mathrm{Agent}(\mathcal{P},\mathcal{K},\mathbf{f})$
@@ -109,8 +111,8 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 #### 발견 1. Branchless accumulator rescaling
 - 문제: 온라인 softmax *(작성자 주. 온라인 softmax가 궁금하면 [FlashAttention-1](flashattention-1.ko.md) 추천!)* 에서는 row-wise 최대값을 갱신하는 단계가 있다. 기존 구현은 최대값 갱신 여부를 판단하는 분기를 만들었다. 갱신할 필요가 없다면 건너뛰는 방식. 그런데 분기 계산은 매번 모든 행의 업데이트 필요 여부를 확인한다는 것을 의미한다. 즉, 일종의 동기화이다. (앞서 말했듯이 동기화 단계가 많아질수록 비동기의 이점은 사라진다.)
 - 해결: 분기를 없애기 위해 무조건 연산한다. 단, 갱신 필요가 없을 때에는 1을 곱한다. 의사 코드로 보자면 이런 식이다.
-	- BEFORE: `if need_update: O = O*scaler`
-	- AFTER: `scaler = factor if need_update else 1; O = O*scaler`
+	- BEFORE: `if need_update: output_O = output_O*scaler`
+	- AFTER: `scaler = factor if need_update else 1; output_O = output_O*scaler`
 
 #### 발견 2. Correction/MMA pipeline overlap
 - 문제: AVO가 만든 기존 커널은 두 개의 Q-tile을 함께 처리하는데, 이때 'PV-GEMM-1 -> PV-GEMM-2 -> Correction-1 -> Correction-2' 순서대로 처리했다. Correction은 온라인 softmax에서 $O$를 업데이트하는 것을 의미.
