@@ -56,7 +56,7 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 #### Formulation
 - 기본 변수들
 	- $\mathfrak{X}$ : CUDA 커널들의 공간
-	- $x_i$ : $i$번째 CUDA 커널
+	- $x_i \in \mathfrak{X}$ : $i$번째 CUDA 커널
 	- $f_j$ : $j$번째 평가 함수 e.g., TFLOPS가 얼마인가?
 	- $\mathbf{f}(x_i) = (f_1(x_i), ..., f_n(x_i))$ : $x_i$의 평가 결과 벡터
 	- $\mathcal{P}_t = \{(x_1,\mathbf{f}(x_1)), ..., (x_t,\mathbf{f}(x_t))\}$ : 시점 $t$ 까지의 모든 커널-평가 쌍들

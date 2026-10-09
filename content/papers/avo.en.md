@@ -63,7 +63,7 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 
 - Basic variables
   - $\mathfrak{X}$: the space of CUDA kernels.
-  - $x_i$: the $i$th CUDA kernel.
+  - $x_i \in \mathfrak{X}$: the $i$th CUDA kernel.
   - $f_j$: the $j$th evaluation function, such as throughput in TFLOPs/s.
   - $\mathbf{f}(x_i) = (f_1(x_i), ..., f_n(x_i))$: the vector of evaluation results for $x_i$.
   - $\mathcal{P}_t = \{(x_1,\mathbf{f}(x_1)), ..., (x_t,\mathbf{f}(x_t))\}$: all kernel–evaluation pairs up to time $t$.
