@@ -2,7 +2,7 @@
 title: "AVO: Agentic Variation Operators"
 date: 2026-10-09
 type: paper
-publish: false
+publish: true
 description: AVO lets LLM agents autonomously sample, generate, and evaluate solutions to improve attention kernels on Blackwell GPUs.
 ---
 ## Bibliographic Information
@@ -35,7 +35,7 @@ description: AVO lets LLM agents autonomously sample, generate, and evaluate sol
 - The paper proposes AVO (Agentic Variation Operators), with two main features.
   - Access to available resources, such as previous solutions, a knowledge base, and evaluation tools.
   - Independent control over the workflow: what to modify or evaluate, and when.
-- To demonstrate AVO's usefulness, the authors apply it to multi-head attention kernel optimization on a Blackwell B200 GPU. After more than seven days of self-improvement, the resulting solution improves performance by 3.5% over cuDNN and 10.5% over FlashAttention-4, reaching 1,668 TFLOPs/s at BF16 precision. It does not overfit to multi-head attention: with a small adaptation, it is general enough to support grouped-query attention as well.
+- To demonstrate AVO's usefulness, the authors apply it to multi-head attention kernel optimization on a Blackwell B200 GPU. After more than seven days of self-improvement, the resulting solution improves performance by up to 3.5% over cuDNN and up to 10.5% over FlashAttention-4, reaching 1,668 TFLOPs/s at BF16 precision. It does not overfit to multi-head attention: with a small adaptation, it is general enough to support grouped-query attention as well.
 
 ### Background
 
@@ -78,7 +78,7 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 #### Autonomy within a Variation Step
 
 - The authors observe that a single variation step in AVO consists of several smaller steps. The search agent uses previous results to identify problems and opportunities, writes a new proposal, and evaluates it. If the result is poor, it diagnoses the cause and proposes another improvement.
-- The search agent cannot add an $x$ to $\mathcal{P}$ on its own. A rule admits a proposed solution only when it scores higher than the current best.
+- The search agent cannot add an $x$ to $\mathcal{P}$ on its own. A rule admits a proposed solution only when it passes correctness checks and matches or improves on the current best score.
 
 #### Continuous Evolution
 
@@ -100,8 +100,8 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 
 #### Results
 
-- For MHA, performance improves by 0.4%–10.5% over cuDNN and FlashAttention-3.
-- To test whether the results generalize, the authors give AVO the MHA solution and ask it to support GQA. AVO completes the adaptation in 30 minutes. The resulting kernel improves performance by 4.5%–9.4% over cuDNN and FlashAttention-4.
+- For causal MHA, performance improves by 0.4%–3.5% over cuDNN and 5.0%–10.5% over FlashAttention-4.
+- To test whether the results generalize, the authors give AVO the MHA solution and ask it to support GQA. AVO completes the adaptation in 30 minutes. For causal GQA, the resulting kernel improves performance by up to 7.0% over cuDNN and up to 9.3% over FlashAttention-4. For non-causal GQA, the gains reach 6.0% and 4.5%, respectively.
 
 #### Key Points from the Evolution Trajectory
 
@@ -128,7 +128,7 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 
 #### Finding 2. Correction/MMA Pipeline Overlap
 
-- Problem: FlashAttention-4 processes two Q-tiles together, in the order `PV-GEMM-1 -> PV-GEMM-2 -> Correction-1 -> Correction-2`. Correction refers to updating $O$ in online softmax.
+- Problem: AVO's v29 kernel processes two Q-tiles together, in the order `PV-GEMM-1 -> PV-GEMM-2 -> Correction-1 -> Correction-2`. Correction refers to updating $O$ in online softmax.
 - Solution: once PV-GEMM-1 finishes, run Correction-1 alongside PV-GEMM-2. GEMM and correction are handled by different warpgroups, so overlapping them does not overload the same warpgroup.
 
 #### Finding 3. Register Rebalancing across Warp Groups
@@ -145,12 +145,13 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 
 ## Reflections
 
-- Can it only make local changes to kernels painstakingly written by researchers, or can it build one from scratch?
-  - For FlashAttention-1, the difficult part was proposing a new computational algorithm: online softmax. Are these small fixes at the implementation level comparably important? I am not sure. The performance gains are certainly meaningful, though. Even a 10% improvement could save an enormous amount of computation worldwide.
-  - Here is the distinction. This paper starts with software that is already very good and improves it. Put differently, it mainly reduces the grunt work NVIDIA engineers would otherwise do. The FlashAttention authors, by contrast, keep asking whether software and its underlying algorithms can be designed when only the constraints are given, without such a strong existing implementation. I see these as different problems.
-  - Given LLMs' recent, rather startling abilities in mathematical proof, building from scratch seems plausible too. But I would like to know how capable the paper's "internally developed NVIDIA coding agent" is.
-- The three discoveries leave me somewhat skeptical. The analysis feels thin. Is that intentional? In particular, the ablations do not seem thorough.
-- Would feeding AVO's output back into AVO yield further improvements? Given that the experiment takes only seven days, it is hard to believe they have not tried...
+- Actually improving an existing system is meaningful.
+- Still, it is worth being precise about the setting AVO was given and the problem it solved.
+  - AVO seems to refine rather than invent. First, as the authors put it, it was given "very good software" as baselines. Second, no new conditions or constraints were introduced that would require a major redesign.
+  - By contrast, the pursuit of "efficiency" running through the FlashAttention papers seems closer to inventing efficient systems than refining existing ones. The question is whether we can respond to new conditions, not just improve what already exists. For example, when new models and chips arrive and usage patterns change substantially, can we automatically generate suitable algorithms and software? AVO does not seem to answer that question.
+  - Given recent examples of LLMs proving results that had eluded humans, invention—not just refinement—seems plausible too. But without knowing the capabilities of NVIDIA's internally developed coding agent, it is hard to tell how likely that is.
+- I also wonder whether feeding AVO's output back into AVO would yield further improvements. Since the experiment takes only seven days, I would expect them to have tried, so it is disappointing not to see the results. If there were no gains, perhaps AVO failed to find a breakthrough because it is geared toward refinement rather than invention.
+- Finally, the three main discoveries deserve more rigorous ablations.
 
 ---
 
@@ -166,4 +167,4 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 
 ---
 
-#AI #LLM #agent #evolutionary_search #GPU #attention #hardware #machine_learning_system #efficiency
+#AI #LLM #agent #evolutionary_search #GPU #attention #hardware #machine_learning_system #efficiency #evaluation #code_generation #parallel_computing #kernel_optimization

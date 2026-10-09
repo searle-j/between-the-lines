@@ -147,4 +147,4 @@ description: ""
 
 ---
 
-#AI #benchmark #evaluation #LLM #ARC #agent
+#AI #benchmark #evaluation #LLM #ARC #agent #intelligence #reasoning #generalization #planning #efficiency

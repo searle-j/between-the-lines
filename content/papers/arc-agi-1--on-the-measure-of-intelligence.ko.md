@@ -258,7 +258,7 @@ $$
 
 ---
 
-#evaluation #psychometrics #measurement_science #AI #benchmark #ARC #intelligence #generalization
+#evaluation #psychometrics #measurement_science #AI #benchmark #ARC #intelligence #generalization #reasoning #program_synthesis #efficiency
 
 <!-- 발행 전 체크리스트
   - 파일 이름: content/papers|non-fiction/<slug>.ko.md — 영문 소문자·하이픈

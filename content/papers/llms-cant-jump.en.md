@@ -102,4 +102,4 @@ description: ""
 
 ---
 
-#world_model #LLM #science #reasoning #AI
+#world_model #LLM #science #reasoning #AI #abduction #agent #intelligence #embodied_cognition

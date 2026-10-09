@@ -134,4 +134,4 @@ description: FlashAttention reduces GPU memory I/O through tiling and recomputat
 
 ---
 
-#AI #hardware #machine_learning_system #attention #GPU #efficiency
+#AI #hardware #machine_learning_system #attention #GPU #efficiency #LLM #transformer #memory_optimization #kernel_optimization

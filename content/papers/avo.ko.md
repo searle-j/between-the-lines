@@ -2,7 +2,7 @@
 title: "AVO: Agentic Variation Operators"
 date: 2026-10-09
 type: paper
-publish: false
+publish: true
 description: LLM 에이전트가 탐색·생성·평가를 자율적으로 수행하며 Blackwell GPU의 어텐션 커널을 개선하는 진화적 탐색 시스템 AVO.
 ---
 ## 서지 정보
@@ -34,7 +34,7 @@ description: LLM 에이전트가 탐색·생성·평가를 자율적으로 수�
 - 이 논문은 AVO(Agentic Variation Operators)를 제안한다. AVO는 다음과 같은 특징을 지닌다.
 	- 주어진 환경적 요소 이용 가능. e.g., 이전 해법들, 지식 베이스, 평가 도구.
 	- 독립적으로 워크플로우 결정. e.g., 수정 대상과 시점, 평가 대상과 시점.
-- AVO의 유용성을 보이기 위해 Blackwell B200 GPU 위에서의 multi-head attention 커널 최적화에 적용한다. AVO가 7일이 넘는 자가 개선 이후에 찾아낸 해법은 cuDNN 대비 3.5%, FlashAttention-4 대비 10.5% 개선되었다. (i.e., 1668 TFLOPS at BF16 precision) 또한, 이 해법은 multi-head attention에 과적합되지 않았으며, 간단한 변형 이후에 grouped-query attention에서도 사용 가능할 정도로 일반적이었다.
+- AVO의 유용성을 보이기 위해 Blackwell B200 GPU 위에서의 multi-head attention 커널 최적화에 적용한다. AVO가 7일이 넘는 자가 개선 이후에 찾아낸 해법은 cuDNN 대비 최대 3.5%, FlashAttention-4 대비 최대 10.5% 개선되었다. (i.e., 1668 TFLOPS at BF16 precision) 또한, 이 해법은 multi-head attention에 과적합되지 않았으며, 간단한 변형 이후에 grouped-query attention에서도 사용 가능할 정도로 일반적이었다.
 ### Background
 #### 진화적 탐색과 변이연산
 - 진화적 탐색이란 이전의 해법-점수 쌍들을 보고 새로운 해법을 만들어내는 과정을 말한다. 기본적으로 아래의 단계를 포함한다.
@@ -70,7 +70,7 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 
 #### 변이 단계의 자율성
 - 저자들은 AVO에서 하나의 변이연산이 여러 개의 세부 단계로 이루어지는 것을 관찰했다. 탐색 에이전트는 이전 결과들을 토대로 문제점과 개선 지점을 도출하고, 새로운 제안을 작성하고, 작성된 제안을 평가했다. 그리고 평가 결과가 나쁘면 원인을 진단하여 다시 개선안을 내 놓았다.
-- 단, 탐색 에이전트는 어떤 $x$를 $\mathcal{P}$에 새로 추가할 권한이 없다. 제안된 해법이 현재 가장 좋은 해법보다 더 점수가 높은 경우에만 규칙 기반으로 추가된다.
+- 단, 탐색 에이전트는 어떤 $x$를 $\mathcal{P}$에 새로 추가할 권한이 없다. 제안된 해법이 정확성 검사를 통과하고 현재 가장 좋은 해법과 점수가 같거나 더 높은 경우에만 규칙 기반으로 추가된다.
 
 #### 연속적 진화
 - AVO는 단일 계보를 유지한다. 각 커널을 점수와 함께 git에 커밋하는 식으로 계보를 관리하는데, 브랜치를 따거나 일부 히스토리를 아카이브하는 것은 하지 않는다.
@@ -89,8 +89,8 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 - **벤치마크:** BF16 정밀도, head dimension 128, 시퀀스 길이 4K-32K. 총 토큰 수는 32K로 고정하고 배치 크기를 조절. MHA는 16개 head, GQA는 32개 query head와 4개 또는 8개 KV head 사용. 각각 causal/non-causal 조건에서 forward pass의 처리량(TFLOPS)을 측정.
 
 #### 결과
-- MHA에서 cuDNN과 FlashAttention-3 대비 0.4% - 10.5%의 성능 개선
-- 이 결과가 일반화 가능한 결과인지 궁금해서 AVO에게 MHA 솔루션을 주고 GQA를 지원하도록 바꾸라고 했다. AVO는 30분의 작업으로 이를 해냈다. 이 커널은 cuDNN과 FlashAttention-4 대비 4.5% - 9.4%의 개선을 보였다.
+- Causal MHA에서 cuDNN 대비 0.4% - 3.5%, FlashAttention-4 대비 5.0% - 10.5%의 성능 개선
+- 이 결과가 일반화 가능한 결과인지 궁금해서 AVO에게 MHA 솔루션을 주고 GQA를 지원하도록 바꾸라고 했다. AVO는 30분의 작업으로 이를 해냈다. 이 커널은 causal GQA에서 cuDNN 대비 최대 7.0%, FlashAttention-4 대비 최대 9.3%의 개선을 보였다. Non-causal GQA에서는 각각 최대 6.0%, 4.5% 개선되었다.
 
 #### 진화 궤적의 핵심 요약
 - 대량 탐색: 7일간 커밋된 커널은 40개이지만 AVO가 만든 버전은 500개 이상이었다. 인간의 효율을 가볍게 능가.
@@ -113,7 +113,7 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 	- AFTER: `scaler = factor if need_update else 1; O = O*scaler`
 
 #### 발견 2. Correction/MMA pipeline overlap
-- 문제: FlashAttention-4는 두 개의 Q-tile을 함께 처리하는데, 이때 'PV-GEMM-1 -> PV-GEMM-2 -> Correction-1 -> Correction-2' 순서대로 처리했다. Correction은 온라인 softmax에서 $O$를 업데이트하는 것을 의미.
+- 문제: AVO가 만든 기존 커널은 두 개의 Q-tile을 함께 처리하는데, 이때 'PV-GEMM-1 -> PV-GEMM-2 -> Correction-1 -> Correction-2' 순서대로 처리했다. Correction은 온라인 softmax에서 $O$를 업데이트하는 것을 의미.
 - 해결: PV-GEMM-1이 끝나면 곧바로 Correction-1을 PV-GEMM-2과 동시에 수행한다. 둘은 GEMM과 Correction은 서로 다른 warpgroup이 처리하기 때문에 겹쳐도 과부하되지 않음.
 
 #### 발견 3. Register rebalancing across warp groups
@@ -128,12 +128,13 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 
 ## 읽고 든 생각
 
-- 연구자가 고생해서 짠 커널의 국소 수정이 가능한 것인지, 혹은 바닥부터 가능한 것인지?
-	- 그러니까 FA-1을 만들 때 새로운 계산 알고리즘인 온라인 softmax를 제안하는 게 어려운 것이지, 이렇게 구현 레벨에서의 사소한 실수들을 잡아내는 게 중요한 것인지? 잘 모르겠음. 물론 성능 향상은 진짜 의미 있긴 함. 10%만 효율화해도 전세계적으로 줄어들 계산 비용이 아주 클 것이라 생각함.
-	- 그런데 이런 것이다. 이 논문의 가정은 '이미 아주 좋은 소프트웨어가 개발이 완료되었을 때' 그걸 개선시키는 것임. 다르게 말해 NVIDIA 엔지니어가 해야 하는 노가다를 줄인 것에 불과. 반면에 FlashAttention의 저자들이 맨날 주장하는 것은 '그렇게 좋은 소프트웨어는 없고 제약 조건들만 주어졌을 때 소프트웨어 및 구동 알고리즘을 설계할 수 있는가'이다. 둘은 다르다고 생각함.
-	- 최근 LLM의 수학 증명 같은 무서운 능력을 보면 충분히 바닥부터 가능할 것 같기도 함. 그런데 논문에서 말하는 'NVIDIA 자체 개발 코딩 에이전트'의 수준을 좀 알고 싶음.
-- 세 가지 발견이 좀 의심스러움. 뭔가 분석이 부실한 것 같음. 의도적인 건지? 특히 ablation이 제대로 되지 않은 느낌.
-- AVO의 결과를 다시 AVO에 넣으면 개선이 있을 것인지? 7일밖에 안 걸리는 실험을 안 해봤을 리는 없는 것 같은데...
+- 기존 시스템을 실제로 개선한 것은 큰 의미가 있다고 생각함.
+- 그런데 AVO에게 주어진 상황과 그것이 해결한 문제를 정확히 이해하는 것이 좋을 것 같음.
+	- AVO가 한 것은 발명보다는 개선인 것 같음. 왜냐하면 1) AVO는 저자들의 말마따나 '아주 좋은 소프트웨어들'을 베이스라인으로 제공 받았다. 2) 새로운 상황이나 제약 조건이 추가되지 않아서 기존 시스템에 큰 전환을 가할 일이 없었다.
+	- 반면, FlashAttention의 저자들이 여러 논문에 걸쳐 줄곧 주장하는 '효율화'는 효율적 개선이 아니라 효율적 발명에 가까운 것 같다. 다시 말해, 있는 걸 개선하는 것보다 새로운 조건이 추가되었을 때 그 조건에 대응할 수 있는가 하는 문제. 예를 들어 새로운 모델이 나오고, 새로운 칩이 나오고, 사용자들의 사용 패턴도 크게 달라졌을 때, 이에 적합한 알고리즘과 소프트웨어를 자동으로 생성할 수 있는가 하는 문제인 듯. 이에 대해 AVO가 답이 되지는 않는 것 같다.
+	- 최근 LLM이 인간이 풀지 못했던 수학 문제들을 증명하는 것을 보면 개선이 아닌 발명도 충분히 가능할 것 같긴 하다. 그런데 AVO의 백본인 'NVIDIA 자체 개발 코딩 에이전트'의 수준을 알 수가 없으니 가능성이 얼마나 될런지는 모르겠다.
+- 또 궁금한 것은 AVO의 결과를 다시 AVO에 넣으면 개선이 있을 것인지? 7일밖에 안 걸리는 실험이라 해 봤을 것 같은데 결과가 공유되지 않아 아쉽다. 만약에 개선이 없었다면 그 원인은 AVO가 발명용이 아니라 개선용이라서 돌파구를 찾지 못 해 그런 게 아닐까 싶다.
+- 마지막으로 세 가지 주요 발견은 ablation을 제대로 하면 좋을 것 같다.
 
 ---
 
@@ -149,12 +150,4 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 
 ---
 
-#AI #LLM #agent #evolutionary_search #GPU #attention #hardware #machine_learning_system #efficiency
-
-<!-- 발행 전 체크리스트
-  - 파일 이름: content/papers/<slug>.ko.md — 영문 소문자·하이픈
-  - type: paper (폴더와 일치), title·description 채우기
-  - 마지막 줄에 인라인 #태그 (스네이크케이스, 예: #world_model #LLM)
-  - .en.md 번역 쌍 작성
-  - publish: true로 바꾸면 발행 (기본 false — dev에서만 보임)
--->
+#AI #LLM #agent #evolutionary_search #GPU #attention #hardware #machine_learning_system #efficiency #evaluation #code_generation #parallel_computing #kernel_optimization

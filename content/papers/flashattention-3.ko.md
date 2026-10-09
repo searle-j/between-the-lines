@@ -102,4 +102,4 @@ description: 비동기 스케줄링과 FP8 양자화로 Hopper GPU에서 어텐�
 
 ---
 
-#AI #GPU #attention #hardware #machine_learning_system #efficiency #quantization
+#AI #GPU #attention #hardware #machine_learning_system #efficiency #quantization #LLM #transformer #memory_optimization #parallel_computing #kernel_optimization

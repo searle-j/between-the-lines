@@ -131,4 +131,4 @@ description: 타일링과 재계산으로 GPU 메모리 입출력을 줄여, 근
 
 ---
 
-#AI #hardware #machine_learning_system #attention #GPU #efficiency
+#AI #hardware #machine_learning_system #attention #GPU #efficiency #LLM #transformer #memory_optimization #kernel_optimization

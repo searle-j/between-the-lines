@@ -25,4 +25,4 @@ description: ""
 
 ---
 
-#novel #hungary
+#novel #hungary #literature #black_comedy #hope #despair

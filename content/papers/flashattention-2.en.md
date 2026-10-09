@@ -146,4 +146,4 @@ description: FlashAttention-2 makes attention faster by reducing non-matmul oper
 
 ---
 
-#GPU #AI #attention #hardware #LLM #machine_learning_system #efficiency
+#GPU #AI #attention #hardware #LLM #machine_learning_system #efficiency #transformer #memory_optimization #parallel_computing #kernel_optimization

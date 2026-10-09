@@ -104,4 +104,4 @@ description: ""
 
 ---
 
-#world_model #brain #neuroscience #consciousness #AI
+#world_model #brain #neuroscience #consciousness #AI #cognition #perception #embodied_cognition #brain_computer_interface #intelligence

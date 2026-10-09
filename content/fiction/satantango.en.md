@@ -25,4 +25,4 @@ _Satantango_ is full of wonderful sentences. Beautiful but unpleasant, subtle bu
 
 ---
 
-#novel #hungary
+#novel #hungary #literature #black_comedy #hope #despair

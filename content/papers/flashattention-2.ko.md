@@ -144,4 +144,4 @@ description: 비행렬곱 연산과 SRAM 왕복을 줄이고 시퀀스 길이 �
 
 ---
 
-#GPU #AI #attention #hardware #LLM #machine_learning_system #efficiency
+#GPU #AI #attention #hardware #LLM #machine_learning_system #efficiency #transformer #memory_optimization #parallel_computing #kernel_optimization
