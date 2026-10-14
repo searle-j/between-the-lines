@@ -62,12 +62,12 @@ description: "Conway's law: how systems reflect their designers' communication s
 
 - Let us extend the argument to system disintegration: the subsystems fail to come together and instead become fragmented.
 - This happens in three stages.
-  1. Overstaffing: assign too many people to the design effort.
-  2. Organizational disintegration: apply conventional management principles to a large design organization, breaking down its communication structure.
-  3. System disintegration: the breakdown of the organization's communication structure is reflected in the system.
+  1. **Overstaffing:** assign too many people to the design effort.
+  2. **Organizational disintegration:** apply conventional management principles to a large design organization, breaking down its communication structure.
+  3. **System disintegration:** the breakdown of the organization's communication structure is reflected in the system.
 - A closer look at each stage:
-  1. **Overstaffing:** ideally, the person in charge takes enough time to understand the overall situation and build a lean design organization. But if the project fails, they fear criticism for taking too long without using all available resources. They therefore focus on committing as many resources as possible early on—asking everyone available to produce design documents—while neglecting efficient organization. Managers may also build the largest organization they can to expand their influence, regardless of efficiency. Once that organization exists, even if it was formed for the wrong reasons, its inefficiencies inevitably shape the system.
-  2. **Organizational disintegration:** communication easily breaks down in an overstaffed organization. A major contributor is the conventional practice of measuring effort as headcount × time. It treats "5 people × 40 days" and "100 people × 2 days" as equivalent. But five people and a hundred people form different organizations and naturally design different systems. Some turn to a pyramidal hierarchy to solve this, but that only makes communication harder.
+  1. **Overstaffing:** ideally, the person in charge takes enough time to understand the overall situation and build a lean design organization. But if the project fails, they fear criticism for taking too long without using all available resources. They therefore focus on committing as many resources as possible early on—asking everyone available to produce design documents—while neglecting efficient organization. Managers may also build the largest organization they can to expand their influence, regardless of efficiency. Once a team is formed—even for the wrong reasons—its inefficiencies inevitably shape the system.
+  2. **Organizational disintegration:** communication easily breaks down in an overstaffed organization. A major contributor is the conventional practice of measuring effort as headcount × time. It treats "5 people × 40 days" and "100 people × 2 days" as equivalent. But five people and a hundred people form different organizations and naturally design different systems—a fact this management approach ignores. By hiding the extra communication costs of a hundred-person team, it encourages the illusion that assigning a five-person job to a hundred people will produce the same result faster. This misconception leads to organizational disintegration.
   3. **System disintegration:** once things have deteriorated this far, it is no surprise that the system falls apart.
 
 ### Conclusion
@@ -97,7 +97,7 @@ description: "Conway's law: how systems reflect their designers' communication s
 
 - **Empirical evidence for Conway's law:** [The Mirroring Hypothesis](mirroring-hypothesis.en.md)
 - **Organizational changes following AI adoption:** [The Cybernetic Teammate](cybernetic-teammate.en.md)
-- **Extending the idea to human–agent organizations:** [Adapting Socio-Technical Congruence to Human-Agent Collectives](adapting-socio-technical-congruence.en.md)
+- **Extending socio-technical congruence to human–agent organizations:** [Adapting Socio-Technical Congruence to Human-Agent Collectives](adapting-socio-technical-congruence.en.md)
 
 ---
 
