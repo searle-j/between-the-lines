@@ -152,4 +152,4 @@ AVO는 진화적 탐색을 (i.e., 샘플링, 생성, 평가) 고정된 파이프
 
 ---
 
-#AI #LLM #agent #evolutionary_search #GPU #attention #hardware #machine_learning_system #efficiency #evaluation #code_generation #parallel_computing #kernel_optimization
+#AI #LLM #agent #GPU #software #optimization #evolutionary_search #attention #hardware #machine_learning_system

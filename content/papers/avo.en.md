@@ -169,4 +169,4 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 
 ---
 
-#AI #LLM #agent #evolutionary_search #GPU #attention #hardware #machine_learning_system #efficiency #evaluation #code_generation #parallel_computing #kernel_optimization
+#AI #LLM #agent #GPU #software #optimization #evolutionary_search #attention #hardware #machine_learning_system

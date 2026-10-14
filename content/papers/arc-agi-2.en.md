@@ -102,4 +102,4 @@ description: ""
 
 ---
 
-#AI #evaluation #benchmark #ARC #LLM #intelligence #reasoning #generalization #psychometrics
+#AI #benchmark #evaluation #intelligence #reasoning #generalization #psychometrics #LLM

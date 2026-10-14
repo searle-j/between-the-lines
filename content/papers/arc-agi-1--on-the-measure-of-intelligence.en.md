@@ -258,7 +258,7 @@ $$
 
 ---
 
-#evaluation #psychometrics #measurement_science #AI #benchmark #ARC #intelligence #generalization #reasoning #program_synthesis #efficiency
+#AI #benchmark #evaluation #intelligence #reasoning #generalization #psychometrics
 
 <!-- Pre-publication checklist
   - File name: content/papers|non-fiction/<slug>.en.md — lowercase letters and hyphens
