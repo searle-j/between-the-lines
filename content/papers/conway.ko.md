@@ -2,7 +2,7 @@
 title: Conway's Law
 date: 2026-10-14
 type: paper
-publish: false
+publish: true
 description: "Conway의 법칙: 시스템이 설계 조직의 의사소통 구조를 닮는 이유와 간결하고 유연한 조직 설계의 중요성."
 ---
 ## 서지 정보

@@ -2,7 +2,7 @@
 title: Conway's Law
 date: 2026-10-14
 type: paper
-publish: false
+publish: true
 description: "Conway's law: how systems reflect their designers' communication structures, and why organizations should stay lean and flexible."
 ---
 ## Bibliographic Information
