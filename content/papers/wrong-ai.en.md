@@ -2,7 +2,7 @@
 title: The Wrong Kind of AI?
 date: 2026-10-15
 type: paper
-publish: false
+publish: true
 description: "Beyond automation: why AI's effects on jobs and output depend on the direction we choose for its development."
 ---
 ## Bibliographic Information

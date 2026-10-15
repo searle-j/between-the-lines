@@ -2,7 +2,7 @@
 title: The Wrong Kind of AI?
 date: 2026-10-15
 type: paper
-publish: false
+publish: true
 description: "자동화를 넘어 고용 창출과 생산 증대로: AI의 경제적 효과는 기술 자체보다 우리가 선택하는 개발 방향에 달려 있다."
 ---
 ## 서지 정보
