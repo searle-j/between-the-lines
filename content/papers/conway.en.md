@@ -95,7 +95,6 @@ description: "Conway's law: how systems reflect their designers' communication s
 
 ## Next reading
 
-- **Empirical evidence for Conway's law:** [The Mirroring Hypothesis](mirroring-hypothesis.en.md)
 - **Organizational changes following AI adoption:** [The Cybernetic Teammate](cybernetic-teammate.en.md)
 - **Extending socio-technical congruence to human–agent organizations:** [Adapting Socio-Technical Congruence to Human-Agent Collectives](adapting-socio-technical-congruence.en.md)
 

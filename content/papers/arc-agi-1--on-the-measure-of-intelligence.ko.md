@@ -153,7 +153,7 @@ $$
 * 즉 문제의 규칙을 자연어로 설명하지 않는다. 시스템은 몇 개의 input-output example을 보고 스스로 transformation rule을 추론해야 한다.
 * 예컨대 demonstration들을 보고 '객체를 좌우 대칭시켜라', '가장 많이 등장하는 객체를 선택하라', '선을 장애물까지 연장하라'와 같은 추상 규칙을 알아낸 뒤 새로운 test input에 적용해야 한다.
 * 하나의 task를 성공적으로 풀려면 test output 전체가 정확히 일치해야 한다. 부분 점수는 없으며 task 단위로 성공/실패가 결정된다.
-* 최종 ARC score는 evaluation task 가운데 성공적으로 해결한 task의 비율이다. 즉, 복잡하게 생각할 것 없이 몇 개나 맞추었나 세면 됨.
+* 최종 ARC score는 evaluation task 가운데 성공적으로 해결한 task의 비율이다. 즉, 복잡하게 생각할 것 없이 몇 개나 맞혔나 세면 됨.
 
 #### ARC에서 학습과 평가
 
