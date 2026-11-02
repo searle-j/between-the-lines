@@ -2,7 +2,7 @@
 title: 모옌 중단편선
 date: 2026-10-28
 type: fiction
-publish: false
+publish: true
 description: ""
 ---
 ## 서지 정보
@@ -50,3 +50,7 @@ description: ""
 ### 결론
 
 모옌 중단편선을 한 마디로 정리하면 이렇다. 동화 같은 환상과 정신이 번쩍 드는 현실, 둘 사이를 기묘하고 첨예한 방식으로 자유롭게 오가는 대단히 중국적인 단편들.
+
+---
+
+#literature #fiction #history #culture #society

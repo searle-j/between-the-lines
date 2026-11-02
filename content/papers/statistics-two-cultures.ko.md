@@ -21,9 +21,9 @@ description: "데이터 모델링과 알고리즘 모델링 사이의 논쟁: �
 
 WARNING: 저자인 Leo Breiman은 원논문 뒤에 여러 통계학자들의 반박과 자신의 재반박을 덧붙여 놓았습니다. 이 세 줄 요약은 Breiman의 원논문만이 대상입니다. 반박과 재반박이 궁금한 사람들은 더 아래 요약 섹션을 참고.
 
-![](../../assets/Pasted%20image%2020261023173726.png)
+![그림 1](../../assets/statistics-two-cultures/figure-1.png)
 
-![](../../assets/Pasted%20image%2020261023173649.png)
+![그림 2](../../assets/statistics-two-cultures/figure-2.png)
 
 - 통계적 모델링에는 두 가지 문화가 있다.
 	1. 확률적 데이터 모델: 데이터를 생성하는 분포가 있다고 가정하고 그것을 밝혀내고자 한다.

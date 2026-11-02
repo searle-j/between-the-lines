@@ -21,9 +21,9 @@ description: "Data models or algorithms? Breiman's case for predictive accuracy,
 
 WARNING: Leo Breiman's paper is followed by comments from other statisticians and his rejoinder. This TL;DR covers only his original paper. For the debate, see the Summary below.
 
-![](../../assets/Pasted%20image%2020261023173726.png)
+![Figure 1](../../assets/statistics-two-cultures/figure-1.png)
 
-![](../../assets/Pasted%20image%2020261023173649.png)
+![Figure 2](../../assets/statistics-two-cultures/figure-2.png)
 
 - Statistical modeling has two cultures.
   1. Stochastic data modeling: assume a distribution generates the data and try to identify it.
