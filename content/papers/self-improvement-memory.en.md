@@ -104,4 +104,4 @@ description: "Self-Improvement Memory records why a harness was changed, what wa
 
 ---
 
-#AI #LLM #agent #memory #optimization
+#AI #LLM #agent #memory #optimization #harness

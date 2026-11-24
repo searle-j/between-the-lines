@@ -103,4 +103,4 @@ description: "하네스 수정의 이유·예상 효과·실제 결과를 기록
 
 ---
 
-#AI #LLM #agent #memory #optimization
+#AI #LLM #agent #memory #optimization #harness
