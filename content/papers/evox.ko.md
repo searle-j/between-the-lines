@@ -79,7 +79,7 @@ description: "LLM이 해법뿐 아니라 탐색 전략도 개선하는 메타 �
 
 ## 다음 읽을 것
 
-- None
+- [FreeEvolve](free-evolve.ko.md)
 
 ---
 

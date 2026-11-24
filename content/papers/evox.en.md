@@ -81,7 +81,7 @@ description: "EvoX uses LLMs to improve search strategies as well as the solutio
 
 ## Next reading
 
-- None
+- [FreeEvolve](free-evolve.en.md)
 
 ---
 
