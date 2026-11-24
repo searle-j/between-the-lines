@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// Posts live in content/{papers,non-fiction,fiction}/<slug>.{ko,en}.md — one file per
+// Posts live in content/{papers,non-fiction,fiction,misc}/<slug>.{ko,en}.md — one file per
 // language. Files that don't match the pattern are ignored by the site, so
 // stray local notes never get published by accident.
 // Tags are inline-only (`#tag` in the body) — there is no frontmatter field.
@@ -9,7 +9,7 @@ import { glob } from 'astro/loaders';
 const postSchema = z.object({
   title: z.string(),
   date: z.coerce.date(),
-  type: z.enum(['paper', 'non-fiction', 'fiction']),
+  type: z.enum(['paper', 'non-fiction', 'fiction', 'misc']),
   description: z.string().optional(),
   publish: z.boolean().default(false),
 });
@@ -34,6 +34,10 @@ export const collections = {
   }),
   fiction: defineCollection({
     loader: glob({ pattern: '**/*.{ko,en}.md', base: './content/fiction', generateId }),
+    schema: postSchema,
+  }),
+  misc: defineCollection({
+    loader: glob({ pattern: '**/*.{ko,en}.md', base: './content/misc', generateId }),
     schema: postSchema,
   }),
   pages: defineCollection({

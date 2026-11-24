@@ -19,6 +19,7 @@ Obsidian ──▶ Markdown + assets ──▶ git push ──▶ GitHub Actions
 | 논문 리뷰        | `content/papers/<slug>.ko.md` + `<slug>.en.md`       |
 | 비문학(학술서 등) | `content/non-fiction/<slug>.ko.md` + `<slug>.en.md` |
 | 문학·에세이      | `content/fiction/<slug>.ko.md` + `<slug>.en.md`      |
+| 기타 글          | `content/misc/<slug>.ko.md` + `<slug>.en.md`         |
 | 이미지           | `assets/<slug>/…`                                    |
 | About            | `content/pages/about.ko.md` / `about.en.md`          |
 
@@ -32,7 +33,7 @@ Obsidian ──▶ Markdown + assets ──▶ git push ──▶ GitHub Actions
 ---
 title: "제목"
 date: 2026-08-08
-type: paper          # paper | non-fiction | fiction (폴더와 일치)
+type: paper          # paper | non-fiction | fiction | misc (폴더와 일치)
 publish: true        # true여야 사이트에 발행 — 기본 false, 로컬 dev에서는 항상 보임
 description: "목록·RSS·검색엔진에 쓰일 한 줄 요약 (선택)"
 ---
@@ -107,7 +108,7 @@ repo 루트를 vault로 열어 쓴다. 권장 설정:
 - **New link format: Relative path to file**
 - **Default location for new attachments**: `assets` 폴더
 - **Files and links → Excluded files**: `src`, `public`, `scripts`, `node_modules`, `dist`, `.astro`, `.github`
-- **Templates → Template folder location**: `templates` — 논문은 `templates/post.ko.md`/`post.en.md`, 비문학은 `non-fiction.ko.md`/`non-fiction.en.md`, 문학·에세이는 `fiction.ko.md`/`fiction.en.md`를 Insert template로 불러와 시작한다 (`content/` 밖이라 사이트에는 실리지 않음).
+- **Templates → Template folder location**: `templates` — 논문은 `templates/post.ko.md`/`post.en.md`, 비문학은 `non-fiction.ko.md`/`non-fiction.en.md`, 문학·에세이는 `fiction.ko.md`/`fiction.en.md`, 기타 글은 `misc.ko.md`/`misc.en.md`를 Insert template로 불러와 시작한다 (`content/` 밖이라 사이트에는 실리지 않음).
 
 ## License
 

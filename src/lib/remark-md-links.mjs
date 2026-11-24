@@ -54,7 +54,7 @@ export function remarkMdLinks(options = {}) {
       const absOs = path.resolve(fromDir, decoded);
       const abs = absOs.split(path.sep).join('/');
 
-      let m = abs.match(/\/content\/(papers|non-fiction|fiction)\/([^/]+)\.(ko|en)\.md$/);
+      let m = abs.match(/\/content\/(papers|non-fiction|fiction|misc)\/([^/]+)\.(ko|en)\.md$/);
       if (m) {
         const [, kind, slug, lang] = m;
         const prefix = `${base}${lang === 'en' ? '/en' : ''}`;

@@ -3,17 +3,17 @@ import type { Lang } from '../i18n/ui';
 import { collectInlineTags } from './remark-inline-tags.mjs';
 
 export type { Lang };
-export type Kind = 'papers' | 'non-fiction' | 'fiction';
+export type Kind = 'papers' | 'non-fiction' | 'fiction' | 'misc';
 
-const KINDS: Kind[] = ['papers', 'non-fiction', 'fiction'];
-const TYPE_LABELS = { papers: 'Paper', 'non-fiction': 'Non-fiction', fiction: 'Fiction' } as const;
+const KINDS: Kind[] = ['papers', 'non-fiction', 'fiction', 'misc'];
+const TYPE_LABELS = { papers: 'Paper', 'non-fiction': 'Non-fiction', fiction: 'Fiction', misc: 'Misc' } as const;
 
 export interface Post {
   slug: string;
   lang: Lang;
   kind: Kind;
   typeLabel: (typeof TYPE_LABELS)[Kind];
-  entry: CollectionEntry<'papers'> | CollectionEntry<'non-fiction'> | CollectionEntry<'fiction'>;
+  entry: CollectionEntry<'papers'> | CollectionEntry<'non-fiction'> | CollectionEntry<'fiction'> | CollectionEntry<'misc'>;
 }
 
 /** `llms-cant-jump.ko` -> { slug: 'llms-cant-jump', lang: 'ko' } */
@@ -106,7 +106,7 @@ export function tagPath(lang: Lang, tag: string): string {
   return `${lang === 'en' ? '/en' : ''}/tags/?k=${encodeURIComponent(tag)}`;
 }
 
-/** 게시물 상세 라우트 6개(kind 3종 × 언어 2종)가 공유하는 getStaticPaths 본문. */
+/** 게시물 상세 라우트 8개(kind 4종 × 언어 2종)가 공유하는 getStaticPaths 본문. */
 export async function postStaticPaths(lang: Lang, kind: Kind) {
   const other: Lang = lang === 'ko' ? 'en' : 'ko';
   const [own, counterpart] = await Promise.all([getPosts(lang, kind), getPosts(other, kind)]);
