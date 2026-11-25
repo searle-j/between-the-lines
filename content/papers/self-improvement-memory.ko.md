@@ -1,5 +1,5 @@
 ---
-title: "Self-Improvement Memory Enables Continual Recursive Self-Improvement"
+title: "Self-Improvement Memory: SIM"
 date: 2026-11-24
 type: paper
 publish: true
