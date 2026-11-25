@@ -29,6 +29,9 @@ Obsidian ──▶ Markdown + assets ──▶ git push ──▶ GitHub Actions
 
 ### Frontmatter
 
+한영 게시물의 `title`은 짧게 유지한다. 논문과 책의 전체 제목은 본문 서지 정보에 적는다.
+모든 글은 간결하고 캐주얼하게 쓰되, 기술 내용을 정확히 전달해 전문성을 유지한다.
+
 ```yaml
 ---
 title: "제목"
