@@ -73,4 +73,4 @@ description: 실행 기록을 골라 여러 크기의 묶음으로 하네스를 
 
 ---
 
-#AI #LLM #agent #harness #optimization #evolutionary_search
+#AI #LLM #agent #harness #optimization #evolutionary_search #data_scaling
