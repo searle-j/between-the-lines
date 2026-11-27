@@ -9,7 +9,7 @@ description: "Beyond automation: why AI's effects on jobs and output depend on t
 
 - title: The wrong kind of AI? Artificial intelligence and the future of labour demand
 - authors: Daron Acemoglu (Nobel laureate 👍); Pascual Restrepo
-- institutions: MIT; Boston University
+- institution: MIT; Boston University
 - venue / publisher: Cambridge Journal of Regions, Economy and Society
 - publication year: 2019
 - link / code & data:

@@ -9,11 +9,11 @@ description: ""
 
 - title: Into the Unknown: Benchmarking AI agents on open scientific research problems
 - authors: Seungone Kim, Jiayi Geng, Young-Jun Lee, Bo Liu, Juyoung Suk, Nicholas Lubbers, Mitchell Wood, Marcus Noack, Yong-Xin Yao, Yuan Shi, Roxana Bujack, Cristina Garcia Cardona, Austin Rodriguez, Ilon Joseph, Woojin Cho, Zora Zhiruo Wang, Chuanyang Jin, Ian Wu, Apurva Gandhi, Tianjian Li, Weiwei Sun, Carolin Lawrence, Kiril Gashteovski, Dongyeop Kang, Jay Shin, Akari Asai, Graham Neubig, Sean Welleck
-- institutions: Carnegie Mellon University, University of Minnesota, Stanford University, Trillion Labs, Los Alamos National Laboratory, Sandia National Laboratory, Lawrence Berkeley National Laboratory, Ames National Laboratory, Iowa State University, University of Colorado Boulder, Michigan State University, Lawrence Livermore National Laboratory, TelePIX, Johns Hopkins University, NEC Laboratories Europe, Ss.Cyril and Methodius University of Skopje
+- institution: Carnegie Mellon University, University of Minnesota, Stanford University, Trillion Labs, Los Alamos National Laboratory, Sandia National Laboratory, Lawrence Berkeley National Laboratory, Ames National Laboratory, Iowa State University, University of Colorado Boulder, Michigan State University, Lawrence Livermore National Laboratory, TelePIX, Johns Hopkins University, NEC Laboratories Europe, Ss.Cyril and Methodius University of Skopje
 - venue / publisher: arXiv
 - publication year: 2026
 - link / code & data:
-  - paper: https://arxiv.org/abs/2610.19159v1
+  - paper: https://arxiv.org/abs/2610.19159
   - GitHub: https://github.com/prometheus-eval/into-the-unknown
   - Hugging Face: https://huggingface.co/datasets/prometheus-eval/into-the-unknown
   - leaderboard: https://prometheus-eval.github.io/into-the-unknown/viewer/

@@ -13,7 +13,7 @@ description: ""
 - 발표 / 출판: arXiv
 - 출판 연도: 2026
 - 링크 / 코드·데이터:
-	- 논문: https://arxiv.org/abs/2610.19159v1
+	- 논문: https://arxiv.org/abs/2610.19159
 	- github: https://github.com/prometheus-eval/into-the-unknown
 	- huggingface: https://huggingface.co/datasets/prometheus-eval/into-the-unknown
 	- leaderboard: https://prometheus-eval.github.io/into-the-unknown/viewer/

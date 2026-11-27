@@ -13,7 +13,7 @@ description: 실패한 과제들을 원인별로 묶고, 하네스가 바뀔 때
 - 발표 / 출판: arXiv
 - 출판 연도: 2026
 - 링크 / 코드·데이터:
-	- 논문: https://arxiv.org/abs/2610.00906v1
+	- 논문: https://arxiv.org/abs/2610.00906
 	- 웹사이트와 코드: https://aka.ms/ActiveSaddler-website
 
 ---

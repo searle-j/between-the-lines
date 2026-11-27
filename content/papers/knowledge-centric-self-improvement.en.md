@@ -13,7 +13,7 @@ description: "A self-improvement method that uses discussion to turn agents' exp
 - venue / publisher: arXiv
 - publication year: 2026
 - link / code & data:
-  - paper: https://arxiv.org/abs/2607.19592v1
+  - paper: https://arxiv.org/abs/2607.19592
   - code: https://github.com/recursive-knowledge/KSI
 
 ---
@@ -35,7 +35,7 @@ description: "A self-improvement method that uses discussion to turn agents' exp
   - Those changes can constrain what the agent does next, reducing its autonomy and making mistakes harder to correct.
   - The improvement loop can get stuck down a rabbit hole or overfit and produce a system that generalizes poorly.
 - This paper keeps the agent setup fixed and updates the shared knowledge base. Start a fresh agent for each task, let it read the knowledge base and do the work, then use the results to update the knowledge base.
-- The authors want to see how far that alone can take the system. They hold other factors fixed to assess what a knowledge base can contribute to self-improvement.
+- A caveat: the paper does not claim that the knowledge-base approach outperforms other methods. It rules out other influences as cleanly as possible, shows how the system performs when experience accumulates only in the knowledge base, and makes the case for what the approach could do.
 
 ### Related Work
 
@@ -60,7 +60,6 @@ description: "A self-improvement method that uses discussion to turn agents' exp
 
 - **Performance and cost.** The approach solved more tasks at lower cost than methods that improve the agents themselves.
 - **Knowledge transfer.** The accumulated knowledge also improved performance when given to a different LLM or used on new tasks.
-- **Limitation.** A direct comparison with simply collecting past attempts would help show how much the forums and distillation contributed.
 
 ### Conclusion
 

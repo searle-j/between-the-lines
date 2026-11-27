@@ -9,7 +9,7 @@ description: "EvoX uses LLMs to improve search strategies as well as the solutio
 
 - title: EvoX: Meta-Evolution for Automated Discovery
 - authors: Shu Liu, Shubham Agarwal, Monishwaran Maheswaran, Mert Cemri, Zhifei Li, Qiuyang Mang, Ashwin Naren, Ethan Boneh, Audrey Cheng, Melissa Z. Pan, Alexander Du, Kurt Keutzer, Alvin Cheung, Alexandros G. Dimakis, Koushik Sen, Matei Zaharia, Ion Stoica
-- institutions: UC Berkeley, Stanford University, Bespoke Labs
+- institution: UC Berkeley, Stanford University, Bespoke Labs
 - venue / publisher: arXiv
 - publication year: 2026
 - link / code & data:

@@ -9,7 +9,7 @@ description: "FreeEvolve lets agents decide how to run, repeat, and stop experim
 
 - title: FreeEvolve: Learning to Evolve Beyond Fixed Loops
 - authors: Lecheng Kong, Like Hui, Nikos Kanakaris, Prithwish Jana, Sahika Genc, Narayanan Sadagopan
-- institutions: AWS AI Labs, Georgia Institute of Technology
+- institution: AWS AI Labs, Georgia Institute of Technology
 - venue / publisher: arXiv
 - publication year: 2026
 - link / code & data:

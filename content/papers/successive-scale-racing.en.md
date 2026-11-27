@@ -9,11 +9,11 @@ description: "SSR improves agent harnesses with different-sized sets of lessons 
 
 - title: Forging More Tasks into Better Harnesses: Agentic Harness Evolution via Successive Scale Racing
 - authors: Jingzhe Liu, Jiliang Tang, Tong Zhao, Neil Shah, Clark Mingxuan Ju
-- institutions: Michigan State University, Snap Inc.
+- institution: Michigan State University, Snap Inc.
 - venue / publisher: arXiv
 - publication year: 2026
 - link / code & data:
-  - paper: https://arxiv.org/abs/2610.28815v1
+  - paper: https://arxiv.org/abs/2610.28815
 
 ---
 

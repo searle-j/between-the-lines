@@ -9,11 +9,11 @@ description: "Meta-Harness gives a coding agent access to past code and executio
 
 - title: Meta-Harness: End-to-End Optimization of Model Harnesses
 - authors: Yoonho Lee, Omar Khattab, Roshen Nair, Qizheng Zhang, Chelsea Finn, Kangwook Lee
-- institutions: Stanford University, MIT, KRAFTON
+- institution: Stanford University, MIT, KRAFTON
 - venue / publisher: arXiv
 - publication year: 2026
 - link / code & data:
-  - paper: https://arxiv.org/abs/2603.28052v1
+  - paper: https://arxiv.org/abs/2603.28052
   - project: https://yoonholee.com/meta-harness/
   - harness discovered on TerminalBench-2: https://github.com/stanford-iris-lab/meta-harness-tbench2-artifact
 
@@ -67,7 +67,7 @@ description: "Meta-Harness gives a coding agent access to past code and executio
 ## Reflections
 
 - There is a growing push to give agents more autonomy. Maybe smart AI has trouble doing its best work under constraints set by us dumb humans.
-  - In EvoX, for example, the model that improves the search gets a summary of the history assembled according to preset rules. Meta-Harness lets the agent browse the full record itself. [EvoX](evox.en.md)
+  - In [EvoX](evox.en.md), for example, the model that improves the search gets a summary of the history assembled according to preset rules. Meta-Harness lets the agent browse the full record itself.
 - While reading, I wondered whether it was better to hand the agent a summary or let it read the full record. I pretty quickly landed on "let the agent decide that too." I do wonder if that's the right call, though.
 
 ---

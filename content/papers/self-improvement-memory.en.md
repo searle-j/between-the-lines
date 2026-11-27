@@ -1,5 +1,5 @@
 ---
-title: "Self-Improvement Memory: SIM"
+title: "SIM: Self-Improvement Memory"
 date: 2026-11-24
 type: paper
 publish: true
@@ -14,7 +14,6 @@ description: "Self-Improvement Memory records why a harness was changed, what wa
 - publication year: 2026
 - link / code & data:
   - paper: https://arxiv.org/abs/2611.18856
-  - PDF: https://arxiv.org/pdf/2611.18856
 
 ---
 
@@ -71,7 +70,7 @@ description: "Self-Improvement Memory records why a harness was changed, what wa
 
 ### Results
 
-- Full SIM had the highest final score in all six benchmark transfer settings and all four model transfer settings. So the memory seems to help with self-improvement itself.
+- Full SIM performed best in every condition, across six benchmarks and four models. In other words, SIM helps with self-improvement itself.
   - In the repeated coding experiment, SIM did better in nine of ten runs.
 - When the harness was passed from one model generation to the next, it did better than starting fresh in two of three transfers. So SIM can help with transfer learning too.
 - Keeping just the causes of failures sometimes made performance worse. That suggests the rest of the record matters.
@@ -79,7 +78,6 @@ description: "Self-Improvement Memory records why a harness was changed, what wa
 ### Conclusion
 
 - Keeping and reusing what the optimizer learns during self-improvement can help it continue improving after the environment changes.
-- The paper did not compare SIM directly with other ways of managing memory, so it is hard to tell whether its particular structure is better.
 
 ---
 

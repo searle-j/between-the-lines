@@ -9,11 +9,11 @@ description: "ActiveSaddler groups tasks by how they failed and picks the next t
 
 - title: ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization
 - authors: Sungho Park, Wonjoong Kim, Jue Zhang, Wook-Shin Han, Pengfei Gao, Chanyoung Park, Yongqiang Yao, Rao Fu, Elsie Nallipogu, Qingwei Lin, Victor Rühle
-- institutions: POSTECH, KAIST, Microsoft
+- institution: POSTECH, KAIST, Microsoft
 - venue / publisher: arXiv
 - publication year: 2026
 - link / code & data:
-  - paper: https://arxiv.org/abs/2610.00906v1
+  - paper: https://arxiv.org/abs/2610.00906
   - website and code: https://aka.ms/ActiveSaddler-website
 
 ---

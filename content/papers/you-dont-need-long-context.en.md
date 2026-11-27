@@ -14,7 +14,6 @@ description: "A study of whether agents can complete long tasks with short conte
 - publication year: 2026
 - link / code & data:
   - paper: https://arxiv.org/abs/2611.05306
-  - PDF: https://arxiv.org/pdf/2611.05306
   - lab: https://nv-dler.github.io/
 
 ---
@@ -82,7 +81,7 @@ description: "A study of whether agents can complete long tasks with short conte
   - Focusing on inference costs feels timely.
 - What I found less satisfying:
   - There was still some performance loss.
-  - Compression can also increase costs by reducing cache reuse, since the previous context is no longer used as is. That is disappointing.
+  - During compression, the context can become less similar to the previous one, which may actually increase caching costs. That is a bit disappointing.
 
 ---
 
