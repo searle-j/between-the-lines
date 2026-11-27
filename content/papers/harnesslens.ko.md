@@ -85,4 +85,4 @@ description: "하네스 수정안마다 관련 있는 과제만 골라 검증하
 
 ---
 
-#AI #LLM #agent #harness #optimization #verification
+#AI #LLM #agent #harness #optimization #verification #credit_assignment #reward_shaping

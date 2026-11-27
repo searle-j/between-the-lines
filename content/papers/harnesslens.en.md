@@ -85,4 +85,4 @@ description: "HarnessLens selects tasks relevant to each harness change and chec
 
 ---
 
-#AI #LLM #agent #harness #optimization #verification
+#AI #LLM #agent #harness #optimization #verification #credit_assignment #reward_shaping
