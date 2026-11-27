@@ -3,13 +3,13 @@ title: Satantango
 date: 2026-08-17
 type: fiction
 publish: true
-description: ""
+description: "László Krasznahorkai's novel of a decaying village whose people move back and forth between hope and despair like dancers in a tango."
 ---
 ## Bibliographic Information
 
-- Title: Satantango
-- Author: László Krasznahorkai (won the Nobel Prize in Literature 👍)
-- Publication year: 1985
+- title: Satantango
+- authors: László Krasznahorkai (won the Nobel Prize in Literature 👍)
+- publication year: 1985
 
 ---
 

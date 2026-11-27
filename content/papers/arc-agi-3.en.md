@@ -3,7 +3,7 @@ title: ARC-AGI-3
 date: 2026-09-21
 type: paper
 publish: true
-description: ""
+description: "ARC-AGI-3 drops AI systems into interactive environments with no instructions and scores how efficiently they explore and solve them compared with humans."
 ---
 ## Bibliographic Information
 
@@ -137,7 +137,7 @@ description: ""
 
 ## Takeaways
 
-- null
+- None
 
 ---
 

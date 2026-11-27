@@ -3,7 +3,7 @@ title: Into the Unknown
 date: 2026-11-02
 type: paper
 publish: true
-description: ""
+description: "A benchmark that asks AI agents to extend existing research papers: none of the 135 papers written by nine frontier agents met the researchers' success criteria."
 ---
 ## Bibliographic Information
 

@@ -3,7 +3,7 @@ title: ARC-AGI-2
 date: 2026-09-20
 type: paper
 publish: true
-description: ""
+description: "ARC-AGI-2 updates a fluid-intelligence benchmark that was nearing its ceiling, making it harder to brute-force and adding human performance data."
 ---
 ## Bibliographic Information
 

@@ -3,7 +3,7 @@ title: The True Creator of Everything
 date: 2026-08-18
 type: non-fiction
 publish: true
-description: ""
+description: "Nicolelis argues that the world we experience is the brain's interpretation of it, and that an analog brain can never be fully simulated by a Turing machine."
 ---
 ## Bibliographic Information
 
@@ -100,7 +100,7 @@ description: ""
 
 ## Next reading
 
-- none
+- None
 
 ---
 

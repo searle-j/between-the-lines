@@ -8,7 +8,7 @@ description: "Data models or algorithms? Breiman's case for predictive accuracy,
 ## Bibliographic Information
 
 - title: Statistical Modeling: The Two Cultures
-- author: Leo Breiman
+- authors: Leo Breiman
 - institution: University of California, Berkeley
 - venue / publisher: Statistical Science
 - publication year: 2001

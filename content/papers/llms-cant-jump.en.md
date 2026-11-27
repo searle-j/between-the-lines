@@ -3,7 +3,7 @@ title: LLMs Can't Jump
 date: 2026-08-16
 type: paper
 publish: true
-description: ""
+description: "A position paper arguing that LLMs handle induction and deduction but fall short at abduction, and that closing the gap takes a manipulable world model."
 ---
 ## Bibliographic Information
 

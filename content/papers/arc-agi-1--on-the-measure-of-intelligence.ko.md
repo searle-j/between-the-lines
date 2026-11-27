@@ -3,7 +3,7 @@ title: "ARC-AGI-1: On the Measure of Intelligence"
 date: 2026-09-13
 type: paper
 publish: true
-description: ""
+description: "지능을 특정 기술이 아니라 새로운 기술을 효율적으로 습득하는 능력으로 정의하고, 이를 측정하는 벤치마크 ARC를 제안한 논문."
 ---
 ## 서지 정보
 
@@ -259,11 +259,3 @@ $$
 ---
 
 #AI #benchmark #evaluation #intelligence #reasoning #generalization #psychometrics
-
-<!-- 발행 전 체크리스트
-  - 파일 이름: content/papers|non-fiction/<slug>.ko.md — 영문 소문자·하이픈
-  - type: paper | non-fiction (폴더와 일치), title·description 채우기
-  - 마지막 줄에 인라인 #태그 (스네이크케이스, 예: #world_model #LLM)
-  - .en.md 번역 쌍 작성
-  - publish: true로 바꾸면 발행 (기본 false — dev에서만 보임)
--->

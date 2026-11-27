@@ -165,7 +165,7 @@ AVO runs evolutionary search—sampling, generation, and evaluation—through ag
 
 ## Next reading
 
-- null
+- None
 
 ---
 

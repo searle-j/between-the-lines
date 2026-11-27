@@ -3,7 +3,7 @@ title: 모옌 중단편선
 date: 2026-10-28
 type: fiction
 publish: true
-description: ""
+description: "동화 같은 환상과 정신이 번쩍 드는 현실 사이를 자유롭게 오가는, 대단히 중국적인 모옌의 단편들."
 ---
 ## 서지 정보
 

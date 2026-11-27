@@ -8,7 +8,7 @@ description: ""
 ## Bibliographic Information
 
 - title: Information Theory and an Extension of the Maximum Likelihood Principle
-- author: Hirotugu Akaike
+- authors: Hirotugu Akaike
 - institution: Institute of Statistical Mathematics
 - venue / publisher: Proceedings of the Second International Symposium on Information Theory
 - publication year: 1973

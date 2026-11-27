@@ -3,13 +3,13 @@ title: Selected Novellas and Short Stories by Mo Yan
 date: 2026-10-28
 type: fiction
 publish: true
-description: ""
+description: "Mo Yan's distinctly Chinese stories, moving freely between fairy-tale fantasy and a reality that jolts you wide awake."
 ---
 ## Bibliographic Information
 
-- Title: Selected Novellas and Short Stories by Mo Yan (Minumsa, Korean edition)
-- Author: Mo Yan (莫言) (won the Nobel Prize 🏅)
-- Publication year: 2016 for the Minumsa edition; the stories were written between 1985 and 2000.
+- title: Selected Novellas and Short Stories by Mo Yan (Minumsa, Korean edition)
+- authors: Mo Yan (莫言) (won the Nobel Prize 🏅)
+- publication year: 2016 for the Minumsa edition; the stories were written between 1985 and 2000.
 
 ---
 

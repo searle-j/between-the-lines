@@ -3,7 +3,7 @@ title: ARC-AGI-2
 date: 2026-09-20
 type: paper
 publish: true
-description: ""
+description: "포화되기 시작한 ARC-AGI-1을 보완해, brute force에 더 강하고 인간 수행 데이터를 갖춘 유동지능 벤치마크 ARC-AGI-2."
 ---
 ## 서지 정보
 

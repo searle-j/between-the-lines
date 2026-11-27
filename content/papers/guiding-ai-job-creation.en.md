@@ -8,7 +8,7 @@ description: "Employment before automation: Cai Fang's case for human–machine 
 ## Bibliographic Information
 
 - title: 引领人工智能创造更多更高质量就业 (Guiding AI to Create More and Better Jobs)
-- author: 蔡昉 (Cai Fang)
+- authors: 蔡昉 (Cai Fang)
 - institution: 中国社会科学院国家高端智库 (National High-End Think Tank of the Chinese Academy of Social Sciences)
 - venue / publisher: 《劳动经济研究》, 13(3), pp. 3–17
 - publication year: 2025

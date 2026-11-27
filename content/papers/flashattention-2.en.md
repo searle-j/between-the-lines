@@ -8,7 +8,7 @@ description: FlashAttention-2 makes attention faster by reducing non-matmul oper
 ## Bibliographic Information
 
 - title: FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning
-- author: Tri Dao
+- authors: Tri Dao
 - institution: Princeton University; Stanford University
 - venue / publisher: ICLR
 - publication year: 2024

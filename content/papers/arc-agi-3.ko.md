@@ -3,7 +3,7 @@ title: ARC-AGI-3
 date: 2026-09-21
 type: paper
 publish: true
-description: ""
+description: "목표도 지시도 없는 상호작용 환경에서 AI가 스스로 탐색하고 규칙을 익혀 문제를 푸는 효율을 인간과 비교하는 벤치마크 ARC-AGI-3."
 ---
 ## 서지 정보
 
@@ -122,7 +122,7 @@ description: ""
 
 ## 배운 점
 
-- null
+- None
 
 ---
 

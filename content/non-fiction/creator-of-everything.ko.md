@@ -3,7 +3,7 @@ title: 뇌와 세계
 date: 2026-08-18
 type: non-fiction
 publish: true
-description: ""
+description: "우리가 경험하는 세계는 뇌가 해석해 만들어낸 결과이며, 아날로그적인 뇌는 튜링 기계로 완전히 모사할 수 없다는 니코렐리스의 주장."
 ---
 ## 서지 정보
 
@@ -100,7 +100,7 @@ description: ""
 
 ## 다음 읽을 것
 
-- none
+- None
 
 ---
 

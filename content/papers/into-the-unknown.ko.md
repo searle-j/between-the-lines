@@ -3,7 +3,7 @@ title: Into the Unknown
 date: 2026-11-02
 type: paper
 publish: true
-description: ""
+description: "기존 논문과 코드·데이터를 주고 후속 연구를 맡기는 벤치마크로, 프론티어 에이전트 9종의 논문 135편 중 성공 기준을 통과한 것은 없었다."
 ---
 ## 서지 정보
 

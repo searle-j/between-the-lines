@@ -3,7 +3,7 @@ title: LLMs Can't Jump
 date: 2026-08-16
 type: paper
 publish: true
-description: ""
+description: "LLM은 귀납과 연역은 잘하지만 귀추에는 한계가 있으며, 이를 넘으려면 조작 가능한 세계 모델이 필요하다는 주장."
 ---
 ## 서지 정보
 

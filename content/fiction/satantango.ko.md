@@ -3,7 +3,7 @@ title: 사탄탱고
 date: 2026-08-17
 type: fiction
 publish: true
-description: ""
+description: "몰락한 시골 마을에서 희망과 절망 사이를 탱고처럼 오가는 사람들을 그린 크러스너호르커이 라슬로의 소설."
 ---
 ## 서지 정보
 

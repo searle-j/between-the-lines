@@ -8,7 +8,7 @@ description: "Conway's law: how systems reflect their designers' communication s
 ## Bibliographic Information
 
 - title: How Do Committees Invent?
-- author: Melvin E. Conway
+- authors: Melvin E. Conway
 - institution: Sperry Rand Corporation, UNIVAC Division
 - venue / publisher: Datamation
 - publication year: 1968
