@@ -29,7 +29,7 @@ description: "GEPA-Curator uses task histories to choose tasks and past successf
 
 ### Motivation
 
-- GEPA randomly samples training tasks, runs them, and sends the failures to the agent improving the prompt.
+- GEPA randomly samples training tasks, runs them, and sends the failed results and their logs to the agent improving the prompt.
 - A failure can have several causes. Say a purchase button temporarily stops responding. The agent might see that failure and add an instruction to find a workaround for the button.
 - In the authors' experiments, GEPA struggled when learnable tasks were mixed with tasks that were impossible or produced unreliable feedback. Even on the 16 learnable tasks, it only solved 12 at its peak...
   - Part of the problem is that GEPA checks the aggregate score when testing a new prompt. A few bad decisions can slip through if the overall score goes up.
@@ -56,7 +56,7 @@ description: "GEPA-Curator uses task histories to choose tasks and past successf
 
 ### Results
 
-- GEPA-Curator outperformed GEPA with the same rollout budget. Even the version optimized for efficiency cost about 1.31 times as much as GEPA. In a separate comparison with total spending matched, it performed better in seven of eight evaluations.
+- GEPA-Curator outperformed GEPA with the same rollout budget. The Curator calls do add cost, though: even the version optimized for efficiency cost about 1.3 times as much as GEPA in total. With total spending matched, it still scored higher on most evaluations.
 - Ablations showed that task selection and successful examples each helped, and combining them worked best.
 - A Curator built from fixed rules produced smaller gains. The rules skipped tasks after three consecutive successes or failures and provided the most recent successful log.
 - Adding a Curator to Meta-Harness also improved performance. Curriculum learning seems useful across different optimization methods.
